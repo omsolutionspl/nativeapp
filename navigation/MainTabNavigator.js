@@ -1,8 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+
+import DrawerContent from '../screens/DrawerContent';
+import Authentication from '../screens/Authentication';
 
 import HomeScreen from '../screens/HomeScreen';
 import SystemWebScreen from '../screens/SystemWebScreen'
@@ -17,6 +20,7 @@ const HomeStack = createStackNavigator({
   WebPage: SystemWebScreen
 }, {defaultNavigationOptions: headerNavigationOptions})
 
+
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
@@ -24,7 +28,7 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
+          ? `ios-home${focused ? '' : ''}`
           : 'md-information-circle'
       }
     />
@@ -78,10 +82,37 @@ QRStack.navigationOptions = {
   ),
 }
 
-
-export default createBottomTabNavigator({
+const ApplicationNavigator = createBottomTabNavigator({
   HomeStack,
   // LinksStack,
   QRStack,
   SettingsStack
 });
+
+export default  createDrawerNavigator({
+  Application: {
+    screen: ApplicationNavigator
+  },
+  Authentication: {
+    path: '/log-in',
+    screen: Authentication
+  },
+  XXXX: {
+    path: '/log-out',
+    name: "Logout",
+    screen: Authentication,
+    navigationOptions: () => ({
+      title: `A`,
+      headerBackTitle: null
+    }),
+  }
+},
+{
+  initialRouteName: 'Application',
+  drawerOpenRoute: 'DrawerOpen',
+  drawerCloseRoute: 'DrawerClose',
+  drawerToggleRoute: 'DrawerToggle',
+  contentComponent: DrawerContent
+});
+
+

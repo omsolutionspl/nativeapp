@@ -15,10 +15,10 @@ export default class HomeScreen extends React.Component {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Home Screen</Text>
           <Button
-              title="Go to Details"
+              title="Go to Details (Drawer)"
               onPress={() => {
                 /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate('WebPage', {
+                this.props.navigation.navigate('Notifications', {
                   url: 'https://mbmapp.com/',
                 });
               }}
