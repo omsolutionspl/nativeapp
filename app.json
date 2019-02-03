@@ -1,18 +1,18 @@
 {
   "expo": {
     "name": "mbm-native",
-    "slug": "mbm-native-x",
+    "slug": "mbm-native",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/app/mbm-logo-350.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
