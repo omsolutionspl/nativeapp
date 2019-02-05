@@ -69,27 +69,25 @@ export const headerNavigationOptions = ({ navigation }) => {
         <Icon.Ionicons
             name={'ios-menu'}
             size={26}
-            style={{ marginLeft: 8, marginTop: 2 }}
+            style={{ marginLeft: 10, marginTop: 2 }}
             onPress={() => navigation.toggleDrawer()} //
             color={"#000000"}
         />
 
     ),
-    /*
-    drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => (
-        <Image
-            source={require('../assets/images/app/mbm-logo-350.png')}
-            style={[ {tintColor: tintColor}]}
-        />
-    ),
-    */
     headerStyle: {
+      height: 60,
       backgroundColor: '#fff' //'#f4511e',
     },
     headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
     },
+  }
+}
+
+export const pageStackNavigationOptions = ({ navigation }) => {
+  return {
+
   }
 }

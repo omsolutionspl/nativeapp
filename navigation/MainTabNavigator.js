@@ -4,12 +4,11 @@ import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator }
 
 import TabBarIcon from '../components/TabBarIcon';
 
+
 import DrawerContent from '../screens/DrawerContent';
-import Authentication from '../screens/Authentication';
 
 import HomeScreen from '../screens/HomeScreen';
 import SystemWebScreen from '../screens/SystemWebScreen'
-import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import QRScreen from '../screens/QRScreen';
 
@@ -18,8 +17,7 @@ import { headerNavigationOptions } from '../components/Header';
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   WebPage: SystemWebScreen
-}, {defaultNavigationOptions: headerNavigationOptions})
-
+}, { headerMode: "none" })
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
@@ -53,7 +51,7 @@ LinksStack.navigationOptions = {
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen
-}, {defaultNavigationOptions: headerNavigationOptions})
+})
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
@@ -70,7 +68,7 @@ const QRStack = createStackNavigator({
   QR: {
     screen: QRScreen
   }
-}, {defaultNavigationOptions: headerNavigationOptions})
+})
 
 QRStack.navigationOptions = {
   tabBarLabel: 'QR',
@@ -84,27 +82,13 @@ QRStack.navigationOptions = {
 
 const ApplicationNavigator = createBottomTabNavigator({
   HomeStack,
-  // LinksStack,
   QRStack,
   SettingsStack
 });
 
-export default  createDrawerNavigator({
+const Application = createDrawerNavigator({
   Application: {
     screen: ApplicationNavigator
-  },
-  Authentication: {
-    path: '/log-in',
-    screen: Authentication
-  },
-  XXXX: {
-    path: '/log-out',
-    name: "Logout",
-    screen: Authentication,
-    navigationOptions: () => ({
-      title: `A`,
-      headerBackTitle: null
-    }),
   }
 },
 {
@@ -113,6 +97,10 @@ export default  createDrawerNavigator({
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle',
   contentComponent: DrawerContent
-});
+})
+
+export default createStackNavigator({
+  Application,
+}, { defaultNavigationOptions: headerNavigationOptions })
 
 

@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component {
               title="Go to Details (Drawer)"
               onPress={() => {
                 /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate('Notifications', {
+                this.props.navigation.navigate('WebPage', {
                   url: 'https://mbmapp.com/',
                 });
               }}
