@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
+
 import AppNavigator from './navigation/AppNavigator';
+import reducer from './reducers/index';
+
+const client = axios.create({
+  baseURL: 'https://api.github.com',
+  responseType: 'json'
+});
+
+
+// TODO: Debuger https://github.com/expo/expo/issues/553
+// https://github.com/svrcekmichal/redux-axios-middleware
+const store = createStore(reducer) // , applyMiddleware(axiosMiddleware(client)));
 
 export default class App extends React.Component {
   state = {
@@ -19,10 +35,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+          <Provider store={store}>
+            <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+          </Provider>
       );
     }
   }

@@ -18,10 +18,20 @@ export default class Authentication extends React.Component {
   };
 
   state = {
+    logging: false,
     result: null,
   };
 
   _handlePressAsync = async () => {
+
+    this.setState({logging : true})
+    await setTimeout(function() {
+      this.setState({logging : false})
+      this.props.navigation.navigate('App');
+    }.bind(this), 1000);
+
+
+    /*
     let redirectUrl = AuthSession.getRedirectUrl();
     let result = await AuthSession.startAsync({
       authUrl:
@@ -29,7 +39,9 @@ export default class Authentication extends React.Component {
       `&client_id=${FB_APP_ID}` +
       `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
     });
+
     this.setState({ result });
+    */
   };
 
   render() {
@@ -69,7 +81,8 @@ export default class Authentication extends React.Component {
             />
           </View>
           <View style={{paddingLeft: 0, marginTop:20, color: "red", alignItems: 'flex-start'}}>
-            <Button style={{color: "red"}} title="Sign In" onPress={this._handlePressAsync} />
+            <Button style={{color: "red"}} title={this.state.logging ? "Logging..." : "Sign In"} disabled={this.state.logging} onPress={this._handlePressAsync} />
+            <Button style={{color: "red"}} title="Sign In with OpenID" disabled={this.state.logging} onPress={this._handlePressAsync} />
           </View>
         </View>
     );

@@ -4,7 +4,6 @@ import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator }
 
 import TabBarIcon from '../components/TabBarIcon';
 
-
 import DrawerContent from '../screens/DrawerContent';
 
 import HomeScreen from '../screens/HomeScreen';
@@ -14,10 +13,14 @@ import QRScreen from '../screens/QRScreen';
 
 import { headerNavigationOptions } from '../components/Header';
 
+const MainStackConfig = {
+  headerMode: 'none'
+}
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   WebPage: SystemWebScreen
-}, { headerMode: "none" })
+}, MainStackConfig)
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
@@ -51,7 +54,7 @@ LinksStack.navigationOptions = {
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen
-})
+}, MainStackConfig)
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
@@ -68,7 +71,7 @@ const QRStack = createStackNavigator({
   QR: {
     screen: QRScreen
   }
-})
+}, MainStackConfig)
 
 QRStack.navigationOptions = {
   tabBarLabel: 'QR',

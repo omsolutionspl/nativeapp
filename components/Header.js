@@ -69,7 +69,7 @@ export const headerNavigationOptions = ({ navigation }) => {
         <Icon.Ionicons
             name={'ios-menu'}
             size={26}
-            style={{ marginLeft: 10, marginTop: 2 }}
+            style={{ marginLeft: 16, marginTop: 2 }}
             onPress={() => navigation.toggleDrawer()} //
             color={"#000000"}
         />
