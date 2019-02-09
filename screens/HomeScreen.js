@@ -2,70 +2,61 @@ import React from 'react';
 import {Button, ScrollView, Image, Easing, View, Text, StyleSheet, Platform } from 'react-native';
 import { Constants, Permissions, Notifications, Icon } from 'expo';
 
-// import Carousel from 'react-native-snap-carousel';
-// import CarouselExamples from '../components/CarouselExamples'
-// import AnimationsExample from '../components/AnimationsExample'
 import FeaturedContent from '../containers/FeaturedContent'
 import ActionButtons  from '../components/ActionButtons'
-import { NavigationBar } from '@shoutem/ui/components/NavigationBar'
+import OpportunitiesScreen from "./OpportunitiesScreen";
 
-import { TimingDriver, FadeIn } from '@shoutem/animation';
-import DetailScreen from "./DetailScreen";
-import SystemWebScreen from "./SystemWebScreen";
+import { connectStyle } from '@shoutem/theme';
+import CompaniesScreen from "./CompaniesScreen";
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 
   render() {
 
     const {navigate} = this.props.navigation;
 
     return (
-        <ScrollView style={styles.contentContainer}>
+        <ScrollView>
 
-          <View>
-            <FeaturedContent />
-          </View>
+          <FeaturedContent title={"FEATURED CONTENT"} />
 
-          <View style={styles.container}>
-            <ActionButtons buttons={[
-              {
-                label: "Scan Business Card",
-                icon:  "md-scan", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
-                onPress: () => navigate('DetailScreen', {
+          <ActionButtons title={"DISCOVER"} buttons={[
+            {
+              label: "Opportunities",
+              icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+              onPress: () => navigate('OpportunitiesScreen', {
+
+              })
+            },
+            {
+              label: "Companies",
+              icon: "md-people",
+              onPress: () => navigate('CompaniesScreen', {
+
+              })
+            },
+            {
+              label: "Events",
+              icon: "md-globe",
+              onPress: () => {
+                navigate('DetailModal', {
                   url: 'https://mbmapp.com/',
-                })
-              },
-              {
-                label: "Enter WEB",
-                icon: "ion-md-analytics",
-                onPress: () => {
-                  navigate('DetailModal', {
-                    url: 'https://mbmapp.com/',
-                   });
-                }
-              },
-              {
-                label: "Matches",
-                icon: "ion-md-analytics",
-                onPress: () => {
-                  navigate('SystemWebScreen', {
-                    url: 'https://mbmapp.com/',
-                  });
-                }
+                });
               }
-            ]}/>
-          </View>
+            }
+          ]} />
 
         </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {},
+
+const styles = {
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between'
   },
-});
+};
+
+// connect the component to the theme
+export default connectStyle('mbm.DashboardScreen', styles)(HomeScreen);

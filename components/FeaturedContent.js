@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import {Platform, View, ScrollView, Text, StatusBar, SafeAreaView, StyleSheet} from 'react-native';
+import {Platform, ScrollView, SafeAreaView} from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import SliderEntry from '../components/SliderEntry';
 import {colors} from "../constants/styles/Carousel";
 import {itemWidth, sliderWidth} from "../constants/styles/SliderEntry";
-import styles from "../constants/styles/Carousel";
-import dashboardStyles from "../constants/styles/Dashboard"
 
-export default class FeaturedContent extends Component {
+import { View } from '@shoutem/ui/components/View'
+import { Button } from '@shoutem/ui/components/Button'
+import { Text } from '@shoutem/ui/components/Text'
+
+import { connectStyle } from '@shoutem/theme';
+
+class FeaturedContent extends Component {
 
   _renderItemWithParallax ({item, index}, parallaxProps) {
     return (
@@ -23,13 +27,13 @@ export default class FeaturedContent extends Component {
 
   render() {
 
-    const { featured, showPagination } = this.props
+    const { featured, showPagination, title, style } = this.props
 
     return (
         <View>
-          <View style={dashboardStyles.header}>
-            <Text style={dashboardStyles.headerText}>
-              Featured content
+          <View styleName={"horizontal v-start"}>
+            <Text style={style.headerText} styleName={"bold"}>
+              {title}
             </Text>
           </View>
           <Carousel
@@ -72,3 +76,13 @@ export default class FeaturedContent extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+  },
+};
+
+
+// connect the component to the theme
+export default connectStyle('mbm.dashboard.FeaturedContent', styles)(FeaturedContent);

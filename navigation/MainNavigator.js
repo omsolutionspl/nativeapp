@@ -2,19 +2,20 @@ import React from 'react';
 import { Platform, Easing, Animated } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../components/Helpers/TabBarIcon';
+import TabBarText from '../components/Helpers/TabBarText';
 import { ROOT_NAV_NAME } from '../constants/Navigation'
 
 import DrawerContent from '../screens/DrawerContent';
 
 import HomeScreen from '../screens/HomeScreen';
 import SystemWebScreen from '../screens/SystemWebScreen'
-import SettingsScreen from '../screens/SettingsScreen';
+import AgendaScreen from '../screens/AgendaScreen';
 import QRScreen from '../screens/QRScreen';
 import DetailScreen from '../screens/DetailScreen';
+import OpportunitiesScreen from '../screens/OpportunitiesScreen';
+import CompaniesScreen from '../screens/CompaniesScreen';
 import DetailModal from '../screens/DetailModal';
-
-import GoScreen from '../components/__examples__/GoScreen'
 
 import { MainStackHeaderNavigationConfig, MainStackConfig } from '../components/Header';
 
@@ -72,29 +73,33 @@ const HomeStack = createStackNavigator({
 }, MainStackConfig)
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: ({ focused }) => (
+      <TabBarText focused={focused} text={'Dashboard'} />
+  ),
   tabBarIcon: ({ focused }) => (
       <TabBarIcon
           focused={focused}
           name={
             Platform.OS === 'ios'
-                ? `ios-home${focused ? '' : ''}`
-                : 'md-information-circle'
+                ? `ios-apps${focused ? '' : ''}`
+                : 'md-apps'
           }
       />
   ),
 }
 
-const SettingsStack = createStackNavigator({
-  SettingsScreen
+const AgendaStack = createStackNavigator({
+  AgendaScreen
 }, MainStackConfig)
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+AgendaStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => (
+      <TabBarText focused={focused} text={'Agenda'} />
+  ),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'}
     />
   ),
 };
@@ -105,7 +110,9 @@ const QRStack = createStackNavigator({
 }, MainStackConfig)
 
 QRStack.navigationOptions = {
-  tabBarLabel: 'QR',
+  tabBarLabel: ({ focused }) => (
+      <TabBarText focused={focused} text={'QR'} />
+  ),
   tabBarIcon: ({ focused }) => (
       <TabBarIcon
           focused={focused}
@@ -116,8 +123,8 @@ QRStack.navigationOptions = {
 
 const MainTabNavigator = createBottomTabNavigator({
   HomeStack,
+  AgendaStack,
   QRStack,
-  SettingsStack
 });
 
 const RootDrawer = createDrawerNavigator({ MainTabNavigator }, {
@@ -125,18 +132,20 @@ const RootDrawer = createDrawerNavigator({ MainTabNavigator }, {
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle',
   contentComponent: DrawerContent
-})
-
+});
 
 const MainAppNavigator = createStackNavigator({
   [ROOT_NAV_NAME]: {
     screen: RootDrawer
   },
   SystemWebScreen,
+  CompaniesScreen,
+  OpportunitiesScreen,
   DetailScreen
-}, {
+},
+{
   defaultNavigationOptions: MainStackHeaderNavigationConfig
-})
+});
 
 export default createStackNavigator({
   MainAppNavigator,
@@ -146,13 +155,10 @@ export default createStackNavigator({
 {
   headerMode: 'none',
   mode: 'modal',
-  // defaultNavigationOptions: {
-  //   gesturesEnabled: false,
-  // },
   transitionConfig: () => ({
     transitionSpec: {
       duration: 1500,
-      easing: Easing.out(Easing.poly(20)),
+      easing: Easing.out(Easing.poly(10)),
       timing: Animated.timing,
     },
     screenInterpolator: sceneProps => {
@@ -167,11 +173,11 @@ export default createStackNavigator({
       });
 
       const opacity = position.interpolate({
-        inputRange: [index - 1, index - 0.99, index],
+        inputRange: [index - 1, index, index + 1],
         outputRange: [0, 1, 1],
       });
 
-      return { transform: [{ translateY }], opacity };
+      return { opacity, transform: [{ translateY }] };
     },
   }),
 }

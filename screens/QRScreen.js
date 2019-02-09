@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
-
 export default class QRScreen extends React.Component {
 
   state = {

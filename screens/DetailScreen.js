@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, ScrollView, View, StyleSheet, Image, Button } from 'react-native';
-import { Constants, Permissions, Notifications } from 'expo';
-import { DrawerItems, SafeAreaView } from 'react-navigation';
+import { Constants, Permissions } from 'expo';
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = { };
@@ -15,10 +14,10 @@ export default class DetailScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     paddingTop: 5,
     backgroundColor: '#fff',
   },
-});
+};

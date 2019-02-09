@@ -18,7 +18,7 @@ class LogoTitle extends React.Component {
 
 export const MainStackHeaderNavigationConfig = ({ navigation }) => {
   return {
-    headerTitle: <LogoTitle/>,
+    headerTitle: navigation.state.routeName === ROOT_NAV_NAME ? <LogoTitle /> : null,
     headerLeft: <Icon.Ionicons
         name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
         size={26}
@@ -35,7 +35,7 @@ export const MainStackHeaderNavigationConfig = ({ navigation }) => {
     />,
     headerStyle: {
       height: 60,
-      backgroundColor: '#fffbec',
+      backgroundColor: Colors.topNavBarColor,
     },
     headerTintColor: '#000',
     headerTitleStyle: {
