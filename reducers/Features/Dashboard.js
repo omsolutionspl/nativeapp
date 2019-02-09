@@ -63,7 +63,7 @@ export function createWidget(widget) {
 
 // selectors
 export const getFeatured = createSelector(
-    (state) => state.dashboard,
+    (state) => state.app.dashboard,
     items => items.featured
 )
 

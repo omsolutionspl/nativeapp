@@ -23,7 +23,7 @@ export default class FeaturedContent extends Component {
 
   render() {
 
-    const { featured } = this.props
+    const { featured, showPagination } = this.props
 
     return (
         <View>
@@ -52,6 +52,8 @@ export default class FeaturedContent extends Component {
               autoplayInterval={3000}
               onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
           />
+
+          {showPagination ?
           <Pagination
               dotsLength={featured.length}
               activeDotIndex={0}
@@ -64,6 +66,8 @@ export default class FeaturedContent extends Component {
               carouselRef={this._slider1Ref}
               tappableDots={!!this._slider1Ref}
           />
+          : null}
+
         </View>
     );
   }

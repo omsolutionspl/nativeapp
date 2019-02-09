@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider, connect } from 'react-redux';
+import {
+  createReduxContainer,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers';
+import axiosMiddleware from 'redux-axios-middleware';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import axios from 'axios';
-import axiosMiddleware from 'redux-axios-middleware';
+import { StyleProvider } from '@shoutem/theme';
+import theme from './constants/theme'
+
 
 import AppNavigator from './navigation/AppNavigator';
 import reducer from './reducers/index';
@@ -14,10 +22,29 @@ const client = axios.create({
   responseType: 'json'
 });
 
+const navReducer = createNavigationReducer(AppNavigator);
+const appReducer = combineReducers({
+    app: reducer,
+    nav: navReducer,
+});
 
-// TODO: Debuger https://github.com/expo/expo/issues/553
-// https://github.com/svrcekmichal/redux-axios-middleware
-const store = createStore(reducer) // , applyMiddleware(axiosMiddleware(client)));
+// Note: createReactNavigationReduxMiddleware must be run before createReduxContainer
+/*
+const middleware = createReactNavigationReduxMiddleware(
+    state => state.nav,
+);
+
+const AppWithNavigationState = connect((state) => ({
+  state: state.nav,
+}))(createReduxContainer(AppNavigator));
+*/
+
+const store = createStore(
+    appReducer,
+    //applyMiddleware(middleware),
+    // , applyMiddleware(axiosMiddleware(client)));
+);
+
 
 export default class App extends React.Component {
   state = {
@@ -38,7 +65,9 @@ export default class App extends React.Component {
           <Provider store={store}>
             <View style={styles.container}>
               {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              <AppNavigator />
+              <StyleProvider style={theme()}>
+                <AppNavigator />
+              </StyleProvider>
             </View>
           </Provider>
       );
@@ -59,6 +88,9 @@ export default class App extends React.Component {
         // to remove this if you are not using it in your app
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         'sans-pro': require('./assets/fonts/SourceSansPro-Regular.ttf'),
+        'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
+        'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
+
       }),
     ]);
   };

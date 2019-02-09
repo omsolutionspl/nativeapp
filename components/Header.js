@@ -1,9 +1,9 @@
-import React from 'react';
-import { Modal, Button, Image, View, Text, TouchableNativeFeedback} from 'react-native';
+import React, { Component } from 'react';
+import {Modal, Button, Image, View, Text, TouchableNativeFeedback, Platform} from 'react-native';
 import { Icon } from 'expo';
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
-// import {  } from 'react-navigation';
+import { ROOT_NAV_NAME } from '../constants/Navigation'
 
 class LogoTitle extends React.Component {
   render() {
@@ -16,74 +16,36 @@ class LogoTitle extends React.Component {
   }
 }
 
-/*
-class ModalExample extends React.Component {
-  state = {
-    modalVisible: false,
-  };
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
-  render() {
-    return (
-        <View style={{marginTop: 22}}>
-          <Modal
-              animationType="slide"
-              transparent={false}
-              visible={this.state.modalVisible}
-              onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-              }}>
-            <View style={{marginTop: 22}}>
-              <View>
-                <Text>Hello World!</Text>
-
-                <TouchableHighlight
-                    onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}>
-                  <Text>Hide Modal</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </Modal>
-
-          <TouchableHighlight
-              onPress={() => {
-                this.setModalVisible(true);
-              }}>
-            <Text>Show Modal</Text>
-          </TouchableHighlight>
-        </View>
-    );
-  }
-}
-*/
-
-export const headerNavigationOptions = ({ navigation }) => {
+export const MainStackHeaderNavigationConfig = ({ navigation }) => {
   return {
     headerTitle: <LogoTitle/>,
-    headerLeft: (
-        <Icon.Ionicons
-            name={'ios-menu'}
-            size={26}
-            style={{ marginLeft: 16, marginTop: 2 }}
-            onPress={() => navigation.toggleDrawer()} //
-            color={"#000000"}
-        />
-
-    ),
+    headerLeft: <Icon.Ionicons
+        name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
+        size={26}
+        style={{ marginLeft: 16, marginTop: 2 }}
+        onPress={() => (navigation.state.routeName === ROOT_NAV_NAME ? navigation.toggleDrawer() : navigation.goBack())}
+        color={Colors.headerIconColor}
+    />,
+    headerRight: <Icon.Ionicons
+        name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
+        size={28}
+        style={{ marginRight: 16, marginTop: 2 }}
+        onPress={() => (navigation.navigate('ProfileModal'))}
+        color={Colors.headerIconColor}
+    />,
     headerStyle: {
       height: 60,
-      backgroundColor: '#fff' //'#f4511e',
+      backgroundColor: '#fffbec',
     },
     headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
     },
   }
+}
+
+export const MainStackConfig = {
+  headerMode: 'none'
 }
 
 export const pageStackNavigationOptions = ({ navigation }) => {

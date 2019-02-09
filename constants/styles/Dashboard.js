@@ -21,7 +21,8 @@ export default StyleSheet.create({
   headerText: {
       ...deafults.default,
     fontSize:16,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: "Rubik-Regular"
   },
   paginationDots: {
     color: "#000000"

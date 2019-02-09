@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
-import { headerNavigationOptions } from '../components/Header';
+
 
 export default class QRScreen extends React.Component {
-  static navigationOptions = headerNavigationOptions;
 
   state = {
     hasCameraPermission: null,

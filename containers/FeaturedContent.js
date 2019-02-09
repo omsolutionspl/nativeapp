@@ -8,6 +8,7 @@ export default connect(
     (state, ownProps) => {
       return {
         featured: getFeatured(state),
+        showPagination: false
       }
     },
     (dispatch, ownProps) => {
