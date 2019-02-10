@@ -11,6 +11,8 @@ class DetailScreen extends Component {
   render() {
 
     const { style, navigation } = this.props
+    
+    console.log('renderDetailModal')
 
     return (
         <View style={style.container}>

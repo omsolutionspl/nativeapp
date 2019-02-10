@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider, connect } from 'react-redux';
+import promiseMiddleware from 'redux-promise';
+import ReduxThunk from 'redux-thunk'
+
 import {
   createReduxContainer,
   createReactNavigationReduxMiddleware,
@@ -41,7 +44,9 @@ const AppWithNavigationState = connect((state) => ({
 
 const store = createStore(
     appReducer,
-    //applyMiddleware(middleware),
+    applyMiddleware(ReduxThunk)
+    // applyMiddleware(promiseMiddleware),
+    // applyMiddleware(middleware),//
     // , applyMiddleware(axiosMiddleware(client)));
 );
 

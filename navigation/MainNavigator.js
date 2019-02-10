@@ -13,9 +13,12 @@ import SystemWebScreen from '../screens/SystemWebScreen'
 import AgendaScreen from '../screens/AgendaScreen';
 import QRScreen from '../screens/QRScreen';
 import DetailScreen from '../screens/DetailScreen';
-import OpportunitiesScreen from '../screens/OpportunitiesScreen';
+import OpportunityDetailScreen from '../screens/OpportunityDetailScreen';
 import CompaniesScreen from '../screens/CompaniesScreen';
 import DetailModal from '../screens/DetailModal';
+
+// Connected with redux
+import OpportunitiesScreen from '../containers/Opportunities';
 
 import { MainStackHeaderNavigationConfig, MainStackConfig } from '../components/Header';
 
@@ -149,7 +152,12 @@ const MainAppNavigator = createStackNavigator({
 
 export default createStackNavigator({
   MainAppNavigator,
-  ProfileModal: { screen: DetailModal },
+  ProfileModal: {
+    screen: DetailModal
+  },
+  OpportunityDetailModal: {
+    screen: OpportunityDetailScreen,
+  },
   DetailModal
 },
 {

@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {Platform, ScrollView, StatusBar, SafeAreaView, StyleSheet} from 'react-native';
-//import { Icon } from 'expo';
+// import { Constants } from 'expo';
 import { map } from 'lodash';
 import { Ionicons } from '@expo/vector-icons';
 import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
 import { Text } from '@shoutem/ui/components/Text'
-import { Row } from '@shoutem/ui/components/Row'
+import { Divider } from '@shoutem/ui/components/Divider'
 import Colors from '../constants/Colors';
 
 import { connectStyle } from '@shoutem/theme';
@@ -19,8 +19,6 @@ class ActionButtons extends Component {
 
     // Workaround for forcing black color on .tabs .active
     let __color = (this.getStyleName() && button.active) ? {color: Colors.black} : {}
-
-    console.log('ccc', __color, {...style.buttonText, ...__color});
     return <Button
         onPress={button.onPress}
         key={`btn_${button.label}`}
@@ -54,7 +52,7 @@ class ActionButtons extends Component {
             </Text>
           </View>
           :null}
-          <View styleName={`horizontal v-center ${this.getStyleName()}`} style={style.buttonsContainer}>
+          <View styleName={`horizontal space-between ${this.getStyleName()}`} style={style.buttonsContainer}>
             {buttons.map(button => this.renderButton(button))}
           </View>
         </View>
@@ -82,9 +80,8 @@ const styles = {
           color: Colors.headerIconColor,
         },
         'shoutem.ui.Text': {
-          color:"#000000"
-
-        }
+          color: Colors.black
+        },
       }
     },
   }

@@ -1,6 +1,7 @@
 import getTheme, { defaultThemeVariables } from "@shoutem/ui/theme";
 import Colors from './Colors'
 import { merge } from 'lodash';
+import { Constants } from 'expo';
 
 const defaultTheme = getTheme();
 
@@ -51,6 +52,13 @@ export default () => {
         // height:40,
         // paddingLeft:10,
         // paddingRight: 10
+      }
+    },
+    'mbm.modal.OpportunityDetailScreen': {
+      container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        // paddingTop: Constants.statusBarHeight,
       }
     },
     'shoutem.ui.Title': {
