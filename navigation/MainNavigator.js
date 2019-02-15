@@ -128,6 +128,14 @@ const MainTabNavigator = createBottomTabNavigator({
   HomeStack,
   AgendaStack,
   QRStack,
+},{
+  tabBarOptions: {
+    style: {
+      height:54,
+      paddingBottom:6,
+      paddingTop:6
+    },
+  }
 });
 
 const RootDrawer = createDrawerNavigator({ MainTabNavigator }, {
@@ -166,7 +174,7 @@ export default createStackNavigator({
   transitionConfig: () => ({
     transitionSpec: {
       duration: 1500,
-      easing: Easing.out(Easing.poly(10)),
+      easing: Easing.out(Easing.poly(8)),
       timing: Animated.timing,
     },
     screenInterpolator: sceneProps => {

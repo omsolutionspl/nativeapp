@@ -12,6 +12,13 @@ import Colors from "../constants/Colors";
 class OpportunityDetailScreen extends Component {
   static navigationOptions = { };
 
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.opp.id === this.props.opp.id) {
+      return false;
+    }
+  }
+
   render() {
 
     const { style, navigation } = this.props

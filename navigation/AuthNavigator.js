@@ -36,4 +36,12 @@ export default createBottomTabNavigator({
       ),
     }
   }
+},{
+  tabBarOptions: {
+    style: {
+      height:54,
+      paddingBottom:6,
+      paddingTop:6
+    },
+  }
 });

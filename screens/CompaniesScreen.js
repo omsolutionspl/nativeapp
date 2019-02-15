@@ -4,7 +4,8 @@ import { Platform, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
-import { Screen } from '@shoutem/ui/components/Screen'
+import { Text } from '@shoutem/ui/components/Text'
+import { ListView } from '@shoutem/ui/components/ListView'
 import { connectStyle } from '@shoutem/theme';
 
 class CompaniesScreen extends Component {
@@ -14,13 +15,23 @@ class CompaniesScreen extends Component {
 
   render() {
 
-    const { style } = this.props
+    const { style, intentions } = this.props
 
     return (
 
-        <Screen styleName="">
+        <View>
+          <View>
+            <Text>CCCC</Text>
+          </View>
+          <View style={{marginBottom: 80}}>
+            <ListView
 
-        </Screen>
+                autoHideHeader={true}
+                data={intentions}
+                renderRow={(opp) => <Text>{opp.id}</Text>}
+            />
+          </View>
+        </View>
     );
   }
 }

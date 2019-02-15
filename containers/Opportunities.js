@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getRenderMode, getOpportunities, seeDetails } from '../reducers/Features/Opportunities';
+import { getRenderMode, getOpportunities, seeDetails, getCurrentTab, changeTab } from '../reducers/Features/Opportunities';
 import { map } from 'lodash'
 
 import OpportunitiesListingScreen from '../screens/OpportunitiesScreen'
@@ -11,12 +11,14 @@ export default connect(
 
       return {
         intentions: getOpportunities(state), // Apply filtered
+        currentTab: getCurrentTab(state),
         showPagination: false,
       }
     },
     (dispatch, ownProps) => {
       return {
         onUpdate: () => console.log('onUpdate'),
+        onTabSwitch: (filter) => dispatch(changeTab(filter))
       }
     }
 )(OpportunitiesListingScreen)

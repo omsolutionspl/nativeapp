@@ -27,7 +27,6 @@ class ActionButtons extends Component {
         {button.icon ?
           <Ionicons
               name={button.icon}
-              size={20}
               style={style.icon}
           />: null}
           <Text style={{...style.buttonText, ...__color}}>{button.label}</Text>

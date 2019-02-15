@@ -1,8 +1,12 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet, Image, TextInput } from 'react-native';
-import { Text, Button } from 'react-native'
+import { ScrollView, TextInput } from 'react-native';
+import { View } from '@shoutem/ui/components/View'
+import { Text } from '@shoutem/ui/components/Text'
+import { Button } from '@shoutem/ui/components/Button'
+import { Image } from '@shoutem/ui/components/Image'
 import { AuthSession } from 'expo';
 
+import { connectStyle } from '@shoutem/theme';
 import appStyles from '../../constants/styles';
 
 const FB_APP_ID = '11';
@@ -12,7 +16,7 @@ const FB_APP_ID = '11';
  * https://goshakkk.name/auth-in-react-native-apps/
  * https://github.com/oblador/react-native-keychain
  */
-export default class Authentication extends React.Component {
+class Authentication extends React.Component {
   static navigationOptions = {
     title: 'Authentication',
   };
@@ -45,57 +49,80 @@ export default class Authentication extends React.Component {
   };
 
   render() {
-    return (
-        <View style={styles.container}>
 
-          <View>
+    const { style } = this.props
+
+    return (
+        <View style={style.container}>
+
+          <View styleName="horizontal" style={{paddingLeft: 34}}>
             <Image
+                // styleName={"small"}
                 source={require('../../assets/images/app/mbm-logo-350.png')}
                 style={{ width: 320, height: 90 }}
             />
           </View>
 
-          <View style={{paddingLeft: 7}}>
-            <Text style={styles.header_big}>
+          <View styleName="vertical" style={style.padding}>
+            <Text style={style.header_big}>
               Welcome back!
             </Text>
-            <Text style={styles.header_small}>
+            <Text style={style.header_small}>
               sign in to continue
             </Text>
           </View>
 
-          <View style={styles.inputsRow}>
-            <TextInput
-                style={styles.inputs}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-                placeholder={'username'}
-            />
+          <View style={style.padding}>
+            <View style={style.inputsRow}>
+              <TextInput
+                  style={style.inputs}
+                  onChangeText={(text) => this.setState({text})}
+                  value={this.state.text}
+                  placeholder={'username'}
+              />
 
-            <TextInput
-                style={styles.inputs}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-                placeholder={'password'}
-                secureTextEntry={true}
-            />
+              <TextInput
+                  style={style.inputs}
+                  onChangeText={(text) => this.setState({text})}
+                  value={this.state.text}
+                  placeholder={'password'}
+                  secureTextEntry={true}
+              />
+            </View>
           </View>
-          <View style={{paddingLeft: 0, marginTop:20, color: "red", alignItems: 'flex-start'}}>
-            <Button style={{color: "red"}} title={this.state.logging ? "Logging..." : "Sign In"} disabled={this.state.logging} onPress={this._handlePressAsync} />
-            <Button style={{color: "red"}} title="Sign In with OpenID" disabled={this.state.logging} onPress={this._handlePressAsync} />
+          <View style={{paddingLeft:30}}>
+            <View styleName="vertical h-start" style={{marginTop:24}}>
+              <Button
+
+                  disabled={this.state.logging}
+                  styleName={this.state.logging ? `muted ` : ``}
+                  onPress={this._handlePressAsync}>
+
+                <Text style={style.buttonText}>{this.state.logging ? "Logging..." : "Sign In"}</Text>
+              </Button>
+              <Button
+                  disabled={this.state.logging}
+                  styleName={this.state.logging ? `muted ` : ``}
+                  onPress={this._handlePressAsync}>
+
+                <Text style={style.buttonText}>{"Sign In with OpenID"}</Text>
+              </Button>
+            </View>
           </View>
         </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingLeft: 40,
     backgroundColor: '#fff',
+  },
+  padding: {
+    paddingLeft: 42
   },
   header_big: {
     fontWeight: 'bold',
@@ -110,14 +137,18 @@ const styles = StyleSheet.create({
     fontFamily: appStyles.default.fontFamily
   },
   inputsRow: {
-    paddingLeft: 7,
     paddingRight:60,
     marginTop:50
   },
   inputs: {
-    height: 40, borderColor: 'gray',
+    height: 40,
+    borderColor: 'gray',
     borderBottomWidth: 1,
     padding:5,
     marginTop:10
   }
-});
+};
+
+// connect the component to the themes
+export default connectStyle('mbm.Authentication', styles)(Authentication);
+

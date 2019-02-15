@@ -40,6 +40,7 @@ export default () => {
         // }
       },
       icon: {
+        fontSize:32,
         color: DEFAULT_COLORS.actionButtonColor,
       },
       buttonText: {
@@ -60,6 +61,13 @@ export default () => {
         backgroundColor: "#fff",
         // paddingTop: Constants.statusBarHeight,
       }
+    },
+    'mbm.Authentication': {
+      buttonText: {
+        fontSize:16,
+        color: "blue"
+      },
+
     },
     'shoutem.ui.Title': {
       fontSize: 18,

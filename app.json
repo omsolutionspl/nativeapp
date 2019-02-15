@@ -2,7 +2,7 @@
   "expo": {
     "name": "mbm-native",
     "slug": "mbm-native",
-    "privacy": "unlisted",
+    "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",

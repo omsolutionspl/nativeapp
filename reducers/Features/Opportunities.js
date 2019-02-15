@@ -9,6 +9,12 @@ const LOAD   = 'MBM/Opportunities/LOAD';
 const CREATE = 'MBM/Opportunities/CREATE';
 const SET_DETAILED = 'MBM/Opportunities/SET_DETAILED';
 const SHOW = 'MBM/Opportunities/SHOW';
+const CHANGE_FILTER = 'MBM/Opportunities/CHANGE_FILTER';
+const CHANGE_TAB = 'MBM/Opportunities/CHANGE_TAB';
+
+export const FILTER_OPPORTUNITIES = 'MBM/Opportunities/Filter/OPPORTUNITIES'
+export const FILTER_FORECASTS = 'MBM/Opportunities/Filter/FORECASTS'
+export const FILTER_MATCHES = 'MBM/Opportunities/Filter/MATCHES'
 
 const initState = {
   opps: [
@@ -105,9 +111,26 @@ const initState = {
         "address": "185 Sutter St, San Francisco, CA 94109",
       },
       "image": {"url": "https://shoutem.github.io/static/getting-started/restaurant-4.jpg"},
+    },
+    {
+      "id":"opp5",
+      "name": "Kyoto Amber Upper East",
+      "category": {
+        "id": 2070,
+        "name": "541690 - Other Scientific and Technical Consulting Services"
+      },
+      "post_date": "2018-11-20",
+      "deadline": "in 10 months",
+      "type": "Presolicitation",
+      "company": {
+        "name": "NASA",
+        "address": "185 Sutter St, San Francisco, CA 94109",
+      },
+      "agency": "Department of the Army",
+      "image": {"url": "https://s3.amazonaws.com/agency-logos.federalregister.gov/32/medium.png"},
     }
   ],
-  filter: false,
+  tab: FILTER_OPPORTUNITIES,
   selectedId: null,
   detailed: [],
 }
@@ -119,6 +142,12 @@ export default function reducer(state = initState, action = {}) {
     case SET_DETAILED:
       return update(state, {
         detailed: { $set: [action.id] } // _.xor(state.detailed, ) }
+      });
+      break;
+
+    case CHANGE_TAB:
+      return update(state, {
+        tab: { $set: action.tab }
       });
       break;
 
@@ -134,7 +163,7 @@ export default function reducer(state = initState, action = {}) {
 }
 
 // Action Creators
-export function seeDetails(opp, navigation, forceModal) {
+export function seeDetails(opp, forceModal) {
   return (dispatch, getState) => {
 
     let _isDetailed = getDetailed(getState()).indexOf(opp.id) !== -1;
@@ -145,10 +174,6 @@ export function seeDetails(opp, navigation, forceModal) {
         type: SHOW,
         id: opp.id
       });
-
-      navigation.navigate('OpportunityDetailModal', {
-        opp: opp,
-      });
     }
     else
     {
@@ -158,6 +183,17 @@ export function seeDetails(opp, navigation, forceModal) {
       });
     }
   };
+}
+
+export function changeTab(tab) {
+  return (dispatch, getState) => {
+
+    // dispatch(seeDetails());
+    dispatch({
+      type: CHANGE_TAB,
+      tab
+    });
+  }
 }
 
 export function createWidget(widget) {
@@ -179,6 +215,19 @@ export const getSelectedId = createSelector(
     (state) => state.app.opportunities,
     state => state.selectedId
 )
+
+export const getCurrentTab = createSelector(
+    (state) => state.app.opportunities,
+    state => state.tab
+)
+
+
+// TODO:
+// export const getFilteredItems = createSelector(
+//     getFilter,
+//     (state) => state.app.opportunities,
+//     state => state.filter
+// )
 
 export const getRenderMode = createSelector(
     (state) => state.app.opportunities,
