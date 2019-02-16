@@ -1,4 +1,5 @@
-import getTheme, { defaultThemeVariables } from "@shoutem/ui/theme";
+import getTheme, { defaultThemeVariables, textComponents, viewComponents } from "@shoutem/ui/theme";
+import { createSharedStyle } from '@shoutem/theme'
 import Colors from './Colors'
 import { merge } from 'lodash';
 import { Constants } from 'expo';
@@ -7,53 +8,89 @@ const defaultTheme = getTheme();
 
 const DEFAULT_COLORS = {
   color: "#797979",
+  buttonTextColor: '#ffffff',
   topNavBar: "#333", //Colors.topNavBarColor,
   actionButtonColor: "#d9d9d9",
-  actionButtonsBg: "#333"//Colors.topNavBarColor
+  actionButtonsBg: "#333", // Colors.topNavBarColor
 }
-
-const DEFAULT_HEADER_TEXT = {
-  fontSize: 14,
-  fontFamily: "Rubik-Medium",
-  padding: 12,
-};
 
 export default () => {
   return merge(defaultTheme, {
-    'mbm.dashboard.FeaturedContent': {
-      headerText: DEFAULT_HEADER_TEXT,
+    'mbm.DashboardScreen': {
+      'mbm.common.ButtonsGroup': {
+        'shoutem.ui.View': {
+          backgroundColor: Colors.darkBlue,
+          'shoutem.ui.View': {
+            'shoutem.ui.Button': {
+              // backgroundColor:'green', // debug
+              marginTop:0,
+              'shoutem.ui.Text': {
+                color: Colors.white,
+                fontSize:12,
+                fontFamily: "FontAwesome"
+              },
+            }
+          }
+        },
 
-    },
-    'mbm.dashboard.ActionButtons': {
-      headerText: { ...DEFAULT_HEADER_TEXT, color: DEFAULT_COLORS.actionButtonColor},
-
-      container: {
-        // flex:1,
-        // padding:10,
-        backgroundColor: DEFAULT_COLORS.actionButtonsBg,
-        // shadowColor: "#000000",
-        // shadowOpacity: 0.8,
-        // shadowRadius: 2,
-        // shadowOffset: {
-        //   height: 1,
-        //   width: 1
-        // }
-      },
-      icon: {
-        fontSize:32,
-        color: DEFAULT_COLORS.actionButtonColor,
-      },
-      buttonText: {
-
-        fontFamily: "Rubik-Regular",
-        color: DEFAULT_COLORS.actionButtonColor
-      },
-      buttonsContainer: {
-        //height: 40,
-        // height:40,
-        // paddingLeft:10,
-        // paddingRight: 10
+        icon: {
+          fontSize:30,
+          color: Colors.white,
+        },
       }
+    },
+
+    'mbm.dashboard.FeaturedContent': {
+      'shoutem.ui.View': {
+        'shoutem.ui.View': {
+          'shoutem.ui.Heading': {
+            fontSize: 15,
+            padding: 10,
+            color: Colors.headingTextColor,
+            fontFamily: "FontAwesome"
+          }
+        }
+      }
+    },
+    'mbm.common.ButtonsGroup': {
+      'shoutem.ui.View': {
+        '.tabs': {
+          'shoutem.ui.View': {
+            'shoutem.ui.Button': {
+              '.tabs': {
+                height: 44,
+                borderWidth:0,
+                paddingTop:2,
+                margin:0,
+                backgroundColor: Colors.topNavBarColor,
+                borderBottomColor: Colors.tabIconDefault,
+                borderBottomWidth: 1,
+                'shoutem.ui.Text': {
+                  color: Colors.tabIconDefault,
+                  fontSize:14,
+                },
+              },
+
+              '.active': {
+                backgroundColor:Colors.darkBlue,
+                borderBottomColor: Colors.darkBlue,
+                'shoutem.ui.Text': {
+                  color: Colors.white,
+                },
+              }
+            }
+          }
+        },
+
+        'shoutem.ui.View': {
+          'shoutem.ui.Heading': {
+            fontSize: 15,
+            padding: 10,
+            color: Colors.white,
+            fontFamily: "FontAwesome"
+          }
+        },
+      },
     },
     'mbm.modal.OpportunityDetailScreen': {
       container: {
@@ -63,17 +100,87 @@ export default () => {
       }
     },
     'mbm.Authentication': {
-      buttonText: {
-        fontSize:16,
-        color: "blue"
+      // Code here
+    },
+    'mbm.common.Badge': {
+      'shoutem.ui.View': {
+
+        'shoutem.ui.Text': {
+          fontSize: 13,
+          color: '#fff',
+
+          '.center' : {
+            //textAlign: 'center'
+          },
+        },
+
+        backgroundColor: DEFAULT_COLORS.color,
+        padding: 4,
+        paddingLeft: 8,
+        paddingRight: 8,
+        borderRadius: 6,
+
+        '.success': {
+          backgroundColor: "#81c868",
+          color: '#fff'
+        },
+
+        '.box': {
+          borderRadius:0,
+          'shoutem.ui.Text': {
+
+          }
+        },
+
+        '.danger' : {
+          backgroundColor: 'red'
+        }
+      }
+    },
+
+    'shoutem.ui.Button': {
+      'shoutem.ui.Text': {
+        color: Colors.darkBlue,
+        fontFamily: "FontAwesome",
+        fontSize:14,
       },
 
+      '.filled' : {
+        'shoutem.ui.Text': {
+          color: Colors.white,
+        },
+        backgroundColor: Colors.darkBlue,
+      },
+
+      // Vertically stacked icon and text
+      '.stacked': {
+        paddingRight:12, // Little fix for missing some pixels
+      },
+
+      '.rounded' : {
+        borderRadius: 20,
+      },
+
+      marginTop:4,
+      backgroundColor: "none",
+      borderWidth: 1,
+      borderColor: Colors.darkBlue,
     },
+
     'shoutem.ui.Title': {
       fontSize: 18,
       padding: 12,
-      fontFamily: "Rubik-Medium",
+      fontFamily: "FontAwesome",
       color: DEFAULT_COLORS.color
+    },
+
+    'shoutem.ui.Overlay': {
+
+      ...createSharedStyle(viewComponents, {
+        ...createSharedStyle([...textComponents, 'shoutem.ui.Icon'], {
+          textAlign: 'left',
+        }),
+      }),
     }
   });
 }

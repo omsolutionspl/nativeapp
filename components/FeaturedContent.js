@@ -8,7 +8,7 @@ import {itemWidth, sliderWidth} from "../constants/styles/SliderEntry";
 
 import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
-import { Text } from '@shoutem/ui/components/Text'
+import { Text, Heading } from '@shoutem/ui/components/Text'
 
 import { connectStyle } from '@shoutem/theme';
 
@@ -32,9 +32,7 @@ class FeaturedContent extends Component {
     return (
         <View>
           <View styleName={"horizontal v-start"}>
-            <Text style={style.headerText} styleName={"bold"}>
-              {title}
-            </Text>
+            <Heading>{title}</Heading>
           </View>
           <Carousel
               ref={c => this._slider1Ref = c}

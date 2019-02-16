@@ -32,7 +32,7 @@ class OpportunityDetailScreen extends Component {
               backgroundColor="#6a51ae"
           />
 
-          <OpportunityBlock item={opp} mode={'modal'} navigation={navigation} />
+          <OpportunityBlock item={opp} mode={'full'} navigation={navigation} />
 
         </View>
     );

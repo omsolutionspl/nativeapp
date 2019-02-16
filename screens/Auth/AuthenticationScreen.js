@@ -4,7 +4,9 @@ import { View } from '@shoutem/ui/components/View'
 import { Text } from '@shoutem/ui/components/Text'
 import { Button } from '@shoutem/ui/components/Button'
 import { Image } from '@shoutem/ui/components/Image'
+import { Row } from '@shoutem/ui/components/Row'
 import { AuthSession } from 'expo';
+import Layout from '../../constants/Layout'
 
 import { connectStyle } from '@shoutem/theme';
 import appStyles from '../../constants/styles';
@@ -55,7 +57,7 @@ class Authentication extends React.Component {
     return (
         <View style={style.container}>
 
-          <View styleName="horizontal" style={{paddingLeft: 34}}>
+          <View styleName="horizontal" style={{marginLeft: -10}}>
             <Image
                 // styleName={"small"}
                 source={require('../../assets/images/app/mbm-logo-350.png')}
@@ -63,7 +65,7 @@ class Authentication extends React.Component {
             />
           </View>
 
-          <View styleName="vertical" style={style.padding}>
+          <View styleName="vertical">
             <Text style={style.header_big}>
               Welcome back!
             </Text>
@@ -72,7 +74,7 @@ class Authentication extends React.Component {
             </Text>
           </View>
 
-          <View style={style.padding}>
+          <View>
             <View style={style.inputsRow}>
               <TextInput
                   style={style.inputs}
@@ -90,24 +92,24 @@ class Authentication extends React.Component {
               />
             </View>
           </View>
-          <View style={{paddingLeft:30}}>
-            <View styleName="vertical h-start" style={{marginTop:24}}>
+
+          <View style={{marginTop:24}}>
               <Button
 
                   disabled={this.state.logging}
-                  styleName={this.state.logging ? `muted ` : ``}
+                  styleName={`filled ` + (this.state.logging ? `muted` : ``) + ` rounded`}
                   onPress={this._handlePressAsync}>
 
-                <Text style={style.buttonText}>{this.state.logging ? "Logging..." : "Sign In"}</Text>
+                <Text>{this.state.logging ? "Logging..." : "Sign In"}</Text>
               </Button>
               <Button
                   disabled={this.state.logging}
-                  styleName={this.state.logging ? `muted ` : ``}
+                  styleName={` ` + (this.state.logging ? `muted` : ``) + ` rounded`}
                   onPress={this._handlePressAsync}>
 
-                <Text style={style.buttonText}>{"Sign In with OpenID"}</Text>
+                <Text>{"Sign In with OpenID"}</Text>
               </Button>
-            </View>
+
           </View>
         </View>
     );
@@ -117,12 +119,11 @@ class Authentication extends React.Component {
 const styles = {
   container: {
     flex: 1,
-    flexDirection: 'column',
+    //flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#fff',
-  },
-  padding: {
-    paddingLeft: 42
+    paddingLeft: (Layout.window.width/100)*7, // 7% 42
+    paddingRight: (Layout.window.width/100)*7 // 7% 42
   },
   header_big: {
     fontWeight: 'bold',
@@ -137,8 +138,8 @@ const styles = {
     fontFamily: appStyles.default.fontFamily
   },
   inputsRow: {
-    paddingRight:60,
-    marginTop:50
+    marginTop:50,
+    paddingRight:10
   },
   inputs: {
     height: 40,

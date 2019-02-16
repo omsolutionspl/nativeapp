@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/images/app/mbm-logo-350.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fffbec"
+      "backgroundColor": "#FFF5D1"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

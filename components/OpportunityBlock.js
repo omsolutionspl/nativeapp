@@ -2,7 +2,7 @@ import React, {Component, PureComponent} from "react";
 import { ScrollView, Easing } from 'react-native';
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 import { View } from '@shoutem/ui/components/View'
-import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
+import { Text, Title, Subtitle, Caption, Heading } from '@shoutem/ui/components/Text'
 import { Tile } from '@shoutem/ui/components/Tile'
 import { Row } from '@shoutem/ui/components/Row'
 import { Icon } from '@shoutem/ui/components/Icon'
@@ -11,10 +11,11 @@ import { Divider } from '@shoutem/ui/components/Divider'
 import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { Image } from '@shoutem/ui/components/Image'
 import { Button } from '@shoutem/ui/components/Button'
+// import { Badge } from 'native-base'
+import { Badge } from '../components';
 
 import Collapsible from 'react-native-collapsible';
 import * as Animatable from 'react-native-animatable';
-
 import Layout from '../constants/Layout'
 
 import { map } from 'lodash';
@@ -26,11 +27,13 @@ class OpportunityBlock extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      extended: props.mode === 'tile' // for fallback
       // oppModalVisible: props.oppModalVisible,
       // collapsed: props.mode === 'row'
     }
   }
 
+  /*
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.mode === 'row' && this.props.mode === 'tile') {
       // this.props.listingReg.scrollToIndex({  // Scrolssl reference TO THE TOP
@@ -44,6 +47,7 @@ class OpportunityBlock extends PureComponent {
       })
     }
   }
+  */
 
 
   /*
@@ -61,20 +65,28 @@ class OpportunityBlock extends PureComponent {
    </View>
    */
 
+  isExtended() {
+    return this.state.extended // this.props.mode === 'tile'
+  }
+
+  shouldExtend() {
+    const { item } = this.props;
+    return item.attributes && item.attributes.length > 0;
+  }
+
   renderHeaderRow()
   {
     const { item } = this.props
 
     return item.name ?
-      <View>
+      <View styleName={"vertical"}>
+        <Text>{item.name}</Text>
         <Title>{item.name}</Title>
         <Subtitle>{item.category.name}</Subtitle>
-        <Caption>{item.company.name}</Caption>
       </View>
       :
       <View>
-        <Title>{item.category.name}</Title>}
-        <Caption>{item.company.name}</Caption>
+        <Title>{item.category.name}</Title>
       </View>
   }
 
@@ -86,6 +98,10 @@ class OpportunityBlock extends PureComponent {
     // })
 
     this.props.handleClickBlock(e); // Redux change
+
+    this.setState({
+      extended: true
+    });
 
     // let __offset = (this.props.index * 220);
     //
@@ -102,10 +118,9 @@ class OpportunityBlock extends PureComponent {
     //   })
     // }
 
-
-    if (this.props.mode === 'tile')
+    if (this.isExtended() || ! this.shouldExtend())
     {
-      this.props.openModal();
+        this.props.openModal();
     }
 
     /*
@@ -134,121 +149,67 @@ class OpportunityBlock extends PureComponent {
 
           <View>
 
-          {mode !== 'modal' ? // row; tile;
+          {mode === 'row' || mode === 'tile' ?
           <TouchableOpacity
               activeOpacity={1}
               style={styles.slideInnerContainer}
-              onPress={this.handleClickBlock.bind(this)}
-          >
-            <Collapsible
-                collapsed={mode === 'row'}
-                easing={"linear"} // easeOutIn
-                duration={200}
-                style={{backgroundColor: "#fff"}}
-                // onAnimationEnd={() =>
-                //     this.props.listingReg.scrollToIndex({  // Scrolssl reference TO THE TOP
-                //       index: this.props.index,
-                //       animated: true
-                //     })
-                //
-                //   // this.props.listingReg.scrollToOffset({  // Scroll reference TO THE TOP
-                //   //   offset: (this.props.index * 120),
-                //   //   animated: true
-                //   // })
-                // }
-            >
-              <Tile>
-                  <ImageBackground
-                      styleName="large-banner"
-                      source={{ uri: item.image.url }}
-                  >
-                    <Overlay styleName="fill-parent image-overlay">
-                      {this.renderHeaderRow()}
-                    </Overlay>
-                  </ImageBackground>
-                  <View styleName="content">
+              onPress={this.handleClickBlock.bind(this)}>
+          <Row>
 
-                    {item.attributes?
-                    <View styleName="vertical full-width">
-
-                      {/*
-                      <Caption>
-                        Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda
-                        Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda
-                        Lorem ipsudsa kasd jkasdl asda Lorem ipsudsdsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda Lorem ipsudsa kasd jkasdl asda
-                      </Caption>
-                      */}
-
-                      <Row>
-                        <View styleName="vertical">
-                          <Subtitle>Params:</Subtitle>
-                          <Text styleName="multiline">
-                            {map(item.attributes, a => a.label).join(', ')}
-                          </Text>
-                        </View>
-                      </Row>
-
-                      <Divider styleName={"line"} />
-                    </View>
-                    :null}
-
-                    <Row>
-                      <View styleName="vertical space-between">
-                        <View styleName="horizontal h-start">
-                          <Subtitle>Value: </Subtitle>
-                          <Text styleName="multiline">$1,000,000</Text>
-                        </View>
-                        <View styleName="horizontal h-start">
-                          <Subtitle>Deadline: </Subtitle>
-                          <Text styleName="multiline">{item.deadline || ''}</Text>
-                        </View>
-
-                      </View>
-                    </Row>
-
-                    <Divider styleName={"line"} />
-
-                  </View>
-              </Tile>
-            </Collapsible>
-          </TouchableOpacity>
-          : null}
-
-          {mode === 'row' ?
-          <TouchableOpacity
-              activeOpacity={1}
-              style={styles.slideInnerContainer}
-              onPress={this.handleClickBlock.bind(this)}
-          >
-          <Row style={{height:120}}>
             <Image
-                styleName="small rounded-corners"
-                source={{ uri: item.image.url }}
-            />
-            <View styleName="vertical stretch space-between">
-              <Subtitle numberOfLines={1}>{item.name ? item.name : item.category.name}</Subtitle>
+                styleName="small rounded-corners top"
+                source={{ uri: item.image.url }} />
 
-              <View styleName="vertical space-between">
-                <View styleName="horizontal h-start">
-                  <Caption>Value: </Caption>
-                  <Caption>$1,000,000</Caption>
+            <View>
+              <View styleName="vertical">
+                <Subtitle numberOfLines={2}>{item.name ? item.name : item.category.name}</Subtitle>
+
+                {this.isExtended() && item.type ?
+                <Row style={{padding:0}}>
+                  <Badge styleName={'success'} style={{fontSize: 11, marginTop:2, marginBottom: 2}}>
+                    {item.type}
+                  </Badge>
+                </Row>
+                :null}
+
+                <View styleName="vertical space-between">
+                  <View styleName="horizontal h-start">
+                    <Caption>Value: </Caption>
+                    <Caption>$1,000,000</Caption>
+                  </View>
+                  <View styleName="horizontal h-start">
+                    <Caption>Deadline: </Caption>
+                    <Caption>{item.deadline || ''}</Caption>
+                  </View>
                 </View>
-                <View styleName="horizontal h-start">
-                  <Caption>Deadline: </Caption>
-                  <Caption>{item.deadline || ''}</Caption>
-                </View>
+
               </View>
+
+              {this.isExtended() ?
+
+                  item.attributes?
+                  <View styleName="attributes vertical full-width">
+                    <Caption>Params:</Caption>
+                    <Caption styleName="multiline">
+                      {map(item.attributes, a => a.label).join(', ')}
+                    </Caption>
+                  </View>
+                  :null
+
+              : null}
+
             </View>
 
             <Icon styleName="disclosure" name="right-arrow" />
-
           </Row>
           </TouchableOpacity>
           :null}
           
-          {mode === 'modal' ?
+          {mode === 'full' ? // full view
           <View>
             <Tile>
+
+              {/* Only on modal this should appear */}
               <View style={{
                 flex:1,
                 flexDirection: 'row',
@@ -264,11 +225,8 @@ class OpportunityBlock extends PureComponent {
                   justifyContent: 'flex-end',
                   backgroundColor: "transparent",
                   zIndex: 999
-                }} onPress={() => this.setState({modalVisible: false})}>
-                  <Icon
-                      style={{color:"white", marginTop:12}}
-                      name="close"
-                  />
+                }} onPress={this.props.onModalClose}>
+                  <Icon style={{color:"#fff", marginTop:12}} name="close" />
                 </Button>
               </View>
 
@@ -277,27 +235,29 @@ class OpportunityBlock extends PureComponent {
                   {this.renderHeaderRow()}
                 </Overlay>
               </ImageBackground>
+              <View styleName="vertical stretch space-between">
+                <Badge styleName={'success box horizontal h-center'} style={{fontSize:20}}>
+                  {item.type}
+                </Badge>
+              </View>
+
             </Tile>
 
             <ScrollView>
               <Row>
-                <Image
-                    styleName="small rounded-corners"
-                    source={{ uri: item.image.url }}
-                />
                 <View styleName="vertical stretch space-between">
-                  <Subtitle>{item.name ? item.name : item.category.name}</Subtitle>
 
-                  <View styleName="vertical space-between">
+                  <View>
 
-                    <Button onPress={() => this.props.navigation.navigate('Root', {})}>
-                      <Text> GO TO DASH</Text>
-                    </Button>
+                    <Row>
 
-                    <View styleName="horizontal h-start">
-                      <Caption>Value: </Caption>
-                      <Caption>$1,000,000</Caption>
-                    </View>
+                      <Button styleName="secondary rounded">
+                        <Text> GO TO DASH</Text>
+                      </Button>
+                    </Row>
+
+                    <Heading style={{marginTop:12}}>{item.company.name}</Heading>
+
                     <View styleName="horizontal h-start">
                       <Caption>Value: </Caption>
                       <Caption>$1,000,000</Caption>
@@ -306,6 +266,27 @@ class OpportunityBlock extends PureComponent {
                       <Caption>LAST </Caption>
                       <Caption>{item.deadline || ''}</Caption>
                     </View>
+                    <View styleName="horizontal h-start">
+                      <Caption>LAST </Caption>
+                      <Caption>{item.deadline || ''}</Caption>
+                    </View>
+                    <View styleName="horizontal h-start">
+                      <Caption>LAST </Caption>
+                      <Caption>{item.deadline || ''}</Caption>
+                    </View>
+                    <View styleName="horizontal h-start">
+                      <Caption>LAST </Caption>
+                      <Caption>{item.deadline || ''}</Caption>
+                    </View>
+                    <View styleName="horizontal h-start">
+                      <Caption>LAST </Caption>
+                      <Caption>{item.deadline || ''}</Caption>
+                    </View>
+
+                    <Button onPress={() => this.props.navigation.navigate('Root', {})}>
+                      <Text> GO TO DASH</Text>
+                    </Button>
+
                   </View>
                 </View>
               </Row>

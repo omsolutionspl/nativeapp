@@ -3,7 +3,7 @@ import {Button, ScrollView, Image, Easing, View, Text, StyleSheet, Platform } fr
 import { Constants, Permissions, Notifications, Icon } from 'expo';
 
 import FeaturedContent from '../containers/FeaturedContent'
-import ActionButtons  from '../components/ActionButtons'
+import ButtonsGroup  from '../components/ButtonsGroup'
 import OpportunitiesScreen from "./OpportunitiesScreen";
 
 import { connectStyle } from '@shoutem/theme';
@@ -20,7 +20,7 @@ class HomeScreen extends React.Component {
 
           <FeaturedContent title={"FEATURED CONTENT"} />
 
-          <ActionButtons title={"DISCOVER"} buttons={[
+          <ButtonsGroup title={"DISCOVER"} styleName={"stacked"} buttons={[
             {
               label: "Opportunities",
               icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
@@ -36,7 +36,7 @@ class HomeScreen extends React.Component {
               })
             },
             {
-              label: "Events",
+              label: "Eventing",
               icon: "md-globe",
               onPress: () => {
                 navigate('DetailModal', {
@@ -51,11 +51,8 @@ class HomeScreen extends React.Component {
   }
 }
 
-
 const styles = {
-  container: {
-    flex: 1,
-  },
+
 };
 
 // connect the component to the theme

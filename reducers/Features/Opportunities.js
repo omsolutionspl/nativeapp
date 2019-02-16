@@ -54,6 +54,7 @@ const initState = {
         "name": "NASA",
         "address": "185 Sutter St, San Francisco, CA 94109",
       },
+      "description": "LOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsaasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdasd",
 
       "website": "https://www.theconsultinglead.com",
       "post_date": "2018-11-20",
@@ -69,6 +70,8 @@ const initState = {
         "id": 2070,
         "name": "541690 - Other Scientific and Technical Consulting Services"
       },
+      "description": "LOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsaasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdasd",
+
       "post_date": "2018-11-20",
       "deadline": "in 10 months",
       "type": "Presolicitation",
@@ -86,6 +89,8 @@ const initState = {
         "id": 2070,
         "name": "541690 - Other Scientific and Technical Consulting Services"
       },
+      "description": "LOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsaasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdasd",
+
       "post_date": "2018-11-20",
       "deadline": "in 10 months",
       "type": "Presolicitation",
@@ -103,6 +108,8 @@ const initState = {
         "id": 2070,
         "name": "541690 - Other Scientific and Technical Consulting Services"
       },
+      "description": "LOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsaasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdasd",
+
       "post_date": "2018-11-20",
       "deadline": "in 10 months",
       "type": "Presolicitation",
@@ -119,6 +126,8 @@ const initState = {
         "id": 2070,
         "name": "541690 - Other Scientific and Technical Consulting Services"
       },
+      "description": "LOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsaasdOrme ipasd sadsa dsa dsa dasdOrme ipasd sadsa dsa dsa dasdasd",
+
       "post_date": "2018-11-20",
       "deadline": "in 10 months",
       "type": "Presolicitation",

@@ -16,8 +16,8 @@ export default connect(
     },
     (dispatch, ownProps) => {
       return {
-        onUpdate: () => console.log('onUpdate'),
         handleClickBlock: () => dispatch(seeDetails(ownProps.item)),
+        onModalClose: () => ownProps.navigation.goBack(),
         openModal: () => ownProps.navigation.navigate('OpportunityDetailModal', {
           opp: ownProps.item,
         })

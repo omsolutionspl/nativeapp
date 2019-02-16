@@ -3,16 +3,16 @@ import { Platform, ScrollView, FlatList } from 'react-native';
 // import { Icon, ImageBackground } from 'expo';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
-import { ListView } from '@shoutem/ui/components/ListView'
 
-// import Colors from '../Colors'
-import ActionButtons from '../components/ActionButtons'
-import { MonoText } from '../components/StyledText'
+import ButtonsGroup from '../components/ButtonsGroup'
 import OpportunityBlock from '../containers/OpportunityBlock'
 // import OpportunityBlock from '../components/OpportunityBlock'
 import { SearchBar } from 'react-native-elements';
 import { FILTER_OPPORTUNITIES, FILTER_FORECASTS, FILTER_MATCHES } from '../reducers/Features/Opportunities';
 import Accordion from 'react-native-collapsible/Accordion';
+
+
+import { Tabs, Tab } from 'native-base';
 
 import { connectStyle } from '@shoutem/theme';
 
@@ -66,7 +66,7 @@ class OpportunitiesScreen extends Component {
   {
     const { onTabSwitch, currentTab } = this.props
 
-    return <ActionButtons theme={"tabs"} buttons={[
+    return <ButtonsGroup styleName={"tabs"} buttons={[
       {
         label: "Opportunities",
         active: currentTab === FILTER_OPPORTUNITIES,
@@ -152,7 +152,6 @@ class OpportunitiesScreen extends Component {
             </View>
             <View style={{marginBottom: 60}}>
 
-
               {/*
               <Accordion
                   sections={intentions}
@@ -162,8 +161,8 @@ class OpportunitiesScreen extends Component {
                   renderContent={(section, index, isActive, sections) => this.renderRow(section, index, 'tile')}
                   onChange={this._updateSections}
               />
-
               */}
+
               <FlatList
                   ref={(list) => this.flatList = list}
                   //renderHeader={this.renderFilters.bind(this)}
@@ -171,9 +170,9 @@ class OpportunitiesScreen extends Component {
                   initialNumToRender={3}
                   maxToRenderPerBatch={3}
                   keyExtractor={item => item.id}
-                  getItemLayout={(data, index) => (
-                      {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
-                  )}
+                  // getItemLayout={(data, index) => (
+                  //     {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
+                  // )}
                   data={intentions}
                   renderItem={({ item, index }) => this.renderRow(item, index)}
               />

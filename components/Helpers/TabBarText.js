@@ -10,7 +10,8 @@ export default class TabBarText extends React.Component {
         <Text
             styleName={"h-center"}
             style={{
-              fontSize: 12,
+              fontSize: 11,
+              fontFamily: "FontAwesome",
               color: this.props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}}
         >{this.props.text}</Text>
     );
