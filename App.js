@@ -1,55 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider, connect } from 'react-redux';
-import promiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk'
-
-import {
-  createReduxContainer,
-  createReactNavigationReduxMiddleware,
-  createNavigationReducer,
-} from 'react-navigation-redux-helpers';
-import axiosMiddleware from 'redux-axios-middleware';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import axios from 'axios';
 import { StyleProvider } from '@shoutem/theme';
-import theme from './constants/theme'
-
 
 import AppNavigator from './navigation/AppNavigator';
-import reducer from './reducers/index';
-
-const client = axios.create({
-  baseURL: 'https://api.github.com',
-  responseType: 'json'
-});
-
-const navReducer = createNavigationReducer(AppNavigator);
-const appReducer = combineReducers({
-    app: reducer,
-    nav: navReducer,
-});
-
-// Note: createReactNavigationReduxMiddleware must be run before createReduxContainer
-/*
-const middleware = createReactNavigationReduxMiddleware(
-    state => state.nav,
-);
-
-const AppWithNavigationState = connect((state) => ({
-  state: state.nav,
-}))(createReduxContainer(AppNavigator));
-*/
-
-const store = createStore(
-    appReducer,
-    applyMiddleware(ReduxThunk)
-    // applyMiddleware(promiseMiddleware),
-    // applyMiddleware(middleware),//
-    // , applyMiddleware(axiosMiddleware(client)));
-);
-
+import store from './reducers/store';
+import theme from './constants/theme'
 
 export default class App extends React.Component {
   state = {
@@ -89,6 +46,7 @@ export default class App extends React.Component {
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
+
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
@@ -98,6 +56,15 @@ export default class App extends React.Component {
         'Rubik-Medium': require('./assets/fonts/rubik/Rubik-Medium.ttf'),
         'Rubik-Bold': require('./assets/fonts/rubik/Rubik-Bold.ttf'),
         'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
+
+        'Lato-Bold': require('./assets/fonts/Lato-Bold.ttf'),
+        'Lato-BoldItalic': require('./assets/fonts/Lato-BoldItalic.ttf'),
+        'Lato-Italic': require('./assets/fonts/Lato-Italic.ttf'),
+        'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
+        'Lato-Medium': require('./assets/fonts/Lato-Medium.ttf'),
+        'Lato-Regular': require('./assets/fonts/Lato-Regular.ttf'),
+        'Lato-Semibold': require('./assets/fonts/Lato-Semibold.ttf'),
+        'Lato-Thin': require('./assets/fonts/Lato-Thin.ttf'),
       }),
     ]);
   };

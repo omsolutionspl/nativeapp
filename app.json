@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "mbm-native",
+    "description": "MyBusinessMatches Native App",
     "slug": "mbm-native",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -12,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/app/mbm-logo-350.png",
+      "image": "./assets/images/app/mbm-logo-350-v2.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFF5D1"
     },
@@ -24,7 +25,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "description": "MyBusinessMatches Native App"
+    }
   }
 }

@@ -14,6 +14,10 @@ import { Button } from '@shoutem/ui/components/Button'
 // import { Badge } from 'native-base'
 import { Badge } from '../components';
 
+import ButtonsGroup from '../components/ButtonsGroup'
+import AttributeRow from '../components/AttributeRow'
+import OpportunityHeader from '../components/OpportunityHeader'
+
 import Collapsible from 'react-native-collapsible';
 import * as Animatable from 'react-native-animatable';
 import Layout from '../constants/Layout'
@@ -21,6 +25,7 @@ import Layout from '../constants/Layout'
 import { map } from 'lodash';
 
 import {connectStyle} from "@shoutem/theme/index";
+import {FILTER_FORECASTS, FILTER_MATCHES, FILTER_OPPORTUNITIES} from "../reducers/Features/Opportunities";
 
 class OpportunityBlock extends PureComponent {
 
@@ -79,15 +84,25 @@ class OpportunityBlock extends PureComponent {
     const { item } = this.props
 
     return item.name ?
-      <View styleName={"vertical"}>
-        <Text>{item.name}</Text>
-        <Title>{item.name}</Title>
-        <Subtitle>{item.category.name}</Subtitle>
-      </View>
-      :
-      <View>
-        <Title>{item.category.name}</Title>
-      </View>
+        <OpportunityHeader styleName={"vertical"}>
+          <Title>{item.name}</Title>
+          <Subtitle>{item.category.name}</Subtitle>
+
+          <View styleName={"horizontal"}>
+            <Button styleName="rounded light" onPress={() => alert('btn 1')}>
+              <Text>FAVORITE</Text>
+            </Button>
+
+            <Button styleName="rounded light secondary" onPress={() => alert('btn 1')}>
+              <Text>LET'S CONNECT</Text>
+            </Button>
+          </View>
+        </OpportunityHeader>
+        :
+        <OpportunityHeader>
+          <Title>{item.category.name}</Title>
+        </OpportunityHeader>
+
   }
 
   handleClickBlock(e) {
@@ -165,11 +180,9 @@ class OpportunityBlock extends PureComponent {
                 <Subtitle numberOfLines={2}>{item.name ? item.name : item.category.name}</Subtitle>
 
                 {this.isExtended() && item.type ?
-                <Row style={{padding:0}}>
                   <Badge styleName={'success'} style={{fontSize: 11, marginTop:2, marginBottom: 2}}>
                     {item.type}
                   </Badge>
-                </Row>
                 :null}
 
                 <View styleName="vertical space-between">
@@ -235,63 +248,98 @@ class OpportunityBlock extends PureComponent {
                   {this.renderHeaderRow()}
                 </Overlay>
               </ImageBackground>
-              <View styleName="vertical stretch space-between">
-                <Badge styleName={'success box horizontal h-center'} style={{fontSize:20}}>
-                  {item.type}
-                </Badge>
-              </View>
-
             </Tile>
 
-            <ScrollView>
+            <ScrollView style={{height:440}}>
               <Row>
-                <View styleName="vertical stretch space-between">
+                <View styleName="">
+                    <Heading>{item.company.name}</Heading>
+                    <Title style={{paddingLeft:0}}>{item.agency}</Title>
 
-                  <View>
+                    <Badge styleName={'success box horizontal h-center'} style={{fontSize:14}}>
+                      {item.type}
+                    </Badge>
 
+                    <View styleName="horizontal">
+                      <Subtitle>Value: </Subtitle>
+                      <Subtitle>$1,000,000</Subtitle>
+                    </View>
+
+                    <View styleName="horizontal">
+                      <Subtitle>Deadline: </Subtitle>
+                      <Subtitle>{item.deadline || ''}</Subtitle>
+                    </View>
+
+                  <Divider styleName="line" />
+
+                    <AttributeRow styleName="vertical" header={"Description"}>
+                      <Text styleName="multiline">
+                        {item.description}
+                      </Text>
+                    </AttributeRow>
+
+                    <View styleName="vertical attribute">
+                      <View styleName="horizontal space-between">
+                        <Subtitle>Description:</Subtitle>
+                      </View>
+                      <Text styleName="multiline">
+                        {item.description}
+                      </Text>
+                    </View>
+
+                    {/*
                     <Row>
-
-                      <Button styleName="secondary rounded">
-                        <Text> GO TO DASH</Text>
-                      </Button>
+                      <Icon name="share" />
+                      <View styleName="vertical">
+                        <View styleName="horizontal space-between">
+                          <Subtitle>Dustin Malone</Subtitle>
+                          <Caption>20 minutes ago</Caption>
+                        </View>
+                        <Text styleName="multiline">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap. Hashtag typewriter banh mi, squid keffiyeh High.</Text>
+                      </View>
                     </Row>
+                    */}
 
-                    <Heading style={{marginTop:12}}>{item.company.name}</Heading>
-
-                    <View styleName="horizontal h-start">
-                      <Caption>Value: </Caption>
-                      <Caption>$1,000,000</Caption>
-                    </View>
-                    <View styleName="horizontal h-start">
-                      <Caption>LAST </Caption>
-                      <Caption>{item.deadline || ''}</Caption>
-                    </View>
-                    <View styleName="horizontal h-start">
-                      <Caption>LAST </Caption>
-                      <Caption>{item.deadline || ''}</Caption>
-                    </View>
-                    <View styleName="horizontal h-start">
-                      <Caption>LAST </Caption>
-                      <Caption>{item.deadline || ''}</Caption>
-                    </View>
-                    <View styleName="horizontal h-start">
-                      <Caption>LAST </Caption>
-                      <Caption>{item.deadline || ''}</Caption>
-                    </View>
-                    <View styleName="horizontal h-start">
-                      <Caption>LAST </Caption>
-                      <Caption>{item.deadline || ''}</Caption>
-                    </View>
-
-                    <Button onPress={() => this.props.navigation.navigate('Root', {})}>
+                    <Button styleName="filled rounded" onPress={() => this.props.navigation.navigate('Root', {})}>
                       <Text> GO TO DASH</Text>
                     </Button>
 
-                  </View>
+                    <Divider styleName="section-header">
+                      <Caption>PRODUCT NAME</Caption>
+                      <Caption>PRICE</Caption>
+                    </Divider>
+
+                    <View styleName="horizontal space-between">
+                      <Subtitle>Deadline: </Subtitle>
+                      <Subtitle>{item.deadline || ''}</Subtitle>
+                    </View>
                 </View>
               </Row>
 
             </ScrollView>
+
+            <ButtonsGroup styleName={"stacked"} buttons={[
+              {
+                label: "Opportunities",
+                active:  false,
+                icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+                onPress: () => alert(1)
+              },
+              {
+                label: "Forecasts",
+                active: false,
+                icon: "md-people",
+                onPress: () => alert(2)
+              },
+              {
+                label: "Matches",
+                active: false,
+                icon: "md-globe",
+                onPress: () => alert(3)
+              }
+
+            ]} />
+
           </View>
           :null}
           </View>
@@ -302,7 +350,13 @@ class OpportunityBlock extends PureComponent {
 }
 
 const styles = {
-
+  'shoutem.ui.Row': {
+    '.attribute': {
+      'shoutem.ui.Text': {
+        // color: 'red'
+      }
+    }
+  }
 };
 
 // connect the component to the theme

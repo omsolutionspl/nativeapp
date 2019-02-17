@@ -34,8 +34,8 @@ class Authentication extends React.Component {
     await setTimeout(function() {
       this.setState({logging : false})
       this.props.navigation.navigate('App');
+      // TODO: Redux actions
     }.bind(this), 1000);
-
 
     /*
     let redirectUrl = AuthSession.getRedirectUrl();
@@ -45,7 +45,6 @@ class Authentication extends React.Component {
       `&client_id=${FB_APP_ID}` +
       `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
     });
-
     this.setState({ result });
     */
   };

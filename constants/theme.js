@@ -1,5 +1,5 @@
 import getTheme, { defaultThemeVariables, textComponents, viewComponents } from "@shoutem/ui/theme";
-import { createSharedStyle } from '@shoutem/theme'
+import { createSharedStyle, changeColorAlpha } from '@shoutem/theme'
 import Colors from './Colors'
 import { merge } from 'lodash';
 import { Constants } from 'expo';
@@ -14,12 +14,22 @@ const DEFAULT_COLORS = {
   actionButtonsBg: "#333", // Colors.topNavBarColor
 }
 
+const BTN_HEIGHT = 40;
+const BTN_HEIGHT_SMALL = 30;
+
 export default () => {
   return merge(defaultTheme, {
+
+    'mbm.ProfileScreen': {
+
+    },
     'mbm.DashboardScreen': {
       'mbm.common.ButtonsGroup': {
         'shoutem.ui.View': {
           backgroundColor: Colors.darkBlue,
+          margin:0,
+          padding:0,
+
           'shoutem.ui.View': {
             'shoutem.ui.Button': {
               // backgroundColor:'green', // debug
@@ -86,6 +96,7 @@ export default () => {
           'shoutem.ui.Heading': {
             fontSize: 15,
             padding: 10,
+            paddingBottom: 0,
             color: Colors.white,
             fontFamily: "FontAwesome"
           }
@@ -102,9 +113,46 @@ export default () => {
     'mbm.Authentication': {
       // Code here
     },
-    'mbm.common.Badge': {
+
+    'mbm.common.OpportunityBlock': {
+      'shoutem.ui.View': {
+        'shoutem.ui.View': {
+          'shoutem.ui.Text': {
+            color: 'red'
+          },
+          '*.attribute': {
+            // backgroundColor: 'red',
+          }
+        }
+      },
+
+      ...createSharedStyle(viewComponents, {
+        '.attribute':{
+          ...createSharedStyle([...textComponents], {
+            'shoutem.ui.Text': {
+              color: 'green'
+            },
+          }),
+        }
+
+      }),
+    },
+
+    'mbm.common.AttributeRow': {
       'shoutem.ui.View': {
 
+        marginTop:4,
+        marginBottom: 4,
+
+        'shoutem.ui.Text': {
+          fontSize: 18,
+          fontFamily: "FontAwesome",
+          color: 'red',
+        },
+      }
+    },
+    'mbm.common.Badge': {
+      'shoutem.ui.View': {
         'shoutem.ui.Text': {
           fontSize: 13,
           color: '#fff',
@@ -138,6 +186,26 @@ export default () => {
       }
     },
 
+
+    'mbm.OpportunityBlock.Header': {
+      ...createSharedStyle(viewComponents, {
+        ...createSharedStyle([...textComponents, 'shoutem.ui.Icon'], {
+          textAlign: 'left',
+          color:"#fff",
+          padding:0,
+          margin:0,
+          zIndex:9999,
+        }),
+
+        'shoutem.ui.Button': {
+          'shoutem.ui.Text': {
+            fontSize:10
+          }
+        }
+
+      }),
+    },
+
     'shoutem.ui.Button': {
       'shoutem.ui.Text': {
         color: Colors.darkBlue,
@@ -150,6 +218,14 @@ export default () => {
           color: Colors.white,
         },
         backgroundColor: Colors.darkBlue,
+      },
+
+      '.light' : {
+        'shoutem.ui.Text': {
+          color: Colors.white,
+        },
+        borderColor: Colors.orange,
+        backgroundColor: Colors.orange,
       },
 
       // Vertically stacked icon and text
@@ -175,12 +251,9 @@ export default () => {
     },
 
     'shoutem.ui.Overlay': {
-
-      ...createSharedStyle(viewComponents, {
-        ...createSharedStyle([...textComponents, 'shoutem.ui.Icon'], {
-          textAlign: 'left',
-        }),
-      }),
+      '.image-overlay': {
+        backgroundColor: changeColorAlpha("#000", 0.4),
+      },
     }
   });
 }

@@ -10,7 +10,7 @@ class Badge extends React.Component {
   render() {
     const { style, styleName } = this.props
     return <View styleName={styleName}>
-        <Text>{this.props.children}</Text>
+        <Text style={style}>{this.props.children}</Text>
       </View>
   }
 }

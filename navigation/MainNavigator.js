@@ -1,26 +1,25 @@
 import React from 'react';
-import { Platform, Easing, Animated } from 'react-native';
+import {Platform, Easing, Animated, StyleSheet} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/Helpers/TabBarIcon';
-import TabBarText from '../components/Helpers/TabBarText';
+import { Colors, Fonts } from '../constants';
+
 import { ROOT_NAV_NAME } from '../constants/Navigation'
 
 import DrawerContent from '../screens/DrawerContent';
 
-import HomeScreen from '../screens/HomeScreen';
 import SystemWebScreen from '../screens/SystemWebScreen'
-import AgendaScreen from '../screens/AgendaScreen';
-import QRScreen from '../screens/QRScreen';
 import DetailScreen from '../screens/DetailScreen';
 import OpportunityDetailScreen from '../screens/OpportunityDetailScreen';
 import CompaniesScreen from '../screens/CompaniesScreen';
 import DetailModal from '../screens/DetailModal';
+import ProfileScreen from '../screens/ProfileScreen';
+
+import MainTabNavigator from './MainTabNavigator'
 
 // Connected with redux
 import OpportunitiesScreen from '../containers/Opportunities';
-
-import { MainStackHeaderNavigationConfig, MainStackConfig } from '../components/Header';
+import { MainStackHeaderNavigationConfig } from '../components/Header';
 
 /*
 const transitionConfig = () => {
@@ -71,73 +70,6 @@ const transitionConfig = () => {
   }}
 */
 
-const HomeStack = createStackNavigator({
-  HomeScreen
-}, MainStackConfig)
-
-HomeStack.navigationOptions = {
-  tabBarLabel: ({ focused }) => (
-      <TabBarText focused={focused} text={'Dashboard'} />
-  ),
-  tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-          focused={focused}
-          name={
-            Platform.OS === 'ios'
-                ? `ios-apps${focused ? '' : ''}`
-                : 'md-apps'
-          }
-      />
-  ),
-}
-
-const AgendaStack = createStackNavigator({
-  AgendaScreen
-}, MainStackConfig)
-
-AgendaStack.navigationOptions = {
-  tabBarLabel: ({ focused }) => (
-      <TabBarText focused={focused} text={'Agenda'} />
-  ),
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'}
-    />
-  ),
-};
-
-
-const QRStack = createStackNavigator({
-  QRScreen
-}, MainStackConfig)
-
-QRStack.navigationOptions = {
-  tabBarLabel: ({ focused }) => (
-      <TabBarText focused={focused} text={'QR'} />
-  ),
-  tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-          focused={focused}
-          name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-options'}
-      />
-  ),
-}
-
-const MainTabNavigator = createBottomTabNavigator({
-  HomeStack,
-  AgendaStack,
-  QRStack,
-},{
-  tabBarOptions: {
-    style: {
-      height:54,
-      paddingBottom:6,
-      paddingTop:6
-    },
-  }
-});
-
 const RootDrawer = createDrawerNavigator({ MainTabNavigator }, {
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
@@ -159,14 +91,18 @@ const MainAppNavigator = createStackNavigator({
 });
 
 export default createStackNavigator({
-  MainAppNavigator,
+  Main: {
+    screen: MainAppNavigator
+  },
   ProfileModal: {
-    screen: DetailModal
+    screen: ProfileScreen
   },
   OpportunityDetailModal: {
     screen: OpportunityDetailScreen,
   },
-  DetailModal
+  DetailModal: {
+    screen: DetailModal
+  }
 },
 {
   headerMode: 'none',
@@ -198,5 +134,3 @@ export default createStackNavigator({
   }),
 }
 );
-
-

@@ -10,7 +10,6 @@ import { connectStyle } from '@shoutem/theme';
 import CompaniesScreen from "./CompaniesScreen";
 
 class HomeScreen extends React.Component {
-
   render() {
 
     const {navigate} = this.props.navigation;

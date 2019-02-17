@@ -9,10 +9,8 @@ import OpportunityBlock from '../containers/OpportunityBlock'
 // import OpportunityBlock from '../components/OpportunityBlock'
 import { SearchBar } from 'react-native-elements';
 import { FILTER_OPPORTUNITIES, FILTER_FORECASTS, FILTER_MATCHES } from '../reducers/Features/Opportunities';
-import Accordion from 'react-native-collapsible/Accordion';
-
-
-import { Tabs, Tab } from 'native-base';
+// import Accordion from 'react-native-collapsible/Accordion';
+// import { Tabs, Tab } from 'native-base';
 
 import { connectStyle } from '@shoutem/theme';
 

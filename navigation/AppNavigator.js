@@ -6,6 +6,25 @@ import MainNavigator from './MainNavigator';
 import Bootstrap from "./Bootstrap";
 import AuthNavigator from "./AuthNavigator"
 
+/*
+export default function NavigatorView({ dispatch, navigatorState, authState }) {
+  if (authState.isLoggedIn || authState.hasSkippedLogin) {
+    return (
+        <AppNavigator
+            navigation={
+              addNavigationHelpers({
+                dispatch,
+                state: navigatorState,
+              })
+            }
+        />
+    );
+  } else {
+    return <AuthNavigator />;
+  }
+}
+*/
+
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html

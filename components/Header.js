@@ -45,7 +45,7 @@ export const MainStackHeaderNavigationConfig = ({ navigation }) => {
 }
 
 export const MainStackConfig = {
-  headerMode: 'none'
+
 }
 
 export const pageStackNavigationOptions = ({ navigation }) => {
