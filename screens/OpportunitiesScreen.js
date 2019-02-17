@@ -43,7 +43,7 @@ class OpportunitiesScreen extends Component {
 
   /*
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.intentions === this.props.intentions) {
+    if (nextProps.intentions.l === this.props.intentions) {
       return false;
     }
     return true;
@@ -144,11 +144,11 @@ class OpportunitiesScreen extends Component {
 
     console.log('render OpportunitSCree');
     return (
-        <View>
+        <View styleName={"vertical"}>
             <View>
               {this.renderHeader()}
             </View>
-            <View style={{marginBottom: 60}}>
+            <View style={{marginBottom: 78}}>
 
               {/*
               <Accordion

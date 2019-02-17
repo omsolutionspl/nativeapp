@@ -13,7 +13,7 @@ import DetailScreen from '../screens/DetailScreen';
 import OpportunityDetailScreen from '../screens/OpportunityDetailScreen';
 import CompaniesScreen from '../screens/CompaniesScreen';
 import DetailModal from '../screens/DetailModal';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../containers/Profile';
 
 import MainTabNavigator from './MainTabNavigator'
 

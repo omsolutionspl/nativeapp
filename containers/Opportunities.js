@@ -8,7 +8,6 @@ import OpportunitiesListingScreen from '../screens/OpportunitiesScreen'
 
 export default connect(
     (state, ownProps) => {
-
       return {
         intentions: getOpportunities(state), // Apply filtered
         currentTab: getCurrentTab(state),

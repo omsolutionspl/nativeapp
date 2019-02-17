@@ -7,6 +7,11 @@ import { combineReducers } from 'redux'
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk'
 import axios from 'axios';
+import {
+  createReduxContainer,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers';
 import axiosMiddleware from 'redux-axios-middleware';
 
 const client = axios.create({

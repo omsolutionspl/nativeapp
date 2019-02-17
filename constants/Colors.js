@@ -12,6 +12,9 @@ export default {
   orange: "#FFBD4A",
 
 
+  // Components
+  gradientFrom: '#034562', gradientTo: '#FFBD4A',
+
   tintColor,
 
   tabIconSelected: tintColor,
@@ -31,8 +34,8 @@ export default {
   primaryGradientEnd: '#fc2335',
   secondaryGradientStart: '#2c76ff',
   secondaryGradientEnd: '#2c76ff',
-  profileGradientStart: '#E57539',
-  profileGradientEnd: '#ED5C3C',
+  profileGradientStart: '#034562',
+  profileGradientEnd: '#2c76ff', // '#ED5C3C',
   secondary: '#2c76ff',
   grey: '#acacac',
   gray: '#5f5f5f',

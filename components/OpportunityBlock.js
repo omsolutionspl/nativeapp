@@ -1,4 +1,5 @@
 import React, {Component, PureComponent} from "react";
+import moment from 'moment';
 import { ScrollView, Easing } from 'react-native';
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 import { View } from '@shoutem/ui/components/View'
@@ -158,6 +159,12 @@ class OpportunityBlock extends PureComponent {
 
     let even = 0;
 
+    let __now = moment();
+    let __toDeadline;
+    if (item.deadline) {
+      __toDeadline = moment(item.deadline);
+    }
+
     console.log('render OppBlock @ ', mode, item.id); // TODO: Slow on modal
 
     return (
@@ -173,7 +180,7 @@ class OpportunityBlock extends PureComponent {
 
             <Image
                 styleName="small rounded-corners top"
-                source={{ uri: item.image.url }} />
+                source={{ uri: item.images[0].url }} />
 
             <View>
               <View styleName="vertical">
@@ -187,13 +194,16 @@ class OpportunityBlock extends PureComponent {
 
                 <View styleName="vertical space-between">
                   <View styleName="horizontal h-start">
-                    <Caption>Value: </Caption>
-                    <Caption>$1,000,000</Caption>
+                    <Caption>Estimated Value: </Caption>
+                    <Caption>$10 million-$20 million </Caption>
                   </View>
+
+                  {__toDeadline ?
                   <View styleName="horizontal h-start">
                     <Caption>Deadline: </Caption>
-                    <Caption>{item.deadline || ''}</Caption>
+                    <Caption>{__now.to(__toDeadline)}</Caption>
                   </View>
+                  :null}
                 </View>
 
               </View>
@@ -243,7 +253,7 @@ class OpportunityBlock extends PureComponent {
                 </Button>
               </View>
 
-              <ImageBackground styleName="large-banner" source={{ uri: item.image.url }}>
+              <ImageBackground styleName="large-banner" source={{ uri: item.images[0].url }}>
                 <Overlay styleName="fill-parent image-overlay">
                   {this.renderHeaderRow()}
                 </Overlay>
@@ -254,27 +264,29 @@ class OpportunityBlock extends PureComponent {
               <Row>
                 <View styleName="">
                     <Heading>{item.company.name}</Heading>
-                    <Title style={{paddingLeft:0}}>{item.agency}</Title>
+                    <Title style={{paddingLeft:0}}>{item.company.agency}</Title>
 
                     <Badge styleName={'success box horizontal h-center'} style={{fontSize:14}}>
                       {item.type}
                     </Badge>
 
                     <View styleName="horizontal">
-                      <Subtitle>Value: </Subtitle>
-                      <Subtitle>$1,000,000</Subtitle>
+                      <Caption>Estimated Value: </Caption>
+                      <Caption>$10 million-$20 million </Caption>
                     </View>
 
-                    <View styleName="horizontal">
-                      <Subtitle>Deadline: </Subtitle>
-                      <Subtitle>{item.deadline || ''}</Subtitle>
+                    {__toDeadline ?
+                    <View styleName="horizontal h-start">
+                      <Caption>Deadline: </Caption>
+                      <Caption>{__now.to(__toDeadline)}</Caption>
                     </View>
+                    :null}
 
                   <Divider styleName="line" />
 
                     <AttributeRow styleName="vertical" header={"Description"}>
                       <Text styleName="multiline">
-                        {item.description}
+                        {item.description.description}
                       </Text>
                     </AttributeRow>
 
@@ -283,7 +295,7 @@ class OpportunityBlock extends PureComponent {
                         <Subtitle>Description:</Subtitle>
                       </View>
                       <Text styleName="multiline">
-                        {item.description}
+                        {item.description.description}
                       </Text>
                     </View>
 
@@ -343,7 +355,6 @@ class OpportunityBlock extends PureComponent {
           </View>
           :null}
           </View>
-
     );
   }
 

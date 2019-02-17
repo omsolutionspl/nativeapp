@@ -64,5 +64,5 @@ const styles = {
 
 };
 
-// connect the component to the theme
+// connect the component to the themess
 export default connectStyle('mbm.common.ButtonsGroup', styles)(ButtonsGroup);

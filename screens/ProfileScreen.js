@@ -1,73 +1,78 @@
 import React from 'react';
-import {View, Text, Image, ImageBackground } from 'react-native';
-import { LinearGradient } from 'expo';
+import { ScrollView, Easing } from 'react-native';
 import { connectStyle } from '@shoutem/theme';
-
+import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
+import { Image } from '@shoutem/ui/components/Image'
+import { View } from '@shoutem/ui/components/View'
+import { Text, Heading, Subtitle, Title, Caption } from '@shoutem/ui/components/Text'
+import { LinearGradient } from 'expo';
 import { Button } from '../components';
 import { Fonts, Colors, Layout } from '../constants';
+import { renderImageOverlay } from '../components/utils/gradients'
+import ProfileHeader  from '../components/ProfileHeader'
+import ButtonsGroup  from '../components/ButtonsGroup'
 
 class ProfileScreen extends React.Component {
-  renderImageOverlay = () => (
-      <LinearGradient
-          start={{ x: 0, y: 1 }}
-          end={{ x: 1, y: 0 }}
-          colors={['#034562', '#4E598C']}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: 0.5,
-          }}
-      />
-  );
 
   render() {
+
+    const { profile, style } = this.props;
+
     return (
-        <View style={styles.container}>
+        <View styleName={"vertical"}>
+
           <ImageBackground
-              resizeMode="cover"
-              source={require('../assets/images/avatar.png')}
-              style={[styles.section, styles.header]}
-          >
-            {this.renderImageOverlay()}
-            <View style={{ flex: 1, justifyContent: 'center' }}>
-              <Text style={styles.title}>Jane SIMPSON</Text>
-              <View>
-                <Text style={styles.position}>UI/UX Designer</Text>
-                <Text style={styles.company}>React Native Starter</Text>
+              styleName="large-banner"
+              source={{ uri: profile.logo }}>
+
+              {renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.8})}
+
+              {/* TODO Close btn here */}
+
+              <ProfileHeader>
+                <View styleName={'vertical content'}>
+                  <Title style={style.title}>{profile.first_name} {profile.last_name}</Title>
+                  <View>
+                    <Subtitle style={style.position}>{profile.title}</Subtitle>
+                    <Caption style={style.company}>{profile.company.name}</Caption>
+                  </View>
+                </View>
+                <View styleName={'vertical avatar'}>
+                  <Image
+                      styleName="medium-avatar"
+                      source={{ uri: profile.avatar }}
+                      style={style.avatar}
+                  />
+                </View>
+              </ProfileHeader>
+
+              <View style={{ flexDirection: 'row' }}>
+                <Button
+                    secondary
+                    bgColor="white"
+                    textColor={Colors.primary}
+                    rounded
+                    small
+                    caption="Contact"
+                    onPress={() => { }}
+                />
+
+                <Button
+                    rounded
+                    bordered
+                    small
+                    style={{ marginLeft: 20 }}
+                    caption="Favourite"
+                    onPress={() => {}}
+                />
               </View>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Button
-                  secondary
-                  bgColor="white"
-                  textColor={Colors.primary}
-                  rounded
-                  small
-                  caption="Contact"
-                  onPress={() => { }}
-              />
-
-              <Button
-                  rounded
-                  bordered
-                  small
-                  style={{ marginLeft: 20 }}
-                  caption="Follow"
-                  onPress={() => {}}
-              />
-            </View>
           </ImageBackground>
+
           <View style={styles.section}>
-
-            <Text>Paris, aaaaa</Text>
-
             <LinearGradient
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 0 }}
-                colors={[Colors.profileGradientStart, Colors.profileGradientEnd]}
+                colors={[Colors.profileGradientStart, Colors.profileGradientStart]}
                 style={styles.quickFacts}
             >
               <View style={styles.quickInfoItem}>
@@ -78,6 +83,11 @@ class ProfileScreen extends React.Component {
               <View style={styles.quickInfoItem}>
                 <Text style={styles.quickInfoText}>1.3k</Text>
                 <Text style={styles.quickInfoText}>Followers</Text>
+              </View>
+
+              <View style={styles.quickInfoItem}>
+                <Text style={styles.quickInfoText}>816</Text>
+                <Text style={styles.quickInfoText}>Following</Text>
               </View>
 
               <View style={styles.quickInfoItem}>
@@ -106,29 +116,30 @@ class ProfileScreen extends React.Component {
             </View>
 
             <View style={styles.bottomRow}>
-              <ImageBackground
-                  style={styles.bottomImage}
-                  source={require('../assets/images/photos.jpeg')}
-              >
-                {this.renderImageOverlay()}
-                <Text style={styles.quickInfoText}>+150</Text>
-                <Text style={styles.quickInfoText} styleName="bright">Photos</Text>
-              </ImageBackground>
-              <ImageBackground
-                  style={styles.bottomImage}
-                  source={require('../assets/images/social.jpeg')}
-              >
-                {this.renderImageOverlay()}
-                <Text style={styles.quickInfoText}>SOCIAL</Text>
-              </ImageBackground>
-              <ImageBackground
-                  style={styles.bottomImage}
-                  source={require('../assets/images/projects.jpg')}
-              >
-                {this.renderImageOverlay()}
-                <Text style={styles.quickInfoText}>PROJECTS</Text>
-              </ImageBackground>
+
+              <ButtonsGroup styleName={"stacked"} buttons={[
+                {
+                  label: "Opportunities",
+                  active:  false,
+                  icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+                  onPress: () => alert(1)
+                },
+                {
+                  label: "Forecasts",
+                  active: false,
+                  icon: "md-people",
+                  onPress: () => alert(2)
+                },
+                {
+                  label: "Matches",
+                  active: false,
+                  icon: "md-globe",
+                  onPress: () => alert(3)
+                }
+
+              ]} />
             </View>
+
           </View>
         </View>
     )
@@ -136,16 +147,8 @@ class ProfileScreen extends React.Component {
 }
 
 const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  header: {
-    flex: 2,
-    padding: 20,
-  },
   section: {
-    flex: 3,
+    flex: 5,
     position: 'relative',
   },
   title: {
@@ -154,6 +157,7 @@ const styles = {
     fontSize: 25,
     letterSpacing: 0.04,
     marginBottom: 10,
+    padding:0,
   },
   lightText: {
     color: Colors.white,
@@ -184,14 +188,6 @@ const styles = {
   },
   bottomRow: {
     height: 80,
-    flexDirection: 'row',
-  },
-  backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
   position: {
     color: Colors.white,

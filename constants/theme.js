@@ -1,4 +1,4 @@
-import getTheme, { defaultThemeVariables, textComponents, viewComponents } from "@shoutem/ui/theme";
+import getTheme, { defaultThemeVariables, dimensionRelativeToIphone, textComponents, viewComponents } from "@shoutem/ui/theme";
 import { createSharedStyle, changeColorAlpha } from '@shoutem/theme'
 import Colors from './Colors'
 import { merge } from 'lodash';
@@ -22,10 +22,34 @@ export default () => {
 
     'mbm.ProfileScreen': {
 
+      avatar: {
+        width: dimensionRelativeToIphone(90),
+        height: dimensionRelativeToIphone(90),
+        borderRadius: 45,
+        borderWidth: 2,
+        borderColor: Colors.topNavBarColor
+      },
+
+      'mbm.common.ProfileHeader': {
+        'shoutem.ui.View': {
+          backgroundColor: "green"
+        }
+      },
+
+      'shoutem.ui.View': {
+        'shoutem.ui.ImageBackground': {
+          flex:2,
+          padding: 20,
+          alignItems: 'flex-start'
+        },
+        flex: 1,
+        backgroundColor: 'white',
+      },
     },
     'mbm.DashboardScreen': {
       'mbm.common.ButtonsGroup': {
         'shoutem.ui.View': {
+          flex:1,
           backgroundColor: Colors.darkBlue,
           margin:0,
           padding:0,
@@ -151,6 +175,28 @@ export default () => {
         },
       }
     },
+    'mbm.common.ProfileHeader': {
+      'shoutem.ui.View': {
+        'shoutem.ui.View.content': {
+          flex: 3,
+          paddingRight: 10,
+          //backgroundColor:'red'
+        },
+        'shoutem.ui.View.avatar': {
+          flex: 1,
+          justifyContent: 'flex-start',
+          marginTop:10,
+          marginRight:10,
+          //backgroundColor:'green',
+        },
+
+
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: 20
+      }
+    },
+
     'mbm.common.Badge': {
       'shoutem.ui.View': {
         'shoutem.ui.Text': {
