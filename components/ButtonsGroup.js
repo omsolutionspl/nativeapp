@@ -7,7 +7,10 @@ import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
 import { Text, Heading } from '@shoutem/ui/components/Text'
 import { Divider } from '@shoutem/ui/components/Divider'
-import Colors from '../constants/Colors';
+
+import { Colors, Fonts } from "../constants";
+import TabBarIcon from '../components/Helpers/TabBarIcon';
+import TabBarText from '../components/Helpers/TabBarText';
 
 import { connectStyle } from '@shoutem/theme';
 
@@ -16,12 +19,26 @@ class ButtonsGroup extends Component {
   // stacked
   renderButton(button)
   {
-    const { style } = this.props
+    const { style, bottom } = this.props
+
+    if (bottom === true)
+    {
+      return <Button
+          onPress={button.onPress}
+          key={`btn_${button.label}`}
+          styleName={`full-width ${this.getStyleName()} ${button.active ? 'active' : ''}`}>
+
+        {button.icon ? <TabBarIcon focused={false} name={button.icon} /> :null}
+        <TabBarText focused={false} text={button.label} />
+
+      </Button>
+    }
 
     return <Button
         onPress={button.onPress}
         key={`btn_${button.label}`}
         styleName={`full-width ${this.getStyleName()} ${button.active ? 'active' : ''}`}>
+
         {button.icon ?
           <Icon.Ionicons
               size={button.size || 30}
@@ -29,6 +46,7 @@ class ButtonsGroup extends Component {
               style={style.icon}
           />
         : null}
+
         <Text style={{fontFamily: "FontAwesome"}}>{button.label}</Text>
     </Button>
   }

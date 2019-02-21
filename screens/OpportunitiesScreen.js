@@ -1,29 +1,25 @@
 import React, {Component} from "react";
-import { Platform, ScrollView, FlatList } from 'react-native';
-// import { Icon, ImageBackground } from 'expo';
+import {
+  StyleSheet,
+  Platform,
+  FlatList,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+  Dimensions,
+} from 'react-native';
+import { LinearGradient } from 'expo';
+import { Colors, Fonts, Layout } from '../constants';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
 
 import ButtonsGroup from '../components/ButtonsGroup'
 import OpportunityBlock from '../containers/OpportunityBlock'
-// import OpportunityBlock from '../components/OpportunityBlock'
 import { SearchBar } from 'react-native-elements';
 import { FILTER_OPPORTUNITIES, FILTER_FORECASTS, FILTER_MATCHES } from '../reducers/Features/Opportunities';
-// import Accordion from 'react-native-collapsible/Accordion';
-// import { Tabs, Tab } from 'native-base';
-
 import { connectStyle } from '@shoutem/theme';
 
-const SECTIONS = [
-  {
-    title: 'First',
-    content: 'Lorem ipsum...',
-  },
-  {
-    title: 'Second',
-    content: 'Lorem ipsum...',
-  },
-];
+const ITEM_HEIGHT = 120
 
 class OpportunitiesScreen extends Component {
   static navigationOptions = {
@@ -40,15 +36,6 @@ class OpportunitiesScreen extends Component {
     this.renderRow = this.renderRow.bind(this);
     this.state = {activeSections: []}
   }
-
-  /*
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.intentions.l === this.props.intentions) {
-      return false;
-    }
-    return true;
-  }
-  */
 
   renderRow(opp, index, mode) {
     return <OpportunityBlock
@@ -105,62 +92,18 @@ class OpportunitiesScreen extends Component {
     </View>
   }
 
-  // TMP TEST
-
-
-  _renderSectionTitle = section => {
-    return (
-        <View style={styles.content}>
-          <Text>{section.content}</Text>
-        </View>
-    );
-  };
-
-  _renderHeader = section => {
-    return (
-        <View style={styles.header}>
-          <Text style={styles.headerText}>{section.name}</Text>
-        </View>
-    );
-  };
-
-  _renderContent = section => {
-    return (
-        <View style={styles.content}>
-          <Text>{section.content}</Text>
-        </View>
-    );
-  };
-
-  _updateSections = activeSections => {
-    this.setState({ activeSections });
-  };
-
   render() {
 
     const { style, navigate, intentions } = this.props
 
-    const ITEM_HEIGHT = 120
-
     console.log('render OpportunitSCree');
+
     return (
-        <View styleName={"vertical"}>
+        <View styleName={"vertical"} style={styles.container}>
             <View>
               {this.renderHeader()}
             </View>
             <View style={{marginBottom: 78}}>
-
-              {/*
-              <Accordion
-                  sections={intentions}
-                  activeSections={this.state.activeSections}
-                  renderSectionTitle={this._renderSectionTitle}
-                  renderHeader={this._renderHeader}
-                  renderContent={(section, index, isActive, sections) => this.renderRow(section, index, 'tile')}
-                  onChange={this._updateSections}
-              />
-              */}
-
               <FlatList
                   ref={(list) => this.flatList = list}
                   //renderHeader={this.renderFilters.bind(this)}
@@ -181,7 +124,14 @@ class OpportunitiesScreen extends Component {
 }
 
 const styles = {
-
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+  tabsContainer: {
+    alignSelf: 'stretch',
+    marginTop: 30,
+  },
 };
 
 // connect the component to the themes

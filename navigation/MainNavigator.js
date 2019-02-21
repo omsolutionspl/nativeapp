@@ -19,6 +19,7 @@ import MainTabNavigator from './MainTabNavigator'
 
 // Connected with redux
 import OpportunitiesScreen from '../containers/Opportunities';
+import EventsScreen from '../containers/Events';
 import { MainStackHeaderNavigationConfig } from '../components/Header';
 
 /*
@@ -84,6 +85,7 @@ const MainAppNavigator = createStackNavigator({
   SystemWebScreen,
   CompaniesScreen,
   OpportunitiesScreen,
+  EventsScreen,
   DetailScreen
 },
 {

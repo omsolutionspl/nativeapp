@@ -14,6 +14,7 @@ import { Image } from '@shoutem/ui/components/Image'
 import { Button } from '@shoutem/ui/components/Button'
 // import { Badge } from 'native-base'
 import { Badge } from '../components';
+import GoBackBtn  from '../components/Helpers/GoBackBtn'
 
 import ButtonsGroup from '../components/ButtonsGroup'
 import AttributeRow from '../components/AttributeRow'
@@ -27,6 +28,7 @@ import { map } from 'lodash';
 
 import {connectStyle} from "@shoutem/theme/index";
 import {FILTER_FORECASTS, FILTER_MATCHES, FILTER_OPPORTUNITIES} from "../reducers/Features/Opportunities";
+import GridRow, { ITEM_ROW, IMAGE_ROW } from '../components/GridRow'
 
 class OpportunityBlock extends PureComponent {
 
@@ -82,12 +84,12 @@ class OpportunityBlock extends PureComponent {
 
   renderHeaderRow()
   {
-    const { item } = this.props
+    const { item: { category, description: { title }} } = this.props
 
-    return item.name ?
+    return title ?
         <OpportunityHeader styleName={"vertical"}>
-          <Title>{item.name}</Title>
-          <Subtitle>{item.category.name}</Subtitle>
+          <Title>{title}</Title>
+          <Subtitle>{category.name}</Subtitle>
 
           <View styleName={"horizontal"}>
             <Button styleName="rounded light" onPress={() => alert('btn 1')}>
@@ -101,7 +103,7 @@ class OpportunityBlock extends PureComponent {
         </OpportunityHeader>
         :
         <OpportunityHeader>
-          <Title>{item.category.name}</Title>
+          <Title>{category.name}</Title>
         </OpportunityHeader>
 
   }
@@ -155,14 +157,14 @@ class OpportunityBlock extends PureComponent {
 
   render() {
 
-    const { item, mode } = this.props
+    const { item, item: { type, description }, mode } = this.props
 
     let even = 0;
 
     let __now = moment();
-    let __toDeadline;
+    let deadline;
     if (item.deadline) {
-      __toDeadline = moment(item.deadline);
+      deadline = moment(item.deadline);
     }
 
     console.log('render OppBlock @ ', mode, item.id); // TODO: Slow on modal
@@ -172,60 +174,26 @@ class OpportunityBlock extends PureComponent {
           <View>
 
           {mode === 'row' || mode === 'tile' ?
-          <TouchableOpacity
-              activeOpacity={1}
-              style={styles.slideInnerContainer}
-              onPress={this.handleClickBlock.bind(this)}>
-          <Row>
+          <GridRow
+            onPress={this.props.handleClickBlock.bind(this)}
+            type={ITEM_ROW}
+            item={{
 
-            <Image
-                styleName="small rounded-corners top"
-                source={{ uri: item.images[0].url }} />
-
-            <View>
-              <View styleName="vertical">
-                <Subtitle numberOfLines={2}>{item.name ? item.name : item.category.name}</Subtitle>
-
-                {this.isExtended() && item.type ?
-                  <Badge styleName={'success'} style={{fontSize: 11, marginTop:2, marginBottom: 2}}>
-                    {item.type}
-                  </Badge>
-                :null}
-
-                <View styleName="vertical space-between">
-                  <View styleName="horizontal h-start">
-                    <Caption>Estimated Value: </Caption>
-                    <Caption>$10 million-$20 million </Caption>
-                  </View>
-
-                  {__toDeadline ?
-                  <View styleName="horizontal h-start">
-                    <Caption>Deadline: </Caption>
-                    <Caption>{__now.to(__toDeadline)}</Caption>
-                  </View>
-                  :null}
-                </View>
-
-              </View>
-
-              {this.isExtended() ?
-
-                  item.attributes?
-                  <View styleName="attributes vertical full-width">
-                    <Caption>Params:</Caption>
-                    <Caption styleName="multiline">
-                      {map(item.attributes, a => a.label).join(', ')}
-                    </Caption>
-                  </View>
-                  :null
-
-              : null}
-
-            </View>
-
-            <Icon styleName="disclosure" name="right-arrow" />
-          </Row>
-          </TouchableOpacity>
+              brand: item.type,
+              title: item.category.name,
+              subtitle: item.description['dot_procurement_category'] || null,
+              detailInfo: item.description['dot_estimated_value'] || null,
+              badge: Math.floor(Math.random() * 10) % 2 ? {
+                label: 'Short deadline',
+                type: "danger"
+              } : {
+                label: 'Fully applicable',
+                type: "success"
+              },
+              image: item.images[0].url,
+              deadline: deadline,
+            }
+          } />
           :null}
           
           {mode === 'full' ? // full view
@@ -233,25 +201,7 @@ class OpportunityBlock extends PureComponent {
             <Tile>
 
               {/* Only on modal this should appear */}
-              <View style={{
-                flex:1,
-                flexDirection: 'row',
-                position:'absolute',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-end',
-                zIndex: 998
-              }}>
-                <Button styleName="clear" style={{
-                  flex:1,
-                  flexDirection: 'row',
-                  alignItems: 'flex-end',
-                  justifyContent: 'flex-end',
-                  backgroundColor: "transparent",
-                  zIndex: 999
-                }} onPress={this.props.onModalClose}>
-                  <Icon style={{color:"#fff", marginTop:12}} name="close" />
-                </Button>
-              </View>
+              <GoBackBtn {...this.props} />
 
               <ImageBackground styleName="large-banner" source={{ uri: item.images[0].url }}>
                 <Overlay styleName="fill-parent image-overlay">
@@ -275,10 +225,10 @@ class OpportunityBlock extends PureComponent {
                       <Caption>$10 million-$20 million </Caption>
                     </View>
 
-                    {__toDeadline ?
+                    {deadline ?
                     <View styleName="horizontal h-start">
                       <Caption>Deadline: </Caption>
-                      <Caption>{__now.to(__toDeadline)}</Caption>
+                      <Caption>{__now.to(deadline)}</Caption>
                     </View>
                     :null}
 
@@ -361,13 +311,6 @@ class OpportunityBlock extends PureComponent {
 }
 
 const styles = {
-  'shoutem.ui.Row': {
-    '.attribute': {
-      'shoutem.ui.Text': {
-        // color: 'red'
-      }
-    }
-  }
 };
 
 // connect the component to the theme

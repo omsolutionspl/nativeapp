@@ -395,10 +395,12 @@ const mapOppToResults = (opp, kk) => {
   let __source = opp._source
 
   return {
+
     id:       opp._id,
     "type":   __source.competition_type,
     "post_date": "2018-11-20",
     "deadline": "2020-11-20",
+
     // TODO: Array
     "category": __source.attributes.naics,
     "images": [

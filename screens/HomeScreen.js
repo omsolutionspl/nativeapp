@@ -8,6 +8,7 @@ import OpportunitiesScreen from "./OpportunitiesScreen";
 
 import { connectStyle } from '@shoutem/theme';
 import CompaniesScreen from "./CompaniesScreen";
+import EventsScreen from "../containers/Events";
 
 class HomeScreen extends React.Component {
   render() {
@@ -38,8 +39,8 @@ class HomeScreen extends React.Component {
               label: "Eventing",
               icon: "md-globe",
               onPress: () => {
-                navigate('DetailModal', {
-                  url: 'https://mbmapp.com/',
+                navigate('EventsScreen', {
+                  // url: 'https://mbmapp.com/',
                 });
               }
             }

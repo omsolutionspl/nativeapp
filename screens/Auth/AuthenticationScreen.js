@@ -3,6 +3,7 @@ import { ScrollView, TextInput } from 'react-native';
 import { View } from '@shoutem/ui/components/View'
 import { Text } from '@shoutem/ui/components/Text'
 import { Button } from '@shoutem/ui/components/Button'
+import { Button as RNButton } from '../../components/'
 import { Image } from '@shoutem/ui/components/Image'
 import { Row } from '@shoutem/ui/components/Row'
 import { AuthSession } from 'expo';
@@ -92,22 +93,24 @@ class Authentication extends React.Component {
             </View>
           </View>
 
-          <View style={{marginTop:24}}>
-              <Button
+          <View style={{marginTop:22}}>
+            <RNButton
+                primary
+                rounded
+                loading={this.state.logging}
+                style={{ marginTop:4 }}
+                caption={this.state.logging ? "Logging..." : "Sign In"}
+                onPress={this._handlePressAsync}
+            />
 
-                  disabled={this.state.logging}
-                  styleName={`filled ` + (this.state.logging ? `muted` : ``) + ` rounded`}
-                  onPress={this._handlePressAsync}>
-
-                <Text>{this.state.logging ? "Logging..." : "Sign In"}</Text>
-              </Button>
-              <Button
-                  disabled={this.state.logging}
-                  styleName={` ` + (this.state.logging ? `muted` : ``) + ` rounded`}
-                  onPress={this._handlePressAsync}>
-
-                <Text>{"Sign In with OpenID"}</Text>
-              </Button>
+            <RNButton
+                primary
+                bordered
+                rounded
+                style={{ marginTop:4 }}
+                caption={"Sign In with OpenID"}
+                onPress={this._handlePressAsync}
+            />
 
           </View>
         </View>

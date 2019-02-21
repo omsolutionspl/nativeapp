@@ -1,8 +1,9 @@
 import getTheme, { defaultThemeVariables, dimensionRelativeToIphone, textComponents, viewComponents } from "@shoutem/ui/theme";
 import { createSharedStyle, changeColorAlpha } from '@shoutem/theme'
-import Colors from './Colors'
+import { Colors, Fonts } from './index'
 import { merge } from 'lodash';
 import { Constants } from 'expo';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const defaultTheme = getTheme();
 
@@ -23,17 +24,11 @@ export default () => {
     'mbm.ProfileScreen': {
 
       avatar: {
-        width: dimensionRelativeToIphone(90),
-        height: dimensionRelativeToIphone(90),
-        borderRadius: 45,
-        borderWidth: 2,
+        width: dimensionRelativeToIphone(80),
+        height: dimensionRelativeToIphone(80),
+        borderRadius: 40,
+        borderWidth: 1,
         borderColor: Colors.topNavBarColor
-      },
-
-      'mbm.common.ProfileHeader': {
-        'shoutem.ui.View': {
-          backgroundColor: "green"
-        }
       },
 
       'shoutem.ui.View': {
@@ -91,6 +86,7 @@ export default () => {
         '.tabs': {
           'shoutem.ui.View': {
             'shoutem.ui.Button': {
+
               '.tabs': {
                 height: 44,
                 borderWidth:0,
@@ -101,7 +97,7 @@ export default () => {
                 borderBottomWidth: 1,
                 'shoutem.ui.Text': {
                   color: Colors.tabIconDefault,
-                  fontSize:14,
+                  fontSize:12,
                 },
               },
 
@@ -137,7 +133,59 @@ export default () => {
     'mbm.Authentication': {
       // Code here
     },
+    'mbm.grid.Listing': {
 
+    },
+    'mbm.grid.GridRow': {
+      'shoutem.ui.View': {
+        'shoutem.ui.Row': {
+          'shoutem.ui.View': {
+
+            'shoutem.ui.View.details': {
+              'shoutem.ui.View': {
+                'shoutem.ui.Text': {
+                  fontFamily: Fonts.primaryRegular,
+                  fontSize: 14,
+                  color: Colors.defaultText,
+                  textAlign: 'right',
+                }
+              }
+            },
+
+            'shoutem.ui.Caption': {
+              fontFamily: Fonts.primarySemiBold,
+              fontSize: 13,
+              color: Colors.secondary,
+            },
+
+            'shoutem.ui.Title': {
+              fontFamily: Fonts.primaryBold,
+              fontSize: 16,
+              padding:0,
+              margin:0,
+              color: Colors.defaultText
+            },
+
+            'shoutem.ui.Subtitle': {
+              fontFamily: Fonts.primaryRegular,
+              fontSize: 14,
+              color: Colors.lightGray
+            },
+
+            // TODO: move to component
+            'shoutem.ui.View.badge': {
+              borderRadius: 10,
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+            }
+          },
+
+          paddingVertical: 16,
+          paddingHorizontal: 10,
+          // backgroundColor: 'green'
+        }
+      },
+    },
     'mbm.common.OpportunityBlock': {
       'shoutem.ui.View': {
         'shoutem.ui.View': {
@@ -163,38 +211,99 @@ export default () => {
     },
 
     'mbm.common.AttributeRow': {
+      'shoutem.ui.Row': {
+        'shoutem.ui.View': {
+
+          marginTop:4,
+          marginBottom: 4,
+
+          ...createSharedStyle([...textComponents], {
+            fontSize: 16,
+            fontFamily: Fonts.primaryRegular,
+            color: Colors.defaultText
+          }),
+
+          'shoutem.ui.Subtitle': {
+            fontSize: 18,
+            fontFamily: Fonts.primarySemiBold,
+            color: Colors.headingTextColor
+          },
+        }
+      }
+    },
+    'mbm.common.Anchor': {
+      ...createSharedStyle([...textComponents], {
+        fontSize:13,
+        color: Colors.primary,
+        fontFamily: Fonts.primarySemiBold,
+      })
+    },
+    'mbm.common.QuickInfo': {
       'shoutem.ui.View': {
 
-        marginTop:4,
-        marginBottom: 4,
-
-        'shoutem.ui.Text': {
-          fontSize: 18,
-          fontFamily: "FontAwesome",
-          color: 'red',
-        },
-      }
+        ...createSharedStyle([...textComponents], {
+          fontSize:12,
+          color: Colors.white,
+          fontFamily: Fonts.primaryRegular,
+        }, {
+          'shoutem.ui.Subtitle' : {
+            fontSize:20,
+            //color:'red',
+            fontFamily: Fonts.primaryBold
+          }
+        }),
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 12,
+      },
     },
     'mbm.common.ProfileHeader': {
       'shoutem.ui.View': {
         'shoutem.ui.View.content': {
+
+          'shoutem.ui.Title':{
+            color: Colors.white,
+            fontFamily: Fonts.primaryBold,
+            fontSize: 24, // hp('4%'),
+            letterSpacing: 0.04,
+            marginBottom: 8,
+            padding:0,
+          },
+          'shoutem.ui.View': {
+            'shoutem.ui.Subtitle':{
+              color: Colors.white,
+              fontFamily: Fonts.primaryLight,
+              fontSize: 14, // hp('3%'),
+              marginBottom: 3,
+            },
+            'shoutem.ui.Caption': {
+              color: Colors.white,
+              fontFamily: Fonts.primaryRegular,
+              fontSize: 16, // hp('2%'),
+            }
+          },
+
           flex: 3,
-          paddingRight: 10,
+          paddingRight: 4,
           //backgroundColor:'red'
         },
         'shoutem.ui.View.avatar': {
           flex: 1,
           justifyContent: 'flex-start',
-          marginTop:10,
-          marginRight:10,
+          alignItems: 'center',
+          marginTop:16,
           //backgroundColor:'green',
         },
 
-
         flex: 1,
         flexDirection: 'row',
-        marginTop: 20
+        marginTop: 14
       }
+    },
+
+    'mbm.common.StyledButton': {
+
     },
 
     'mbm.common.Badge': {
@@ -202,10 +311,6 @@ export default () => {
         'shoutem.ui.Text': {
           fontSize: 13,
           color: '#fff',
-
-          '.center' : {
-            //textAlign: 'center'
-          },
         },
 
         backgroundColor: DEFAULT_COLORS.color,
@@ -215,8 +320,10 @@ export default () => {
         borderRadius: 6,
 
         '.success': {
-          backgroundColor: "#81c868",
-          color: '#fff'
+            'shoutem.ui.Text': {
+              color: Colors.white
+            },
+          backgroundColor: Colors.green,
         },
 
         '.box': {
@@ -277,6 +384,18 @@ export default () => {
       // Vertically stacked icon and text
       '.stacked': {
         paddingRight:12, // Little fix for missing some pixels
+      },
+
+      '.bottom': {
+        height:54,
+        paddingBottom:6,
+        paddingTop:6,
+        borderTopColor: Colors.tabNavigationBorder,
+        borderTopWidth: 0.5,
+        'shoutem.ui.Text': {
+          color: Colors.grey,
+          fontSize:12,
+        },
       },
 
       '.rounded' : {

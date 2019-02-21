@@ -1,18 +1,23 @@
 import React from 'react';
-import { ScrollView, Easing } from 'react-native';
+import { ScrollView, Easing, Platform } from 'react-native';
 import { connectStyle } from '@shoutem/theme';
 import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { Image } from '@shoutem/ui/components/Image'
 import { View } from '@shoutem/ui/components/View'
 import { Text, Heading, Subtitle, Title, Caption } from '@shoutem/ui/components/Text'
-import { LinearGradient } from 'expo';
-import { Button } from '../components';
+import { Icon, LinearGradient, Linking } from 'expo';
 import { Fonts, Colors, Layout } from '../constants';
 import { renderImageOverlay } from '../components/utils/gradients'
 import ProfileHeader  from '../components/ProfileHeader'
-import ButtonsGroup  from '../components/ButtonsGroup'
+import QuickInfo  from '../components/QuickInfo'
+import { ButtonsGroup, AttributeRow, GoBackBtn, Button, Anchor } from '../components/'
 
 class ProfileScreen extends React.Component {
+
+  _handlePressContact = () => {
+    Linking.openURL(this.props.href);
+    this.props.onPress && this.props.onPress();
+  };
 
   render() {
 
@@ -21,20 +26,21 @@ class ProfileScreen extends React.Component {
     return (
         <View styleName={"vertical"}>
 
+          {/* TODO Close btn here */}
+          <GoBackBtn {...this.props} />
+
           <ImageBackground
               styleName="large-banner"
               source={{ uri: profile.logo }}>
 
               {renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.8})}
 
-              {/* TODO Close btn here */}
-
               <ProfileHeader>
                 <View styleName={'vertical content'}>
-                  <Title style={style.title}>{profile.first_name} {profile.last_name}</Title>
+                  <Title>{profile.first_name} {profile.last_name}</Title>
                   <View>
-                    <Subtitle style={style.position}>{profile.title}</Subtitle>
-                    <Caption style={style.company}>{profile.company.name}</Caption>
+                    <Subtitle numberOfLines={2}>{profile.title}</Subtitle>
+                    <Caption>{profile.company.name}</Caption>
                   </View>
                 </View>
                 <View styleName={'vertical avatar'}>
@@ -46,12 +52,13 @@ class ProfileScreen extends React.Component {
                 </View>
               </ProfileHeader>
 
-              <View style={{ flexDirection: 'row' }}>
+              <View styleName={"horizontal"}>
                 <Button
                     secondary
                     bgColor="white"
                     textColor={Colors.primary}
                     rounded
+                    //loading
                     small
                     caption="Contact"
                     onPress={() => { }}
@@ -68,77 +75,90 @@ class ProfileScreen extends React.Component {
               </View>
           </ImageBackground>
 
+
           <View style={styles.section}>
             <LinearGradient
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 0 }}
-                colors={[Colors.profileGradientStart, Colors.profileGradientStart]}
+                colors={[Colors.profileGradientStart, Colors.profileGradientEnd]}
                 style={styles.quickFacts}
             >
-              <View style={styles.quickInfoItem}>
-                <Text style={styles.quickInfoText}>112</Text>
-                <Text style={styles.quickInfoText}>Projects</Text>
-              </View>
+              <QuickInfo>
+                <Subtitle>21</Subtitle>
+                <Text>Opportunities</Text>
+              </QuickInfo>
 
-              <View style={styles.quickInfoItem}>
-                <Text style={styles.quickInfoText}>1.3k</Text>
-                <Text style={styles.quickInfoText}>Followers</Text>
-              </View>
+              <QuickInfo>
+                <Subtitle>72</Subtitle>
+                <Text>Contracts</Text>
+              </QuickInfo>
 
-              <View style={styles.quickInfoItem}>
-                <Text style={styles.quickInfoText}>816</Text>
-                <Text style={styles.quickInfoText}>Following</Text>
-              </View>
-
-              <View style={styles.quickInfoItem}>
-                <Text style={styles.quickInfoText}>816</Text>
-                <Text style={styles.quickInfoText}>Following</Text>
-              </View>
+              <QuickInfo>
+                <Subtitle>11</Subtitle>
+                <Text>Events</Text>
+              </QuickInfo>
             </LinearGradient>
 
-            <View style={{ flex: 1 }}>
-              <View style={styles.infoRow}>
-                {/*<Icon style={styles.infoIcon} name="map-marker" size={20} color="#c3c3c3" />*/}
-                <Text>Paris, France</Text>
-              </View>
-              <View style={styles.hr} />
+            <ScrollView>
 
-              <View style={styles.infoRow}>
-                {/*<Icon style={styles.infoIcon} name="instagram" size={20} color="#c3c3c3" />*/}
-                <Text>rns</Text>
-              </View>
-              <View style={styles.hr} />
+              <AttributeRow styleName="vertical" header={null}>
+                <Text styleName="multiline">
+                  {profile.company.description}
+                </Text>
+              </AttributeRow>
 
-              <View style={styles.infoRow}>
-                {/*<Icon style={styles.infoIcon} name="youtube" size={20} color="#c3c3c3" />*/}
-                <Text>React Native Starter</Text>
-              </View>
-            </View>
+              <AttributeRow styleName="vertical" header={"Contact"}>
+                <View styleName="horizontal h-start">
+                  <Icon.Ionicons
+                      size={17}
+                      name={"md-mail"}
+                      style={{paddingRight: 6, marginTop:-1}}
+                  />
+                  <Caption><Anchor href={"mailto:email@domain.com"}>email@domain.com</Anchor></Caption>
+                </View>
+                <View styleName="horizontal h-start">
+                  <Icon.Ionicons
+                      size={17}
+                      name={"md-call"}
+                      style={{paddingRight: 6, marginTop:-1}}
+                  />
+                  <Caption><Anchor href={"tel:+1 432 33 22 123"}>+1 432 33 22 123</Anchor></Caption>
+                </View>
+              </AttributeRow>
 
-            <View style={styles.bottomRow}>
+              <AttributeRow styleName="vertical" header={"Address"}>
+                <Caption>{profile.address}</Caption>
+                <Caption>{profile.city}, {profile.state}, {profile.country}</Caption>
+              </AttributeRow>
 
-              <ButtonsGroup styleName={"stacked"} buttons={[
-                {
-                  label: "Opportunities",
-                  active:  false,
-                  icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
-                  onPress: () => alert(1)
-                },
-                {
-                  label: "Forecasts",
-                  active: false,
-                  icon: "md-people",
-                  onPress: () => alert(2)
-                },
-                {
-                  label: "Matches",
-                  active: false,
-                  icon: "md-globe",
-                  onPress: () => alert(3)
-                }
+            </ScrollView>
 
-              ]} />
-            </View>
+            <ButtonsGroup styleName={"stacked bottom"} bottom={true} buttons={[
+              {
+                label: "Let's Connect!",
+                active: false,
+                icon: Platform.OS === 'ios' ? 'md-chatbubbles' : 'md-chatbubbles',
+                onPress: () => this.props.navigation.navigate('DetailModal', {
+
+                })
+              },
+              {
+                label: "Schedule",
+                active:  false,
+                icon:  "md-calendar", ////
+                onPress: () => this.props.navigation.navigate('DetailModal', {
+
+                })
+              },
+              {
+                label: "Events",
+                active: false,
+                size: 26,
+                icon: "md-globe",
+                onPress: () => this.props.navigation.goBack()
+              }
+
+            ]} />
 
           </View>
         </View>
@@ -150,73 +170,19 @@ const styles = {
   section: {
     flex: 5,
     position: 'relative',
-  },
-  title: {
-    color: Colors.white,
-    fontFamily: Fonts.primaryBold,
-    fontSize: 25,
-    letterSpacing: 0.04,
-    marginBottom: 10,
-    padding:0,
-  },
-  lightText: {
-    color: Colors.white,
+    // backgroundColor:'red'
   },
   quickFacts: {
-    height: 60,
-    flexDirection: 'row',
-  },
-  quickFact: {
-    flex: 1,
-  },
-  infoSection: {
-    flex: 1,
-  },
-  infoRow: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    // height: 60,
     flexDirection: 'row',
   },
   hr: {
     borderBottomColor: '#e3e3e3',
     borderBottomWidth: 1,
     marginLeft: 20,
-  },
-  infoIcon: {
-    marginRight: 20,
-  },
-  bottomRow: {
-    height: 80,
-  },
-  position: {
-    color: Colors.white,
-    fontFamily: Fonts.primaryLight,
-    fontSize: 16,
-    marginBottom: 3,
-  },
-  company: {
-    color: Colors.white,
-    fontFamily: Fonts.primaryRegular,
-    fontSize: 16,
-  },
-  quickInfoItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-  quickInfoText: {
-    color: Colors.white,
-    fontFamily: Fonts.primaryRegular,
-  },
-  bottomImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  }
 };
 
-// connect the component to the theme
+// connect the component to the themeaamm
 export default connectStyle('mbm.ProfileScreen', styles)(ProfileScreen);
 

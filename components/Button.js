@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinearGradient } from 'expo';
+import { LinearGradient, Icon } from 'expo';
+
 import {
-  Image,
-  StyleSheet,
   TouchableOpacity,
   View,
   Text,
@@ -11,88 +10,116 @@ import {
 } from 'react-native';
 
 import { Colors, Fonts } from '../constants';
+import {connectStyle} from "@shoutem/theme/index";
 
 const borderRadius = 40;
 
-export default function RNSButton(props) {
-  const caption = props.caption && props.caption.toUpperCase();
-  let icon;
-  if (props.icon) {
-    icon = <Image resizeMode="contain" source={props.icon} style={styles.icon} />;
+class Button extends Component {
+
+  getText() {
+    const { caption, uppercase } = this.props
+    return (caption && uppercase === true && caption.toUpperCase()) || caption;
   }
 
-  let content;
-
-  if (props.bordered) {
-    const borderedStyle = [
-      styles.button,
-      props.small && styles.buttonSmall,
-      styles.border,
-      props.primary && {
-        borderColor: Colors.primary,
-      },
-      props.secondary && {
-        borderColor: Colors.secondary,
-      },
-      props.bgColor && {
-        borderColor: props.bgColor,
-      },
-      props.rounded && styles.rounded,
-    ];
-    const textStyle = [
-      styles.caption,
-      props.small && styles.captionSmall,
-      styles.secondaryCaption,
-      icon && styles.captionWithIcon,
-      props.primary && {
-        color: Colors.primary,
-      },
-      props.secondary && {
-        color: Colors.secondary,
-      },
-      props.bgColor && {
-        color: props.bgColor,
-      },
-      props.textColor && {
-        color: props.textColor,
-      },
-    ];
-
-    content = (
-        <View style={borderedStyle}>
-          { icon && (
-              <View>
-                {icon}
-              </View>
-          )}
-          { props.loading && (
-              <ActivityIndicator color="white" />
-          )}
-          { !props.loading && props.caption && (
-              <Text style={textStyle}>
-                {caption}
-              </Text>
-          )}
-          { props.children && props.children }
-        </View>
-    );
-  } else {
-    const isPrimary = props.primary || (!props.primary && !props.secondary);
-    let gradientArray = props.bgGradientStart && props.bgGradientEnd ? [
-      props.bgGradientStart, props.bgGradientEnd,
-    ] : undefined;
-
-    if (!gradientArray) {
-      gradientArray = isPrimary ? [Colors.primaryGradientStart, Colors.primaryGradientEnd] :
-          [Colors.secondaryGradientStart, Colors.secondaryGradientEnd];
+  getIcon() {
+    const { icon } = this.props;
+    if (icon) {
+      return <Icon.Ionicons
+          // size={button.size || 30}
+          name={icon}
+          // style={style.icon}
+      />
     }
+    return null;
+  }
 
-    if (props.bgColor) {
-      gradientArray = [props.bgColor, props.bgColor];
+  render()
+  {
+    const { props } = this;
+    const caption   = this.getText();
+    let icon        = this.getIcon();
+
+    let content;
+
+    if (props.bordered) {
+
+      const borderedStyle = [
+        styles.button,
+        props.small && styles.buttonSmall,
+        styles.border,
+        props.primary && {
+          borderColor: Colors.primary,
+        },
+        props.secondary && {
+          borderColor: Colors.secondary,
+        },
+        props.bgColor && {
+          borderColor: props.bgColor,
+        },
+        props.rounded && styles.rounded,
+      ];
+
+      const textStyle = [
+        styles.caption,
+        props.small && styles.captionSmall,
+        styles.secondaryCaption,
+        icon && styles.captionWithIcon,
+        props.primary && {
+          color: Colors.primary,
+        },
+        props.secondary && {
+          color: Colors.secondary,
+        },
+        props.blue && {
+          borderColor: Colors.secondary,
+        },
+        props.bgColor && {
+          color: props.bgColor,
+        },
+        props.textColor && {
+          color: props.textColor,
+        },
+      ];
+
+      // No background button content
+      content = (
+          <View style={borderedStyle}>
+            { icon && (
+                <View>
+                  {icon}
+                </View>
+            )}
+            { props.loading && (
+                <ActivityIndicator color="white" />
+            )}
+            { !props.loading && props.caption && (
+                <Text style={textStyle}>
+                  {caption}
+                </Text>
+            )}
+            { props.children && props.children }
+          </View>
+      );
     }
+    else
+    {
+      const isPrimary = props.primary || (!props.primary && !props.secondary);
 
-    content = (
-        <LinearGradient
+      let gradientArray = props.bgGradientStart && props.bgGradientEnd ? [
+        props.bgGradientStart, props.bgGradientEnd,
+      ] : undefined;
+
+      if (!gradientArray) {
+        gradientArray = isPrimary ? [Colors.primaryGradientStart, Colors.primaryGradientEnd] :
+            [Colors.secondaryGradientStart, Colors.secondaryGradientEnd];
+      }
+
+      if (props.bgColor) {
+        gradientArray = [props.bgColor, props.bgColor];
+      }
+
+      content = (
+          <LinearGradient
             start={[0.5, 1]}
             end={[1, 1]}
             colors={gradientArray}
@@ -102,52 +129,46 @@ export default function RNSButton(props) {
               styles.primaryButton,
               props.rounded && { borderRadius },
               props.action && styles.action,
-            ]}
-        >
-          { icon && (
-              <View>
-                {icon}
-              </View>
-          )}
-          { props.loading && (
-              <ActivityIndicator color="white" />
-          )}
-          { !props.loading && props.caption && (
+            ]}>
+
+            { icon && ( <View> {icon} </View>)}
+            { props.loading && (<ActivityIndicator color="white" />)}
+            { !props.loading && props.caption && (
               <Text
-                  style={[
-                    styles.caption,
-                    props.small && styles.captionSmall,
-                    icon && styles.captionWithIcon,
-                    styles.primaryCaption,
-                    props.textColor && {
-                      color: props.textColor,
-                    },
-                  ]}
-              >
-                {caption}
-              </Text>
-          )}
-          { !props.loading && props.children && props.children }
-        </LinearGradient>
+              style={[
+                styles.caption,
+                props.small && styles.captionSmall,
+                icon && styles.captionWithIcon,
+                styles.primaryCaption,
+                props.textColor && {
+                  color: props.textColor,
+                },
+              ]}>{caption}</Text>
+            )}
+
+            { !props.loading && props.children && props.children }
+
+          </LinearGradient>
+      );
+    }
+
+    return (
+        <TouchableOpacity
+            accessibilityTraits="button"
+            onPress={props.onPress}
+            activeOpacity={props.opacity || 0.4}
+            style={[styles.container, props.small && styles.containerSmall, props.style]}
+        >
+          {content}
+        </TouchableOpacity>
     );
   }
-
-  return (
-      <TouchableOpacity
-          accessibilityTraits="button"
-          onPress={props.onPress}
-          activeOpacity={0.8}
-          style={[styles.container, props.small && styles.containerSmall, props.style]}
-      >
-        {content}
-      </TouchableOpacity>
-  );
 }
 
 const HEIGHT = 40;
 const HEIGHT_SMALL = 30;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     height: HEIGHT,
     // borderWidth: 1 / PixelRatio.get(),
@@ -172,6 +193,10 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     backgroundColor: 'transparent',
+    borderRadius: 5,
+  },
+  blueButton: {
+    backgroundColor: Colors.darkBlue,
     borderRadius: 5,
   },
   rounded: {
@@ -208,4 +233,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+};
+
+// connect the component to the themess
+export default connectStyle('mbm.common.StyledButton', styles)(Button);

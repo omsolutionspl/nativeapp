@@ -8,6 +8,7 @@ export const renderImageOverlay = ({ from, to, opacity }) => (
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
         colors={[from, to]}
+        // colors={['#4f1920', '#8c3d42']}
         style={{
           position: 'absolute',
           top: 0,

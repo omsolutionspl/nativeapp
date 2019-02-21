@@ -3,17 +3,37 @@ const tintColor = '#034562';
 export default {
 
   darkBlue: "#034562",
+  secondary: '#034562',
+  primary: '#034562',
   white: "#ffffff",
   black: '#000000',
-  defaultText: "#d9d9d9",
+  defaultText: "#797979",
   headingTextColor: "#797979",
-  topNavBarColor: '#FFF5D1',
   tabIconDefault: '#797979',
+  topNavBarColor: '#FFF5D1',
   orange: "#FFBD4A",
+  grey: '#acacac',
+  gray: '#5f5f5f',
+  darkGray: '#4d4d4d',
+  lightGray: '#9b9b9b',
+  blue: '#5A81F7',
+  bluish: '#f8f8f1',
+  green: '#3cd39f',
+  yellow: '#ffc247',
+  red: '#fc5d4f',
 
 
   // Components
-  gradientFrom: '#034562', gradientTo: '#FFBD4A',
+  primaryLight: '#fc5d4f',
+  primaryGradientStart: '#034562',
+  primaryGradientEnd: '#035172',
+  secondaryGradientStart: '#FFBD4A',
+  secondaryGradientEnd: '#FFF5D1',
+  profileGradientStart: '#034562',
+  profileGradientEnd: "#034562", // '#ED5C3C',//
+  gradientFrom: '#034562', gradientTo: '#75A0B2',
+
+
 
   tintColor,
 
@@ -28,21 +48,4 @@ export default {
   tabNavigationBorder: '#d6d6d6',
 
   // TODO: (RN)
-  primary: '#fc2335',
-  primaryLight: '#fc5d4f',
-  primaryGradientStart: '#fc2335',
-  primaryGradientEnd: '#fc2335',
-  secondaryGradientStart: '#2c76ff',
-  secondaryGradientEnd: '#2c76ff',
-  profileGradientStart: '#034562',
-  profileGradientEnd: '#2c76ff', // '#ED5C3C',
-  secondary: '#2c76ff',
-  grey: '#acacac',
-  gray: '#5f5f5f',
-  darkGray: '#4d4d4d',
-  lightGray: '#9b9b9b',
-  blue: '#5A81F7',
-  bluish: '#f8f8f1',
-  green: '#6DD0A3',
-  yellow: '#ffc247',
 };
