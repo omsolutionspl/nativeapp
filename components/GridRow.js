@@ -14,7 +14,8 @@ import { Row } from '@shoutem/ui/components/Row'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
 import { Image } from '@shoutem/ui/components/Image'
 import { Divider } from '@shoutem/ui/components/Divider'
-import { Badge } from '../components'
+import Badge from '../components/Badge'
+import { Icon } from '@shoutem/ui/components/Icon'
 
 
 export const IMAGE_ROW = 'image_row';
@@ -70,7 +71,7 @@ class GridRow extends React.Component {
   render() {
     const { style, styleName, item } = this.props
 
-    if (item.badge === 'NEW') {
+    if (this.getType() === ITEM_ROW && item.badge === 'NEW') {
       style.badge.backgroundColor = Colors.green
     }
 
@@ -116,7 +117,7 @@ class GridRow extends React.Component {
 
             <View styleName={"details horizontal space-between v-start"}>
 
-              <View styleName={"vertical"}>
+              <View styleName={"vertical"} style={{marginTop:-2}}>
                 {item.badge && (
                   <Badge styleName={item.badge.type}>{item.badge.label}</Badge>
                 )}
@@ -130,7 +131,9 @@ class GridRow extends React.Component {
             </View>
 
           </View>
+          <Icon styleName="disclosure" name="right-arrow" />
         </Row>
+
         <Divider styleName={"line"} style={{color:"#e3e3e3", backgroundColor: "#e3e3e3"}}/>
 
       </TouchableOpacity>

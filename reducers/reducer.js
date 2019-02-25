@@ -13,12 +13,14 @@ import GalleryReducer from './gallery';
 import dashboard from './Features/Dashboard'
 import opportunities from './Features/Opportunities'
 import events from './Features/Events'
+import chat from './Features/Chat'
 
 export default combineReducers({
 
   dashboard,
   opportunities,
   events,
+  chat,
 
   /*
   calendar: CalendarReducer,

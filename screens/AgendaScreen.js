@@ -8,18 +8,13 @@ class AgendaScreen extends Component {
 
     return <Text style={{fontWeight: 'bold'}}>
       AgendaScreen
-      <Text style={{color: 'red'}}>
-        and red
-      </Text>
     </Text>;
   }
 }
 
 
 const styles = {
-  container: {
-    flex: 1,
-  },
+
 };
 
 // connect the component to the theme

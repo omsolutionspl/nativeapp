@@ -414,7 +414,7 @@ const mapOppToResults = (opp, kk) => {
       "organisation": null,
       "division": null,
       "office": __source.attributes.office,
-      "agency": "Department of the Army",
+      "agency": __source.attributes.agency,
       "website": "https://www.theconsultinglead.com",
     },
 
@@ -433,14 +433,6 @@ const mapOppToResults = (opp, kk) => {
         "name": "s13",
         "label": "Historically Underutilized Business Zone "
       }, {
-        "id": 1122,
-        "name": "s18",
-        "label": "Small Disadvantaged  Business"
-      }, {
-        "id": 1125,
-        "name": "s21",
-        "label": "Service Disabled Veteran Owned  Small  Business"
-      }, {
         "id": 1126,
         "name": "s22",
         "label": "Veteran Owned Small Business"
@@ -451,20 +443,17 @@ const mapOppToResults = (opp, kk) => {
       }],
 
     "description": {
-      ...__source.attributes,
       "description":  __source.description_field,
       "title": __source.title || 'Service Disabled Veteran Owned  Small',
-      // "rfp_predict_fiscal_year": "2019",
-      // "dot_estimated_value": "$1 million-$2 million",
-      // "dot_founded_ar_ra": "no",
-      // "sol_id": "dot_5c695bf4e0c27",
-      // "rfp_predict_quarter": "1st QTR",
-      // "link": "https:\/\/www.transportation.gov\/content\/procurement-forecast-opportunity-2019-123",
-      // "office": "",
-      // "contact_info": "MELVIN SLOAN, EFLHD.CONTRACTS@DOT.GOV, (703) 404-6205",
-      // "dot_follow_on_8a": "no",
-      // "dot_procurement_category": "Construction",
-      // "dot_sequence_number": "2019-123",
+      "rfp_predict_fiscal_year": __source.attributes.rfp_predict_fiscal_year,
+      "estimated_value": __source.attributes.dot_estimated_value,
+      "dot_founded_ar_ra": __source.attributes.dot_founded_ar_ra,
+      "sol_id": __source.attributes.sol_id,
+      "rfp_predict_quarter": __source.attributes.rfp_predict_quarter,
+      "link":__source.attributes.link,
+      "dot_follow_on_8a": __source.attributes.dot_follow_on_8a,
+      "dot_procurement_category": __source.attributes.dot_procurement_category,
+      // "dot_sequence_number": __source.attributes.dot_sequence_number,
     }
   }
 }

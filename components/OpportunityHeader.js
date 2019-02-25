@@ -17,12 +17,8 @@ class OpportunityHeader extends React.Component {
 }
 
 const styles = {
-  'shoutem.ui.Button': {
-    'shoutem.ui.Text': {
-      fontSize:10
-    }
-  }
+
 }
 
 // connect the component to the theme
-export default connectStyle('mbm.OpportunityBlock.Header', styles)(OpportunityHeader);
+export default connectStyle('mbm.common.OpportunityHeader', styles)(OpportunityHeader);

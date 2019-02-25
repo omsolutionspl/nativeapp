@@ -11,8 +11,7 @@ import Colors from "../constants/Colors";
 
 class OpportunityDetailScreen extends Component {
   static navigationOptions = { };
-
-
+  
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.opp.id === this.props.opp.id) {
       return false;
@@ -25,7 +24,7 @@ class OpportunityDetailScreen extends Component {
     const { opp } = navigation.state.params;
 
     return (
-        <View style={style.container}>
+        <View styleName={"vertical"}>
 
           <StatusBar hidden={true}
               barStyle="light-content"

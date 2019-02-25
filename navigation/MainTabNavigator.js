@@ -5,6 +5,7 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 
 import HomeScreen from '../screens/HomeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
+import ChatScreen from '../containers/Chat';
 import QRScreen from '../screens/QRScreen';
 import HomeExample from '../components/HomeExample';
 
@@ -200,6 +201,10 @@ export default createBottomTabNavigator({
     screen: QRScreen,
     params: { label: "QR"}
   },
+  Chats: {
+    screen: ChatScreen,
+    params: { label: "Let's Connect"}
+  },
   Components: {
     screen: HomeExample,
     params: { label: "Examples"}
@@ -229,6 +234,9 @@ export default createBottomTabNavigator({
           break;
         case 'QR':
           iconName = Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-options';
+          break;
+        case 'Chats':
+          iconName = Platform.OS === 'ios' ? 'md-chatboxes' : 'md-chatboxes';
           break;
         case 'Pages':
           iconName = Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-options';

@@ -14,18 +14,27 @@ import OpportunityBlock from '../components/OpportunityBlock'
 export default connect(
     (state, ownProps) => {
 
+
+      let _item = ownProps.navigation.state.params.opp || ownProps.item; // TODO: fix
+      let _mode = ownProps.navigation.state.params.mode || ownProps.mode; // TODO: fix
+
+      console.log('x', _mode);
       return {
-        item: ownProps.item,
-        type: ownProps.mode || ITEM_ROW,
-        mode: ownProps.mode || (getDetailed(state).indexOf(ownProps.item.id) === -1 ? 'row' : 'tile')
+        item: _item,
+        type: _mode,
+        mode: _mode || (getDetailed(state).indexOf(_item.id) === -1 ? 'row' : 'tile')
       }
     },
     (dispatch, ownProps) => {
+
+      let _item = ownProps.navigation.state.params.opp || ownProps.item; // TODO: fix
+
       return {
         handleClickBlock: () => {
-          dispatch(seeDetails(ownProps.item))
-          ownProps.navigation.navigate('OpportunityDetailModal', {
-            opp: ownProps.item, // TODO: provide ID instead of object ///
+          dispatch(seeDetails(_item))
+          ownProps.navigation.navigate('Opportunity', { // 'OpportunityDetailModal', {
+            opp: _item, // TODO: provide ID instead of object ///
+            mode: "full"
           })
         },
         // onModalClose: () => ownProps.navigation.goBack(),

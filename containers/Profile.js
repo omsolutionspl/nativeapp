@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getFeatured } from '../reducers/Features/Dashboard';
 
-import ProfileScreen from '../screens/ProfileScreen'
+import ProfileBlock from '../components/ProfileBlock'
 
 export default connect(
     (state, ownProps) => {
       return {
+        // navigation: ownProps.navigation,
         profile: {
             "id": 179049,
             "account_name": "",
@@ -406,4 +407,4 @@ export default connect(
         onUpdate: () => console.log('onUpdate'),
       }
     }
-)(ProfileScreen)
+)(ProfileBlock)

@@ -24,20 +24,20 @@ export const MainStackHeaderNavigationConfig = ({ navigation }) => {
         size={26}
         style={{ marginLeft: 16, marginTop: 2 }}
         onPress={() => (navigation.state.routeName === ROOT_NAV_NAME ? navigation.toggleDrawer() : navigation.goBack())}
-        color={Colors.headerIconColor}
+        color={Colors.defaultText}
     />,
     headerRight: <Icon.Ionicons
         name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
         size={28}
         style={{ marginRight: 16, marginTop: 2 }}
         onPress={() => (navigation.navigate('ProfileModal'))}
-        color={Colors.headerIconColor}
+        color={Colors.defaultText}
     />,
     headerStyle: {
       height: 60,
       backgroundColor: Colors.topNavBarColor,
     },
-    headerTintColor: '#000',
+    headerTintColor: Colors.defaultText,
     headerTitleStyle: {
       fontWeight: 'bold',
     },

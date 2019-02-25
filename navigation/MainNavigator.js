@@ -18,8 +18,12 @@ import ProfileScreen from '../containers/Profile';
 import MainTabNavigator from './MainTabNavigator'
 
 // Connected with redux
+import Profile from '../containers/Profile';
 import OpportunitiesScreen from '../containers/Opportunities';
+import OpportunityBlock from '../containers/OpportunityBlock'
 import EventsScreen from '../containers/Events';
+import ChatScreen from '../containers/Chat';
+import MessagesScreen from '../containers/Message';
 import { MainStackHeaderNavigationConfig } from '../components/Header';
 
 /*
@@ -86,7 +90,18 @@ const MainAppNavigator = createStackNavigator({
   CompaniesScreen,
   OpportunitiesScreen,
   EventsScreen,
-  DetailScreen
+  DetailScreen,
+  Opportunity: {
+    screen: OpportunityBlock
+  },
+  Chats: {
+    screen: ChatScreen,
+    params: { label: "Let's Connect"}
+  },
+  Messages: {
+    screen: MessagesScreen,
+    params: { label: "MessageScreen"}
+  },
 },
 {
   defaultNavigationOptions: MainStackHeaderNavigationConfig
@@ -97,10 +112,16 @@ export default createStackNavigator({
     screen: MainAppNavigator
   },
   ProfileModal: {
-    screen: ProfileScreen
+    screen: DetailModal,
+    params: {
+      component: navigation => <Profile navigation={navigation} />
+    }
   },
   OpportunityDetailModal: {
-    screen: OpportunityDetailScreen,
+    screen: DetailModal,
+    params: {
+      component: navigation => <OpportunityBlock item={navigation.state.params.opp} mode={'full'} navigation={navigation} />
+    }
   },
   DetailModal: {
     screen: DetailModal
