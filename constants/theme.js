@@ -1,10 +1,15 @@
-import getTheme, { defaultThemeVariables, dimensionRelativeToIphone, textComponents, viewComponents } from "@shoutem/ui/theme";
+import getTheme, {
+  defaultThemeVariables, dimensionRelativeToIphone, formatLineHeight, textComponents,
+  viewComponents
+} from "@shoutem/ui/theme";
 import { createSharedStyle, changeColorAlpha } from '@shoutem/theme'
-import { Colors, Fonts } from './index'
+import { Colors, Fonts, Layout } from './index'
 import { merge } from 'lodash';
 import { Constants } from 'expo';
 
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {INCLUDE} from "@shoutem/theme/index";
+import {Platform, StyleSheet} from "react-native";
 
 
 const defaultTheme = getTheme();
@@ -29,7 +34,7 @@ export default () => {
       },
     },
 
-    ...createSharedStyle(['mbm.common.ProfileBlock', 'mbm.common.OpportunityBlock'], {
+    ...createSharedStyle(['mbm.common.ProfileBlock', 'mbm.common.OpportunityBlock', 'mbm.common.OpportunityBlockScroll'], {
       'shoutem.ui.View': {
 
         'shoutem.ui.ImageBackground': {
@@ -365,6 +370,88 @@ export default () => {
         paddingRight: 6,
         color: Colors.primary,
       }
+    },
+
+    'mbm.common.NavigationBar': {
+
+      /*
+      [INCLUDE]: ['navigationBar'],
+      '.clear': {
+        [INCLUDE]: ['clearNavigationBar'],
+      },
+      '.inline': {
+        container: {
+          width: window.width,
+          position: 'relative',
+        },
+      },
+
+
+      statusBar: {
+        backgroundColor: variables.statusBarColor,
+        height: IPHONE_X_NOTCH_PADDING,
+      },
+      */
+
+      'shoutem.ui.Title': {
+        /*
+        solidifyAnimation(driver) {
+          return {
+            color: driver.interpolate({
+              inputRange: [250, 300],
+              outputRange: ['transparent', variables.navBarText.color],
+              extrapolate: 'clamp',
+            }),
+          };
+        },
+        boxingAnimation() {
+          return {};
+        },
+        */
+
+        color: Colors.defaultText,
+        fontSize: 20,
+        fontFamily: Fonts.primarySemiBold,
+        lineHeight: formatLineHeight(20),
+      },
+
+      container: {
+        // [INCLUDE]: ['fillParent'],
+        height: Layout.NAVIGATION_HEADER_HEIGHT,
+        //backgroundColor: Colors.navBarBackground,
+        borderBottomColor: Colors.tabNavigationBorder,
+        borderBottomWidth: 0.5,
+        // Leave space for the status bar on iOS
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        backgroundColor: 'transparent' // Colors.topNavBarColor
+      },
+
+      componentsContainer: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: 'transparent',
+      },
+
+      leftComponent: {
+        alignSelf: 'center',
+        alignItems: 'flex-start',
+        flex: 1,
+      },
+
+      centerComponent: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        flex: 1,
+        marginBottom: 0,
+      },
+
+      rightComponent: {
+        alignSelf: 'center',
+        alignItems: 'flex-end',
+        flex: 1,
+      },
     },
 
     'shoutem.ui.Button': {

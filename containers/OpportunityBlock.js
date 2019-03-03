@@ -9,6 +9,8 @@ import { GridRow } from '../components'
 import { Colors } from '../constants'
 import { ITEM_ROW, IMAGE_ROW } from '../components/GridRow'
 import OpportunityBlock from '../components/OpportunityBlock'
+import OpportunityBlock2 from '../components/OpportunityBlock2'
+
 // TODO : Test
 
 export default connect(
@@ -43,4 +45,4 @@ export default connect(
         // })
       }
     }
-)(OpportunityBlock)
+)(OpportunityBlock2)

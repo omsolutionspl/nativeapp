@@ -1,7 +1,11 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
+import { Constants } from 'expo';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
+const NAVIGATION_HEADER_HEIGHT = 80; // 64;
+const STATUS_BAR_HEIGHT = Constants.statusBarHeight;
 
 export default {
   window: {
@@ -9,4 +13,6 @@ export default {
     height,
   },
   isSmallDevice: width < 375,
+  NAVIGATION_HEADER_HEIGHT,
+  STATUS_BAR_HEIGHT
 };

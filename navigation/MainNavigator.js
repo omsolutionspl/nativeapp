@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator }
 import { Colors, Fonts } from '../constants';
 
 import { ROOT_NAV_NAME } from '../constants/Navigation'
+import { Icon } from 'expo';
 
 import DrawerContent from '../screens/DrawerContent';
 
@@ -92,7 +93,18 @@ const MainAppNavigator = createStackNavigator({
   EventsScreen,
   DetailScreen,
   Opportunity: {
-    screen: OpportunityBlock
+    screen: OpportunityBlock,
+    navigationOptions: {
+      title: "OPPORTUNITY DETAILS",
+      headerRight: <Icon.Ionicons
+          name={'md-heart'}
+          size={28}
+          style={{ marginRight: 16, marginTop: 2 }}
+          onPress={() => (navigation.navigate('ProfileModal'))}
+          color={Colors.defaultText}
+      />,
+      header: null,
+    }
   },
   Chats: {
     screen: ChatScreen,
@@ -104,7 +116,8 @@ const MainAppNavigator = createStackNavigator({
   },
 },
 {
-  defaultNavigationOptions: MainStackHeaderNavigationConfig
+  defaultNavigationOptions: MainStackHeaderNavigationConfig,
+  // headerMode: 'none', // This will be provided by NavigationBar
 });
 
 export default createStackNavigator({

@@ -11,7 +11,7 @@ import { Overlay } from '@shoutem/ui/components/Overlay'
 import { Divider } from '@shoutem/ui/components/Divider'
 import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { Image } from '@shoutem/ui/components/Image'
-import NavigationBar from '../components/Helpers/NavigationBar'
+import { NavigationBar } from '@shoutem/ui/components/NavigationBar'
 
 
 import OpportunityHeader from '../components/OpportunityHeader'
@@ -85,7 +85,7 @@ class OpportunityBlock extends PureComponent {
 
   render() {
 
-    const { navigation, item, item: { type, description } } = this.props
+    const { item, item: { type, description } } = this.props
 
     let mode = this.getMode();
     let __now = moment();
@@ -119,25 +119,6 @@ class OpportunityBlock extends PureComponent {
 
     // Full
     return <View styleName={"vertical"}>
-
-      <NavigationBar
-          styleName="fade"
-          leftComponent={<Icon.Ionicons
-              name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
-              size={26}
-              style={{ marginLeft: 16, marginTop: 2 }}
-              onPress={() => (navigation.state.routeName === ROOT_NAV_NAME ? navigation.toggleDrawer() : navigation.goBack())}
-              color={Colors.defaultText}
-          />}
-          centerComponent={<Title>OpportunityTTXXXX lsdas askdsakd sad k s</Title>}
-          rightComponent={<Icon.Ionicons
-              name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
-              size={28}
-              style={{ marginRight: 16, marginTop: 2 }}
-              onPress={() => (navigation.navigate('EventsScreen'))}
-              color={Colors.defaultText}
-          />}
-      />
 
       <ImageBackground
           // styleName="large"

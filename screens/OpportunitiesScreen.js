@@ -100,10 +100,12 @@ class OpportunitiesScreen extends Component {
 
     return (
         <View styleName={"vertical"} style={styles.container}>
+            {/*
             <View>
               {this.renderHeader()}
             </View>
-            <View style={{marginBottom: 78}}>
+            */}
+            <View /*style={{marginBottom: 60}} */>
               <FlatList
                   ref={(list) => this.flatList = list}
                   //renderHeader={this.renderFilters.bind(this)}
