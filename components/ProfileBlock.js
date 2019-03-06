@@ -51,6 +51,7 @@ class ProfileBlock extends React.Component {
               </View>
             </ProfileHeader>
 
+            {/*
             <View styleName={"horizontal"}>
               <Button
                   secondary
@@ -72,6 +73,7 @@ class ProfileBlock extends React.Component {
                   onPress={() => {}}
               />
             </View>
+            */}
           </ImageBackground>
 
           <View styleName={"content-section"}>

@@ -1,23 +1,21 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
   FlatList,
   TouchableOpacity,
-  Image,
 } from 'react-native';
-
+import {connectStyle} from "@shoutem/theme/index";
 import { Fonts, Colors } from '../../constants';
-import {
-  TextInput,
-} from '../../components';
+
 import {
   Text,
   Caption,
   Title,
+  Subtitle
 } from '@shoutem/ui/components/Text';
 
-import {connectStyle} from "@shoutem/theme/index";
+import { Image } from '@shoutem/ui/components/Image'
+import { View } from '@shoutem/ui/components/View'
+import { Row } from '@shoutem/ui/components/Row'
 
 //onPress={() => this.props.navigate({ routeName: 'Messages', params: { ...item } })}
 class ChatScreen extends React.Component {
@@ -29,32 +27,29 @@ class ChatScreen extends React.Component {
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate({ routeName: 'Messages', params: {
-            title: item.userName,
+            title: `Chat with ${item.userName}`,
             ...item,
           }
         })}
       >
-        <View style={styles.messageItem}>
-          <View style={styles.avatarContainer}>
-            <Image
+
+        <Row>
+          <Image
               style={styles.avatar}
-              defaultSource={require('../../assets/images/default-avatar.png')}
+              styleName="small rounded-corners"
               source={item.userAvatar ? { uri: item.userAvatar } : require('../../assets/images/default-avatar.png')}
-            />
-            { item.online && (
-              <View style={styles.onlineBadge} />
-            )}
-          </View>
-          <View style={{ flex: 1, paddingLeft: 15 }}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Title color={Colors.darkGray}>{item.userName}</Title>
-              <Caption color={Colors.lightGray}>{item.time}</Caption>
+          />
+          { item.online && (<View style={styles.onlineBadge} />)}
+          <View styleName="vertical">
+            <View styleName="horizontal space-between">
+              <Subtitle>{item.userName}</Subtitle>
+              <Caption>{item.time}</Caption>
             </View>
-            <View styleName="vertical v-start" style={{ alignSelf: 'stretch' }}>
-            <Caption color={Colors.lightGray} numberOfLines={1}>{item.lastMessage}</Caption>
-            </View>
+            <Caption numberOfLines={1}>
+              {item.lastMessage}
+            </Caption>
           </View>
-        </View>
+        </Row>
       </TouchableOpacity>
     );
   }
@@ -79,7 +74,7 @@ class ChatScreen extends React.Component {
     // }
 
     return (
-      <View style={styles.container}>
+      <View>
         {/*
         <TextInput
           type="bordered"
@@ -91,12 +86,11 @@ class ChatScreen extends React.Component {
         />
         */}
         <FlatList
-          style={{ backgroundColor: Colors.white }}
           refreshing={props.messagesListLoading}
           onRefresh={props.loadMessagesList}
-          ListEmptyComponent={this._renderNoItemsComponent.bind(this)}
+          ListEmptyComponent={ ! props.messagesListLoading ? this._renderNoItemsComponent.bind(this) : null}
           data={filteredMessages}
-          keyExtractor={item => item.id}
+          keyExtractor={item => `user_${item.id}`}
           renderItem={this._renderItem.bind(this)}
         />
       </View>
@@ -105,38 +99,23 @@ class ChatScreen extends React.Component {
 }
 
 const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingTop: 10,
-    paddingHorizontal: 15,
-  },
   empty: {
     textAlign:'center',
-    color:Colors.defaultText
+    color: Colors.defaultText
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20
   },
-  avatarContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end'
-  },
   onlineBadge: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
     backgroundColor: '#3CD4A4',
     position: 'absolute',
-    right: 0,
-    bottom: -5
-  },
-  messageItem: {
-    flex: 1,
-    flexDirection: 'row',
-    marginVertical: 15,
+    left: 20,
+    bottom: 20
   },
 }
 

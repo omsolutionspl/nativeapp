@@ -106,13 +106,23 @@ const MainAppNavigator = createStackNavigator({
       header: null,
     }
   },
+  /*
   Chats: {
     screen: ChatScreen,
-    params: { label: "Let's Connect"}
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: navigation.getParam('PersonName', 'Chat With Alice Dong'),
+      };
+    }
   },
+  */
   Messages: {
     screen: MessagesScreen,
-    params: { label: "MessageScreen"}
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: navigation.getParam('title', 'Chat With Alice Dong'),
+      };
+    }
   },
 },
 {

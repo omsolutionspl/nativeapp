@@ -460,7 +460,11 @@ const mapOppToResults = (opp, kk) => {
 
 const initState = {
   opps: OPPORTUNITIES,
-  tab: FILTER_OPPORTUNITIES,
+  filters: {
+    tab: FILTER_OPPORTUNITIES,
+    search: '',
+
+  },
   selectedId: null,
   detailed: [],
 }
@@ -477,7 +481,7 @@ export default function reducer(state = initState, action = {}) {
 
     case CHANGE_TAB:
       return update(state, {
-        tab: { $set: action.tab }
+        filters: { tab: { $set: action.tab } }
       });
       break;
 
@@ -554,7 +558,7 @@ export const getSelectedId = createSelector(
 
 export const getCurrentTab = createSelector(
     (state) => state.app.opportunities,
-    state => state.tab
+    state => state.filters.tab
 )
 
 

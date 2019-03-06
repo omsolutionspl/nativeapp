@@ -36,7 +36,7 @@ class HomeScreen extends React.Component {
               })
             },
             {
-              label: "Eventing",
+              label: "Events",
               icon: "md-globe",
               onPress: () => {
                 navigate('EventsScreen', {

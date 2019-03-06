@@ -6,12 +6,12 @@ import styles from '../constants/styles/SliderEntry';
 
 export default class SliderEntry extends Component {
 
-  get image () {
+  get image ()
+  {
     const { data: { illustration }, parallax, parallaxProps, even } = this.props;
-
     return parallax ? (
         <ParallaxImage
-            source={{ uri: illustration }}
+            source={illustration}
             containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
             style={styles.image}
             parallaxFactor={0.35}
@@ -51,12 +51,10 @@ export default class SliderEntry extends Component {
             <View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]} />
           </View>
           <View style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
-            { uppercaseTitle }
-            <Text
-                style={[styles.subtitle, even ? styles.subtitleEven : {}]}
-                numberOfLines={2}
-            >
-              { subtitle }
+            {uppercaseTitle}
+
+            <Text style={[styles.subtitle, even ? styles.subtitleEven : {}]} numberOfLines={2}>
+              {subtitle}
             </Text>
           </View>
         </TouchableOpacity>

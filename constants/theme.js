@@ -82,7 +82,11 @@ export default () => {
     },
 
     'mbm.ChatScreen': {
-
+      'shoutem.ui.View': { // container
+        flex: 1,
+        paddingTop: 10,
+        paddingHorizontal: 10
+      }
     },
 
     'mbm.dashboard.FeaturedContent': {

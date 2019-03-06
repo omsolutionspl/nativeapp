@@ -214,11 +214,13 @@ class OpportunityBlock extends Component {
 
             <View style={style.scrollViewContent}>
 
+              {item.company.agency ?
               <AttributeRow styleName="vertical">
                 <Title>
                   {item.company.agency}
                 </Title>
               </AttributeRow>
+              : null}
 
               <AttributeRow styleName="vertical">
                 {this.renderDescriptionList()}
@@ -263,7 +265,7 @@ class OpportunityBlock extends Component {
                 source={{ uri: item.images[0].url }}
             />
 
-            {renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.7})}
+            {renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.8})}
 
             <LinearGradient
                 start={{ x: 0, y: 1 }}
@@ -318,7 +320,7 @@ class OpportunityBlock extends Component {
               <View style={style.centerComponent}><Text></Text></View>
               <View style={style.rightComponent}>
                 <Icon.Ionicons
-                    name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
+                    name={Platform.OS === 'ios' ? 'ios-heart-empty': 'md-heart-empty'}
                     size={28}
                     style={{ marginRight: 16, marginTop: 2, color: 'white' }}
                     onPress={() => (navigation.navigate('EventsScreen'))}
@@ -379,9 +381,6 @@ class OpportunityBlock extends Component {
 }
 
 const style = {
-  content: {
-    flex: 1,
-  },
   header: {
     position: 'absolute',
     top: 0,
@@ -407,8 +406,7 @@ const style = {
     left:0,
     opacity:0,
     right: -100, // initial position
-    // marginTop:15,
-    paddingLeft:10,
+    paddingLeft:15,
     marginTop: 15 + 40, // navigation bar size Layout.NAVIGATION_HEADER_HEIGHT +
   },
   bar: {

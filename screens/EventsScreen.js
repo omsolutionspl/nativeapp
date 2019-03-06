@@ -27,14 +27,9 @@ class EventsScreen extends Component {
     title: 'EVENTS',
   };
 
-  state = {
-    activeSections: [],
-  };
-
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
-    this.state = {activeSections: []}
   }
 
   renderHeader() {
@@ -52,11 +47,11 @@ class EventsScreen extends Component {
     console.log('render EventsScreen');
 
     return (
-        <View styleName={"vertical"} style={styles.container}>
+        <View styleName={"vertical"} style={{ flex:1 }}>
           <View>
             {this.renderHeader()}
           </View>
-          <View style={{marginBottom: 78}}>
+          <View style={{ flex:1 }}>
             <FlatList
                 ref={(list) => this.flatList = list}
                 //renderHeader={this.renderFilters.bind(this)}
@@ -64,9 +59,6 @@ class EventsScreen extends Component {
                 initialNumToRender={3}
                 maxToRenderPerBatch={3}
                 keyExtractor={item => item.id || item[0] && item[0].id}
-                // getItemLayout={(data, index) => (
-                //     {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
-                // )}
                 data={events}
                 renderItem={({ item, index }) => this.renderRow(item, index)}
             />
@@ -77,10 +69,6 @@ class EventsScreen extends Component {
 }
 
 const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-  },
   tabsContainer: {
     alignSelf: 'stretch',
     marginTop: 30,

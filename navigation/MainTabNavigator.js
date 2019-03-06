@@ -203,7 +203,14 @@ export default createBottomTabNavigator({
   },
   Chats: {
     screen: ChatScreen,
-    params: { label: "Let's Connect"}
+    params: { label: "Let's Connect" },
+
+    // TODO: Fix this does not work because tab navigator has header defined
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: "Let's Connect"
+      };
+    }
   },
   Components: {
     screen: HomeExample,

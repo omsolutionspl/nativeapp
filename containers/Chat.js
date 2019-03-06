@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose, lifecycle, withState, } from 'recompose';
-// import { bindActionCreators } from 'redux';
-// import { NavigationActions } from 'react-navigation';
+import { compose, lifecycle, withState } from 'recompose';
 
 import ChatScreen from '../screens/Chat/ChatScreen';
 

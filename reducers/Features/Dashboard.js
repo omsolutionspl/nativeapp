@@ -9,29 +9,26 @@ const CREATE = 'MBM/Dashboard/CREATE';
 const initState = {
   featured: [
     {
-      title: 'Favourites landscapes 1',
-      subtitle: 'Lorem ipsum dolor sit amet',
-      illustration: 'https://i.imgur.com/SsJmZ9jl.jpg'
+      title: 'Direct Access Program',
+      subtitle: 'Offering unique opportunities for Veteran-Owned Small Businesses (VOSBs) to build partnerships, maximize networking, and gain access to Procurement Decision Makers (PDMs).',
+      illustration: require('../../assets/images/app/content/dap-bg.png')
     },
     {
-      title: 'Favourites landscapes 2',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitsdsdur',
-      illustration: 'https://i.imgur.com/5tj6S7Ol.jpg'
+      title: 'Veterans Affairs Medical Center Events (VAMC)',
+      subtitle: 'Click here for the schedule of VAMC events',
+      illustration: { uri :'https://nvsbe-mbmapp-com-mybusinessmatche.netdna-ssl.com/media/transfer/img/5c633903029c3.jpeg'}
+
+      // https://www.mybusinessmatches.com/home/wp-content/uploads/2019/02/2019-OSDBU-Direct-Access-Program-VAMC-Events-Show-Schedule-as-of-1-31-19-201901310303330591.pdf
     },
     {
-      title: 'Favourites landscapes 3',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat',
-      illustration: 'https://i.imgur.com/pmSqIFZl.jpg'
+      title: 'OPPORTUNITY',
+      subtitle: '237310 - Highway, Street, and Bridge Construction',
+      illustration: { uri : 'https://s3.amazonaws.com/agency-logos.federalregister.gov/32/medium.png' }
     },
     {
       title: 'Favourites landscapes 4',
       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-      illustration: 'https://i.imgur.com/cA8zoGel.jpg'
-    },
-    {
-      title: 'Favourites landscapes 6',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat',
-      illustration: 'https://i.imgur.com/l49aYS3l.jpg'
+      illustration: { uri :'https://i.imgur.com/cA8zoGel.jpg'}
     }
   ],
   mainButtons: []

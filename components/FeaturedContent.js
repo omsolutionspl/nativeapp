@@ -41,7 +41,7 @@ class FeaturedContent extends Component {
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
               hasParallaxImages={true}
-              firstItem={1}
+              firstItem={0}
               inactiveSlideScale={0.94}
               inactiveSlideOpacity={0.7}
               // inactiveSlideShift={20}

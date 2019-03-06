@@ -31,7 +31,7 @@ export default {
   secondaryGradientEnd: '#FFF5D1',
   profileGradientStart: '#034562',
   profileGradientEnd: "#034562", // '#ED5C3C',//
-  gradientFrom: '#034562', gradientTo: '#75A0B2',
+  gradientFrom: '#034562',  gradientTo: '#034562', // gradientTo: '#034562',
 
 
 
