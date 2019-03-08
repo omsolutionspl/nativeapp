@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getRenderMode, getOpportunities, seeDetails, getCurrentTab, changeTab } from '../reducers/Features/Opportunities';
+import { getRenderMode, getOpportunities, seeDetails, getCurrentTab, changeTab, isFiltersModalOpen } from '../reducers/Features/Opportunities';
 import { map } from 'lodash'
 
 import OpportunitiesListingScreen from '../screens/OpportunitiesScreen'

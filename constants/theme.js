@@ -375,6 +375,31 @@ export default () => {
 
     'mbm.common.FiltersBar': {
 
+      results: {
+
+        'shoutem.ui.Text': {
+          fontFamily: Fonts.primarySemiBold,
+          fontSize: 13,
+          color: Colors.tabIconDefault,
+        },
+
+        backgroundColor: 'transparent'
+      },
+
+      icon: {
+        color: Colors.tabIconDefault
+      },
+
+      icons: {
+
+        'shoutem.ui.TouchableOpacity' : {
+          backgroundColor: 'transparent',
+          color: Colors.tabIconDefault,
+          paddingHorizontal: 10
+        },
+      },
+
+
     },
 
     'mbm.common.NavigationBar': {

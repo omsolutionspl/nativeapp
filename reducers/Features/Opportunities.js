@@ -11,6 +11,7 @@ const CREATE = 'MBM/Opportunities/CREATE';
 const SET_DETAILED = 'MBM/Opportunities/SET_DETAILED';
 const SHOW = 'MBM/Opportunities/SHOW';
 const CHANGE_FILTER = 'MBM/Opportunities/CHANGE_FILTER';
+const TOGGLE_FILTERS = 'MBM/Opportunities/TOGGLE_FILTERS';
 const CHANGE_TAB = 'MBM/Opportunities/CHANGE_TAB';
 
 export const FILTER_OPPORTUNITIES = 'MBM/Opportunities/Filter/OPPORTUNITIES'
@@ -463,7 +464,7 @@ const initState = {
   filters: {
     tab: FILTER_OPPORTUNITIES,
     search: '',
-
+    modalOpen: false
   },
   selectedId: null,
   detailed: [],
@@ -476,6 +477,12 @@ export default function reducer(state = initState, action = {}) {
     case SET_DETAILED:
       return update(state, {
         detailed: { $set: [action.id] } // _.xor(state.detailed, ) }
+      });
+      break;
+
+    case TOGGLE_FILTERS:
+      return update(state, {
+        filters: { modalOpen: { $set: ! state.filters.modalOpen } }
       });
       break;
 
@@ -529,6 +536,12 @@ export function changeTab(tab) {
   }
 }
 
+export function toggleSearchModal() {
+  return {
+      type: TOGGLE_FILTERS
+  };
+}
+
 export function createWidget(widget) {
   return { type: CREATE, widget };
 }
@@ -556,9 +569,19 @@ export const getSelectedId = createSelector(
     state => state.selectedId
 )
 
-export const getCurrentTab = createSelector(
+export const getFilters = createSelector(
     (state) => state.app.opportunities,
-    state => state.filters.tab
+    state => state.filters
+)
+
+export const getCurrentTab = createSelector(
+    getFilters,
+    filters => filters.tab
+)
+
+export const isFiltersModalOpen = createSelector(
+    getFilters,
+    filters => filters.modalOpen
 )
 
 
