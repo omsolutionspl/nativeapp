@@ -11,6 +11,7 @@ export default {
   headingTextColor: "#797979",
   tabIconDefault: '#797979',
   topNavBarColor: '#FFF5D1',
+  topNavSearchBackgroundColor: "#E8DCAE",
   orange: "#FFBD4A",
   grey: '#acacac',
   gray: '#5f5f5f',

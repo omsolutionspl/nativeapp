@@ -8,7 +8,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { LinearGradient } from 'expo';
+import { Icon, LinearGradient } from 'expo';
 import { Colors, Fonts, Layout } from '../constants';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
@@ -20,6 +20,8 @@ import OpportunityBlock from '../containers/OpportunityBlock'
 import { FILTER_OPPORTUNITIES, FILTER_FORECASTS, FILTER_MATCHES } from '../reducers/Features/Opportunities';
 import { connectStyle } from '@shoutem/theme';
 import OpportunitiesFilterBar from '../containers/OpportunitiesFilterBar'
+import NavigationBar from '../components/Helpers/NavigationBar'
+import {ROOT_NAV_NAME} from "../constants/Navigation";
 
 const ITEM_HEIGHT = 120
 
@@ -46,9 +48,13 @@ class OpportunitiesScreen extends Component {
 
   _renderHeader()
   {
-    const { onTabSwitch, currentTab } = this.props
+    const { onTabSwitch, currentTab, navigation } = this.props
 
     return <View>
+
+      <OpportunitiesFilterBar navigation={navigation} />
+
+      {/*
      <ButtonsGroup styleName={"tabs"} buttons={[
         {
           label: "Opportunities",
@@ -64,8 +70,7 @@ class OpportunitiesScreen extends Component {
         }
 
       ]} />
-
-      <OpportunitiesFilterBar />
+      */}
     </View>
   }
 

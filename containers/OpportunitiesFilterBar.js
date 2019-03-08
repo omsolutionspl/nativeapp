@@ -10,7 +10,9 @@ export default compose(
     connect(
       (state, ownProps) => {
         return {
-          filters: {}
+          filters: {
+
+          },
         }
       },
       (dispatch, ownProps) => {

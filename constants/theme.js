@@ -22,9 +22,6 @@ const DEFAULT_COLORS = {
   actionButtonsBg: "#333", // Colors.topNavBarColor
 }
 
-const BTN_HEIGHT = 40;
-const BTN_HEIGHT_SMALL = 30;
-
 export default () => {
   return merge(defaultTheme, {
 
@@ -376,6 +373,10 @@ export default () => {
       }
     },
 
+    'mbm.common.FiltersBar': {
+
+    },
+
     'mbm.common.NavigationBar': {
 
       /*
@@ -426,8 +427,8 @@ export default () => {
         borderBottomColor: Colors.tabNavigationBorder,
         borderBottomWidth: 0.5,
         // Leave space for the status bar on iOS
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
-        backgroundColor: 'transparent' // Colors.topNavBarColor
+        paddingTop: Platform.OS === 'ios' ? (Layout.isIphoneX ? 40 : 20) : 24,
+        backgroundColor: Colors.topNavBarColor,
       },
 
       componentsContainer: {
@@ -455,6 +456,29 @@ export default () => {
         alignSelf: 'center',
         alignItems: 'flex-end',
         flex: 1,
+      },
+
+      '.filters': {
+
+        componentsContainer: {
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+        },
+
+        leftComponent: {
+          flex: 0,
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          marginRight:10
+        },
+
+        centerComponent: {
+          flex: 1,
+          alignItems: 'stretch',
+          justifyContent: 'flex-start',
+        }
       },
     },
 

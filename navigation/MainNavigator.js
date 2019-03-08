@@ -89,7 +89,12 @@ const MainAppNavigator = createStackNavigator({
   },
   SystemWebScreen,
   CompaniesScreen,
-  OpportunitiesScreen,
+  OpportunitiesScreen: {
+    screen: OpportunitiesScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   EventsScreen,
   DetailScreen,
   Opportunity: {
@@ -127,6 +132,7 @@ const MainAppNavigator = createStackNavigator({
 },
 {
   defaultNavigationOptions: MainStackHeaderNavigationConfig,
+  headerLayoutPreset: 'center'
   // headerMode: 'none', // This will be provided by NavigationBar
 });
 

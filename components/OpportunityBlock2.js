@@ -37,8 +37,8 @@ import ProfileHeader  from '../components/ProfileHeader'
 import QuickInfo  from '../components/QuickInfo'
 import { Badge, ButtonsGroup, AttributeRow, GoBackBtn, Button, Anchor } from '../components/'
 
-const HEADER_MAX_HEIGHT = 280; //
-const HEADER_MIN_HEIGHT = 220; // Layout.NAVIGATION_HEADER_HEIGHT; // Platform.OS === 'ios' ? 60 : 73;
+const HEADER_MAX_HEIGHT = Platform.OS === 'ios' ? (Layout.isIphoneX ? 300 : 280) : 280; //
+const HEADER_MIN_HEIGHT = (Platform.OS === 'ios' && Layout.isIphoneX) ? 250 : 220; // Layout.NAVIGATION_HEADER_HEIGHT; // Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 /**
@@ -310,10 +310,10 @@ class OpportunityBlock extends Component {
             <View style={style.componentsContainer}>
               <View style={style.leftComponent}>
                 <Icon.Ionicons
-                    name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
+                    name={'md-arrow-back'}
                     size={26}
-                    style={{ marginLeft: 16, marginTop: 2, color: 'white' }}
-                    onPress={() => (navigation.state.routeName === ROOT_NAV_NAME ? navigation.toggleDrawer() : navigation.goBack())}
+                    style={{ marginLeft: 16, color: 'white' }}
+                    onPress={() => navigation.goBack()}
                     color={Colors.defaultText}
                 />
               </View>
@@ -322,7 +322,7 @@ class OpportunityBlock extends Component {
                 <Icon.Ionicons
                     name={Platform.OS === 'ios' ? 'ios-heart-empty': 'md-heart-empty'}
                     size={28}
-                    style={{ marginRight: 16, marginTop: 2, color: 'white' }}
+                    style={{ marginRight: 16, color: 'white' }}
                     onPress={() => (navigation.navigate('EventsScreen'))}
                     color={Colors.defaultText}
                 />
@@ -407,7 +407,7 @@ const style = {
     opacity:0,
     right: -100, // initial position
     paddingLeft:15,
-    marginTop: 15 + 40, // navigation bar size Layout.NAVIGATION_HEADER_HEIGHT +
+    marginTop: 20 + 40 + (Layout.isIphoneX ? 24 : 0), // navigation bar size Layout.NAVIGATION_HEADER_HEIGHT +
   },
   bar: {
     backgroundColor: 'transparent', // 'red'
@@ -422,8 +422,9 @@ const style = {
     top: 0,
     left: 0,
     right: 0,
-    marginTop: 10 + 40, // navigation bar size Layout.NAVIGATION_HEADER_HEIGHT +
+    marginTop: 15 + 40 - 2 + (Layout.isIphoneX ? 24 : 0), // navigation bar size Layout.NAVIGATION_HEADER_HEIGHT +
   },
+
   navigation: {
     position: 'absolute',
     top: 0,
@@ -433,7 +434,7 @@ const style = {
     backgroundColor:'transparent',
     // justifyContent: '',
     // alignItems: '',
-    marginTop: Layout.STATUS_BAR_HEIGHT
+    marginTop: Layout.STATUS_BAR_HEIGHT + 12
   },
 
   componentsContainer: {
