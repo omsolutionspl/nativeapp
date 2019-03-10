@@ -459,6 +459,497 @@ const mapOppToResults = (opp, kk) => {
   }
 }
 
+const agg = {
+  "event.participant_profile.multi.business_certifications.value.raw12": {
+    "doc_count": 175,
+        "inner": {
+          "doc_count": 646,
+          "event.participant_profile.multi.business_certifications.value.raw_count": {
+            "value": 6
+          },
+        "event.participant_profile.multi.business_certifications.value.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 66,
+            "buckets": [{
+              "key": "b04",
+              "doc_count": 127
+            }, {
+              "key": "b03",
+              "doc_count": 124
+            }, {
+              "key": "b06",
+              "doc_count": 123
+            }, {
+              "key": "b02",
+              "doc_count": 107
+            }, {
+              "key": "b05",
+              "doc_count": 99
+            }]
+      }
+    }
+  },
+  "event.participant_profile.multi.small_business_category.value.raw14": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 0,
+          "event.participant_profile.multi.small_business_category.value.raw_count": {
+        "value": 0
+      },
+      "event.participant_profile.multi.small_business_category.value.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": []
+      }
+    }
+  },
+  "event.participant_profile.multi.federal_supply_schedule.value.raw13": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 0,
+          "event.participant_profile.multi.federal_supply_schedule.value.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": []
+      },
+      "event.participant_profile.multi.federal_supply_schedule.value.raw_count": {
+        "value": 0
+      }
+    }
+  },
+  "event.labels7": {
+    "doc_count": 175,
+        "event.labels": {
+      "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0,
+          "buckets": []
+    },
+    "event.labels_count": {
+      "value": 0
+    }
+  },
+  "event.naics.value8": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 1388,
+          "event.naics.value_count": {
+        "value": 40
+      },
+      "event.naics.value": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [{
+          "key": "74",
+          "doc_count": 128,
+          "label": "541 - Professional, Scientific, and Technical Services"
+        }, {
+          "key": "11",
+          "doc_count": 72,
+          "label": "237 - Heavy and Civil Engineering Construction"
+        }, {
+          "key": "1234",
+          "doc_count": 67,
+          "label": "221310 - Water Supply and Irrigation Systems"
+        }, {
+          "key": "126",
+          "doc_count": 67,
+          "label": "2213 - Water, Sewage and Other Systems"
+        }, {
+          "key": "468",
+          "doc_count": 67,
+          "label": "22131 - Water Supply and Irrigation Systems"
+        }, {
+          "key": "9",
+          "doc_count": 67,
+          "label": "221 - Utilities"
+        }, {
+          "key": "12",
+          "doc_count": 59,
+          "label": "238 - Specialty Trade Contractors"
+        }, {
+          "key": "1248",
+          "doc_count": 51,
+          "label": "237990 - Other Heavy and Civil Engineering Construction"
+        }, {
+          "key": "132",
+          "doc_count": 51,
+          "label": "2379 - Other Heavy and Civil Engineering Construction"
+        }, {
+          "key": "479",
+          "doc_count": 51,
+          "label": "23799 - Other Heavy and Civil Engineering Construction"
+        }, {
+          "key": "1257",
+          "doc_count": 46,
+          "label": "238210 - Electrical Contractors and Other Wiring Installation Contractors"
+        }, {
+          "key": "134",
+          "doc_count": 46,
+          "label": "2382 - Building Equipment Contractors"
+        }, {
+          "key": "2060",
+          "doc_count": 46,
+          "label": "541511 - Custom Computer Programming Services"
+        }, {
+          "key": "333",
+          "doc_count": 46,
+          "label": "5415 - Computer Systems Design and Related Services"
+        }, {
+          "key": "488",
+          "doc_count": 46,
+          "label": "23821 - Electrical Contractors and Other Wiring Installation Contractors"
+        }, {
+          "key": "950",
+          "doc_count": 46,
+          "label": "54151 - Computer Systems Design and Related Services"
+        }, {
+          "key": "2040",
+          "doc_count": 32,
+          "label": "541110 - Offices of Lawyers"
+        }, {
+          "key": "329",
+          "doc_count": 32,
+          "label": "5411 - Legal Services"
+        }, {
+          "key": "934",
+          "doc_count": 32,
+          "label": "54111 - Offices of Lawyers"
+        }, {
+          "key": "2050",
+          "doc_count": 31,
+          "label": "541330 - Engineering Services"
+        }, {
+          "key": "331",
+          "doc_count": 31,
+          "label": "5413 - Architectural, Engineering, and Related Services"
+        }, {
+          "key": "940",
+          "doc_count": 31,
+          "label": "54133 - Engineering Services"
+        }, {
+          "key": "1245",
+          "doc_count": 26,
+          "label": "237130 - Power and Communication Line and Related Structures Construction"
+        }, {
+          "key": "129",
+          "doc_count": 26,
+          "label": "2371 - Utility System Construction"
+        }, {
+          "key": "476",
+          "doc_count": 26,
+          "label": "23713 - Power and Communication Line and Related Structures Construction"
+        }, {
+          "key": "2080",
+          "doc_count": 21,
+          "label": "541870 - Advertising Material Distribution Services"
+        }, {
+          "key": "336",
+          "doc_count": 21,
+          "label": "5418 - Advertising, Public Relations, and Related Services"
+        }, {
+          "key": "962",
+          "doc_count": 21,
+          "label": "54187 - Advertising Material Distribution Services"
+        }, {
+          "key": "1253",
+          "doc_count": 17,
+          "label": "238150 - Glass and Glazing Contractors"
+        }, {
+          "key": "133",
+          "doc_count": 17,
+          "label": "2381 - Foundation, Structure, and Building Exterior Contractors"
+        }, {
+          "key": "484",
+          "doc_count": 17,
+          "label": "23815 - Glass and Glazing Contractors"
+        }, {
+          "key": "2070",
+          "doc_count": 15,
+          "label": "541690 - Other Scientific and Technical Consulting Services"
+        }, {
+          "key": "334",
+          "doc_count": 15,
+          "label": "5416 - Management, Scientific, and Technical Consulting Services"
+        }, {
+          "key": "953",
+          "doc_count": 15,
+          "label": "54169 - Other Scientific and Technical Consulting Services"
+        }, {
+          "key": "1284",
+          "doc_count": 1,
+          "label": "311411 - Frozen Fruit, Juice, and Vegetable Manufacturing"
+        }, {
+          "key": "1286",
+          "doc_count": 1,
+          "label": "311421 - Fruit and Vegetable Canning"
+        }, {
+          "key": "13",
+          "doc_count": 1,
+          "label": "311 - Food Manufacturing"
+        }, {
+          "key": "140",
+          "doc_count": 1,
+          "label": "3114 - Fruit and Vegetable Preserving and Specialty Food Manufacturing"
+        }, {
+          "key": "507",
+          "doc_count": 1,
+          "label": "31141 - Frozen Food Manufacturing"
+        }, {
+          "key": "508",
+          "doc_count": 1,
+          "label": "31142 - Fruit and Vegetable Canning, Pickling, and Drying"
+        }]
+      }
+    }
+  },
+  "event.community_of_interest.raw10": {
+    "doc_count": 175,
+        "event.community_of_interest.raw": {
+      "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0,
+          "buckets": []
+    },
+    "event.community_of_interest.raw_count": {
+      "value": 0
+    }
+  },
+  "event.participant_profile.multi.business_certification.value.raw15": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 0,
+          "event.participant_profile.multi.business_certification.value.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": []
+      },
+      "event.participant_profile.multi.business_certification.value.raw_count": {
+        "value": 0
+      }
+    }
+  },
+  "address.state18": {
+    "doc_count": 175,
+        "address.state": {
+      "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0,
+          "buckets": [{
+        "key": "PR",
+        "doc_count": 11
+      }, {
+        "key": "AK",
+        "doc_count": 9
+      }, {
+        "key": "DE",
+        "doc_count": 7
+      }, {
+        "key": "MI",
+        "doc_count": 7
+      }, {
+        "key": "MD",
+        "doc_count": 6
+      }, {
+        "key": "RI",
+        "doc_count": 6
+      }, {
+        "key": "WA",
+        "doc_count": 6
+      }, {
+        "key": "DC",
+        "doc_count": 5
+      }, {
+        "key": "MT",
+        "doc_count": 5
+      }, {
+        "key": "ND",
+        "doc_count": 5
+      }, {
+        "key": "OR",
+        "doc_count": 5
+      }, {
+        "key": "TN",
+        "doc_count": 5
+      }, {
+        "key": "AL",
+        "doc_count": 4
+      }, {
+        "key": "FL",
+        "doc_count": 4
+      }, {
+        "key": "GA",
+        "doc_count": 4
+      }, {
+        "key": "MA",
+        "doc_count": 4
+      }, {
+        "key": "ME",
+        "doc_count": 4
+      }, {
+        "key": "MS",
+        "doc_count": 4
+      }, {
+        "key": "NE",
+        "doc_count": 4
+      }, {
+        "key": "OK",
+        "doc_count": 4
+      }, {
+        "key": "PA",
+        "doc_count": 4
+      }, {
+        "key": "UT",
+        "doc_count": 4
+      }, {
+        "key": "VA",
+        "doc_count": 4
+      }, {
+        "key": "WV",
+        "doc_count": 4
+      }, {
+        "key": "LA",
+        "doc_count": 3
+      }, {
+        "key": "MN",
+        "doc_count": 3
+      }, {
+        "key": "NC",
+        "doc_count": 3
+      }, {
+        "key": "NV",
+        "doc_count": 3
+      }, {
+        "key": "TX",
+        "doc_count": 3
+      }, {
+        "key": "WI",
+        "doc_count": 3
+      }, {
+        "key": "WY",
+        "doc_count": 3
+      }, {
+        "key": "AR",
+        "doc_count": 2
+      }, {
+        "key": "CA",
+        "doc_count": 2
+      }, {
+        "key": "ID",
+        "doc_count": 2
+      }, {
+        "key": "IL",
+        "doc_count": 2
+      }, {
+        "key": "KY",
+        "doc_count": 2
+      }, {
+        "key": "MO",
+        "doc_count": 2
+      }, {
+        "key": "NM",
+        "doc_count": 2
+      }, {
+        "key": "OH",
+        "doc_count": 2
+      }, {
+        "key": "SC",
+        "doc_count": 2
+      }, {
+        "key": "SD",
+        "doc_count": 2
+      }, {
+        "key": "VT",
+        "doc_count": 2
+      }, {
+        "key": "AZ",
+        "doc_count": 1
+      }, {
+        "key": "CO",
+        "doc_count": 1
+      }, {
+        "key": "CT",
+        "doc_count": 1
+      }, {
+        "key": "HI",
+        "doc_count": 1
+      }, {
+        "key": "IA",
+        "doc_count": 1
+      }, {
+        "key": "IN",
+        "doc_count": 1
+      }, {
+        "key": "NY",
+        "doc_count": 1
+      }]
+    },
+    "address.state_count": {
+      "value": 49
+    }
+  },
+  "event.participant_profile.single.employees_number.raw16": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 5,
+          "event.participant_profile.single.employees_number.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": []
+      },
+      "event.participant_profile.single.employees_number.raw_count": {
+        "value": 0
+      }
+    }
+  },
+  "custom.sessions.value9": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 0
+    }
+  },
+  "event.participant_profile.multi.socio_economy_category.value.raw11": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 426,
+          "event.participant_profile.multi.socio_economy_category.value.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 6,
+            "buckets": [{
+          "key": "s21",
+          "doc_count": 119
+        }, {
+          "key": "s03",
+          "doc_count": 106
+        }, {
+          "key": "s13",
+          "doc_count": 95
+        }, {
+          "key": "s22",
+          "doc_count": 94
+        }, {
+          "key": "s20",
+          "doc_count": 6
+        }]
+      },
+      "event.participant_profile.multi.socio_economy_category.value.raw_count": {
+        "value": 7
+      }
+    }
+  },
+  "event.participant_profile.single.yyyy.raw17": {
+    "doc_count": 175,
+        "inner": {
+      "doc_count": 5,
+          "event.participant_profile.single.yyyy.raw": {
+        "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": []
+      },
+      "event.participant_profile.single.yyyy.raw_count": {
+        "value": 0
+      }
+    }
+  }
+}
+
 const initState = {
   opps: OPPORTUNITIES,
   filters: {

@@ -2,7 +2,11 @@ import { Dimensions, Platform } from 'react-native';
 import { Constants } from 'expo';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const height = Platform.OS === "ios"
+    ? Dimensions.get("window").height
+    : require("react-native-extra-dimensions-android").get("REAL_WINDOW_HEIGHT");
+
+
 
 export function isIphoneX() {
   const dim = Dimensions.get('window');

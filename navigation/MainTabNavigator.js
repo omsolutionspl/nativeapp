@@ -8,6 +8,7 @@ import AgendaScreen from '../screens/AgendaScreen';
 import ChatScreen from '../containers/Chat';
 import QRScreen from '../screens/QRScreen';
 import HomeExample from '../components/HomeExample';
+import ModalExample from '../components/__examples__/ModalExample';
 
 import { Colors, Fonts } from "../constants";
 import TabBarIcon from '../components/Helpers/TabBarIcon';
@@ -213,7 +214,7 @@ export default createBottomTabNavigator({
     }
   },
   Components: {
-    screen: HomeExample,
+    screen: ModalExample, // HomeExample,
     params: { label: "Examples"}
   }
 },

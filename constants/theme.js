@@ -373,7 +373,7 @@ export default () => {
       }
     },
 
-    'mbm.common.FiltersBar': {
+    'mbm.filters.FiltersBar': {
 
       results: {
 
@@ -384,6 +384,32 @@ export default () => {
         },
 
         backgroundColor: 'transparent'
+      },
+
+
+      section: {
+        flex:1,
+        paddingHorizontal:0,
+        paddingVertical:6,
+        borderBottomWidth:0.5,
+        paddingBottom:15,
+        borderBottomColor: Colors.lightGray,
+        backgroundColor:'white',
+        marginBottom:14,
+      },
+
+      checkbox: {
+
+        justifyContent: 'flex-start',
+        alignItems:'flex-start',
+        padding:0,
+        margin:0,
+        borderTopWidth:0,
+        borderLeftWidth:0,
+        borderRightWidth:0,
+        backgroundColor:'white',
+        borderBottomWidth:0.5,
+        borderBottomColor: Colors.lightGray
       },
 
       icon: {
@@ -398,8 +424,37 @@ export default () => {
           paddingHorizontal: 10
         },
       },
+    },
 
 
+    'mbm.filters.FilterValueRow': {
+      'shoutem.ui.View': {
+        flex:1,
+
+        'shoutem.ui.Subtitle': {
+          fontSize:18,
+          paddingHorizontal:12,
+          paddingVertical:10,
+          marginBottom:6,
+          fontFamily: Fonts.primaryBold
+        },
+      },
+
+      rowText: {
+        padding:0,
+        paddingTop:12,
+        paddingBottom:12,
+        // backgroundColor: 'blue',
+        fontFamily: Fonts.primaryRegular,
+        fontSize:16,
+        // color:'red',
+      },
+
+      rowTextCounter: {
+        fontSize:13,
+        fontFamily:Fonts.primarySemiBold,
+        color: Colors.lightGray
+      },
     },
 
     'mbm.common.NavigationBar': {
