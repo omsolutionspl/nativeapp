@@ -36,8 +36,11 @@ class EventsScreen extends Component {
     return null;
   }
 
-  renderRow(event, index, mode) {
-    return <GridRow item={event} />
+  renderRow(event, index) {
+    return <GridRow
+        item={event}
+        onPress={() =>  this.props.onSelect(event)}
+      />
   }
 
   render() {
@@ -76,10 +79,6 @@ const styles = {
   itemOneContainer: {
     flex: 1,
     width: (Dimensions.get('window').width / 2 - 40),
-  },
-  itemOneImageContainer: {
-    borderRadius: 3,
-    overflow: 'hidden',
   },
   itemOneImage: {
     height: 200,
@@ -133,22 +132,6 @@ const styles = {
     color: Colors.white,
     fontFamily: Fonts.primaryBold,
     fontSize: 20,
-  },
-  itemTwoImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  itemTwoOverlay: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: '#4f1920',
-    opacity: 0.5,
   },
   itemThreeContainer: {
     backgroundColor: 'white',

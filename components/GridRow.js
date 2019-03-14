@@ -52,7 +52,7 @@ class GridRow extends React.Component {
             <View style={styles.itemOneContent}>
               <Text style={styles.itemOneTitle} numberOfLines={1}>{item.title}</Text>
               <Text style={styles.itemOneSubTitle} styleName="collapsible" numberOfLines={3}>{item.subtitle}</Text>
-              <Text style={styles.itemOnePrice} numberOfLines={1}>{item.price}</Text>
+              <Text style={styles.itemOnePrice} numberOfLines={1}>{item.date}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -91,7 +91,7 @@ class GridRow extends React.Component {
             <View style={style.itemTwoOverlay} />
             <Text style={style.itemTwoTitle}>{item.title}</Text>
             <Text style={style.itemTwoSubTitle}>{item.subtitle}</Text>
-            <Text style={style.itemTwoPrice}>{item.price}</Text>
+            <Text style={style.itemTwoPrice}>{item.date}</Text>
           </View>
         </TouchableOpacity>
       : null}
@@ -151,7 +151,7 @@ const styles = { //
   itemOneImageContainer: {
     borderRadius: 3,
     overflow: 'hidden',
-    backgroundColor:'red'
+    backgroundColor:'green'
   },
   itemOneImage: {
     height: 200,
@@ -220,8 +220,8 @@ const styles = { //
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: '#4f1920',
-    opacity: 0.5,
+    backgroundColor: Colors.yellow,
+    opacity: 0.2,
   },
 };
 

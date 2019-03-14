@@ -41,6 +41,7 @@
     "react-native-nav": "^2.0.2",
     "react-native-responsive-dimensions": "^2.0.1",
     "react-native-responsive-screen": "^1.2.0",
+    "react-native-sectioned-multi-select": "^0.6.5",
     "react-native-snap-carousel": "^3.7.5",
     "react-native-tableview": "^2.5.0",
     "react-navigation": "^3.0.9",

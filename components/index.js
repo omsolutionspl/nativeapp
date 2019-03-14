@@ -6,6 +6,7 @@ export GridRow from './GridRow';
 export ButtonsGroup from './ButtonsGroup';
 export GoBackBtn from './Helpers/GoBackBtn';
 export Anchor from './Helpers/Anchor';
+export Dropdown from './Helpers/Dropdown';
 export FiltersBar from './FiltersBar';
 export TextInput from './Helpers/TextInput';
 

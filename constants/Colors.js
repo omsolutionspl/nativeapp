@@ -35,7 +35,7 @@ export default {
   gradientFrom: '#034562',  gradientTo: '#034562', // gradientTo: '#034562',
 
 
-
+  horizontalSeparatorBackground: '#dadada',
   tintColor,
 
   tabIconSelected: tintColor,

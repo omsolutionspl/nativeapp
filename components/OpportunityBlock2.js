@@ -165,9 +165,9 @@ class OpportunityBlock extends Component {
     });
 
     // Small logo animations
-    const logoOpacity = scrollY.interpolate({
-      inputRange: [0, HEADER_SCROLL_DISTANCE],
-      outputRange: [0, 1],
+    const logoOpacity = this.state.scrollY.interpolate({
+      inputRange: [0, 0, HEADER_SCROLL_DISTANCE],
+      outputRange: [0.1, 0.1, 1],
       extrapolate: 'clamp',
     });
 
@@ -292,7 +292,7 @@ class OpportunityBlock extends Component {
               style={[
                 style.logoContainer,
                 {
-                  opacity: logoOpacity,
+                  opacity: logoOpacity, // __opacity
                   transform: [
                     { translateX: logoTranslateX },
                     // { translateY: imageTranslateY }

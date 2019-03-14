@@ -7,7 +7,8 @@ import {
   TouchableHighlight,
   ScrollView,
   Platform,
-  Dimensions
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 import Modal from "react-native-modal";
 
@@ -16,7 +17,8 @@ import { Icon } from 'expo';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Caption, Subtitle } from '@shoutem/ui/components/Text'
 import {connectStyle} from "@shoutem/theme/index";
-import { SearchBar, CheckBox} from 'react-native-elements';
+import { SearchBar, CheckBox } from 'react-native-elements';
+import Dropdown from '../components/Helpers/Dropdown'
 
 import {Colors, Layout, Fonts } from "../constants";
 import NavigationBar from '../components/Helpers/NavigationBar'
@@ -24,34 +26,46 @@ import { TouchableOpacity } from '@shoutem/ui/components/TouchableOpacity'
 
 
 const FilterValueRow = ({ style, header, values, onPress }) => {
-  return <View style={style.section}>
+  return <View>
     <Subtitle>{header}</Subtitle>
-    {map(values, (__value, index) => <CheckBox
-        key={`filter_${header}_${index}`}
-        wrapperStyle={style.wrapper}
-        containerStyle={style.checkbox}
-        title={
-          <View styleName={"horizontal"}>
-            <Text multiline={true} style={style.rowText}>
-              {__value.label} <Text style={style.rowTextCounter}>({__value.count})</Text>
-            </Text>
-          </View>
-        }
-        checked={!__value.checked}
-        checkedIcon={<Icon.Ionicons
-            size={24}
-            name={Platform.OS === 'ios' ? "ios-checkbox":"md-star-outline"}
-            style={{paddingRight:10}}
-        />}
-        uncheckedIcon={<Icon.Ionicons
-            size={24}
-            name={'md-square-outline'}
-            style={{paddingRight:10}}
-        />}
-        // checkedColor={Colors.darkBlue}
-        // uncheckedColor={Colors.defaultText}
-        onPress={() => onPress(__value)}
-    />
+    {map(values, (__value, index) => <View key={`filter_c_${header}_${index}`}>
+          <CheckBox
+            key={`filter_${header}_${index}`}
+            wrapperStyle={style.wrapper}
+            containerStyle={style.checkbox}
+            title={
+              <View styleName={"horizontal"}>
+                <Text multiline={true} style={style.rowText}>
+                  {__value.label} <Text style={style.rowTextCounter}>({__value.count})</Text>
+                </Text>
+              </View>
+            }
+            checked={!__value.checked}
+            checkedIcon={<Icon.Ionicons
+                size={24}
+                name={Platform.OS === 'ios' ? "ios-checkbox":"md-star-outline"}
+                style={{paddingRight:10}}
+            />}
+            uncheckedIcon={<Icon.Ionicons
+                size={24}
+                name={'md-square-outline'}
+                style={{paddingRight:10}}
+            />}
+            // checkedColor={Colors.darkBlue}
+            // uncheckedColor={Colors.defaultText}
+            onPress={() => onPress(__value)}
+        />
+          {/* Separator */}
+        <View
+            style={{
+              flex: 1,
+              marginHorizontal: 10,
+              height: StyleSheet.hairlineWidth,
+              alignSelf: 'stretch',
+              backgroundColor: Colors.horizontalSeparatorBackground,
+            }}
+        />
+    </View>
     )}
   </View>
 }
@@ -146,48 +160,70 @@ class FilterBar extends React.Component {
                   }}
                 >
 
-                <StyledFilterValueRow
-                    style={style}
-                    header={"Socio-Economic Category"}
-                    values={[
-                      {
-                        label:"Service Disabled Veteran Owned",
-                        count: 123,
-                        checked: false,
-                      },
-                      {
-                        label:"Historically Underutilized Business Zone",
-                        count: 91,
-                        checked: true
-                      },
-                      {
-                        label:"Veteran Owned Small Business",
-                        count: 17,
-                        checked: false
-                      }
-                    ]}
-                    checked={!this.state.checked}
-                    onPress={() => this.setState({checked: this.state.checked})}
-                />
+                <View style={style.section}>
+                  <StyledFilterValueRow
+                      style={style}
+                      header={"Socio-Economic Category"}
+                      values={[
+                        {
+                          label:"Service Disabled Veteran Owned",
+                          count: 123,
+                          checked: false,
+                        },
+                        {
+                          label:"Historically Underutilized Business Zone",
+                          count: 91,
+                          checked: true
+                        },
+                        {
+                          label:"Veteran Owned Small Business",
+                          count: 17,
+                          checked: false
+                        }
+                      ]}
+                      checked={!this.state.checked}
+                      onPress={() => this.setState({checked: this.state.checked})}
+                  />
+                </View>
 
-                <StyledFilterValueRow
-                    style={style}
-                    header={"Business Certifications"}
-                    values={[
-                      {
-                        label: "PMP (Project Management Professional)",
-                        count: 11,
-                        checked: this.state.checked
-                      },
-                    ]}
-                    onPress={(item) => this.setState({checked: !this.state.checked})}
-                />
+                <View style={style.section}>
+                  <StyledFilterValueRow
+                      style={style}
+                      header={"Business Certifications"}
+                      values={[
+                        {
+                          label: "PMP (Project Management Professional)",
+                          count: 11,
+                          checked: this.state.checked
+                        },
+                      ]}
+                      onPress={(item) => this.setState({checked: !this.state.checked})}
+                  />
+                </View>
 
-                <Text>Hello World!</Text>
-                <Text>Hello World!</Text>
-                <Text>Hello World!</Text>
-                <Text>Hello World!</Text>
-                <Text>Hello LLLLLAAAST!</Text>
+                <View style={style.section}>
+                  <Dropdown
+
+                    key={'country'}
+
+                  />
+                </View>
+
+                <View style={style.section}>
+                  <StyledFilterValueRow
+                      style={style}
+                      header={"New filter out"}
+                      values={[
+                        {
+                          label: "PMP (Project Management Professional)",
+                          count: 11,
+                          checked: this.state.checked
+                        },
+                      ]}
+                      onPress={(item) => this.setState({checked: !this.state.checked})}
+                  />
+                </View>
+
               </ScrollView>
 
             </View>
@@ -207,7 +243,6 @@ class FilterBar extends React.Component {
               > Show ({totalFound}) Results
               </Text>
             </TouchableHighlight>
-
 
           </View>
         {/*</Animated.View>*/}

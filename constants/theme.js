@@ -391,9 +391,7 @@ export default () => {
         flex:1,
         paddingHorizontal:0,
         paddingVertical:6,
-        borderBottomWidth:0.5,
         paddingBottom:15,
-        borderBottomColor: Colors.lightGray,
         backgroundColor:'white',
         marginBottom:14,
       },
@@ -408,8 +406,8 @@ export default () => {
         borderLeftWidth:0,
         borderRightWidth:0,
         backgroundColor:'white',
-        borderBottomWidth:0.5,
-        borderBottomColor: Colors.lightGray
+        borderBottomWidth:0,
+        borderBottomColor: '#848787' // Colors.lightGray
       },
 
       icon: {
@@ -426,6 +424,26 @@ export default () => {
       },
     },
 
+    'mbm.filters.Dropdown': {
+      itemText: {
+        fontFamily:Fonts.primarySemiBold,
+        fontSize:18,
+      },
+      item: {
+
+      },
+      scrollView: {
+        padding:0,
+        flex:1,
+        paddingHorizontal:12,
+        backgroundColor: 'white'
+      },
+      container: {
+        padding:0,
+        margin:0,
+      }
+
+    },
 
     'mbm.filters.FilterValueRow': {
       'shoutem.ui.View': {
@@ -436,7 +454,7 @@ export default () => {
           paddingHorizontal:12,
           paddingVertical:10,
           marginBottom:6,
-          fontFamily: Fonts.primaryBold
+          fontFamily: Fonts.primarySemiBold
         },
       },
 
