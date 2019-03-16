@@ -6,6 +6,7 @@ export default {
   secondary: '#034562',
   primary: '#034562',
   white: "#ffffff",
+  almostWhite: '#F9F9F9',
   black: '#000000',
   defaultText: "#797979",
   headingTextColor: "#797979",

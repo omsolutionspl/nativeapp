@@ -3,7 +3,7 @@ import {Platform, ScrollView, SafeAreaView} from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
-import SliderEntry from '../components/SliderEntry';
+
 import {colors} from "../constants/styles/Carousel";
 import {itemWidth, sliderWidth} from "../constants/styles/SliderEntry";
 
@@ -13,25 +13,33 @@ import { Button } from './index'
 
 import { connectStyle } from '@shoutem/theme';
 
-
+import SliderEntry from '../components/SliderEntry';
 import OpportunityBlock from '../containers/OpportunityBlock'
 
 class FeaturedContent extends Component {
 
-  _renderItemWithParallax ({item, index}, parallaxProps) {
+  _renderItem ({item, index}, parallaxProps) {
 
-    console.log('1',this.props.navigation);
-    switch(this.props.renderType) {
-      case 'opportunity':
+    const { renderAs } = this.props
+
+    switch(renderAs) {
+
+      case 'company':
+
+
+        break;
+
+      case 'opportunities':
         return (
             <OpportunityBlock
                 item={item}
                 index={index}
-                mode={'row'}
+                mode={'card'}
+
                 // listingReg={this.flatList} // for scroll maintain after collapsable
-               navigation={this.props.navigation}
+                navigation={this.props.navigation}
             />
-        )
+        );
       break;
     }
 
@@ -47,13 +55,20 @@ class FeaturedContent extends Component {
 
   render() {
 
-    const { name, featured, showPagination, title, layout, layoutCardOffset, styleName } = this.props
+    const {
+      name,
+      featured,
+      showPagination,
+      title,
+      layout,
+      layoutCardOffset,
+      autoplay,
+      loop,
+      styleName } = this.props
 
-    // console.log('featued content render', layout, layoutCardOffset);
-
-    let data = featured[name];
+    let data = featured
     
-    console.log(name, data)
+    // console.log('autopla', autoplay)
 
     return (
         <View styleName={styleName}>
@@ -63,12 +78,10 @@ class FeaturedContent extends Component {
             </View>
             <View styleName={"horizontal h-end"}>
               <Button
-                  primary
-                  rounded
+                  clear
                   small
                   loading={false}
-                  style={{  }}
-                  caption={"Discover"}
+                  caption={"Discover More"}
                   onPress={() => alert('pressed')}
               />
             </View>
@@ -76,7 +89,7 @@ class FeaturedContent extends Component {
           <Carousel
               ref={c => this._slider1Ref = c}
               data={data}
-              renderItem={this._renderItemWithParallax.bind(this)}
+              renderItem={this._renderItem.bind(this)}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
               hasParallaxImages={true}
@@ -87,9 +100,9 @@ class FeaturedContent extends Component {
               // inactiveSlideShift={20}
               //containerCustomStyle={styles.slider}
               //contentContainerCustomStyle={styles.sliderContentContainer}
-              loop={true}
+              loop={loop !== undefined ? loop : true}
               loopClonesPerSide={2}
-              autoplay={true}
+              autoplay={autoplay !== undefined ? autoplay : true}
               autoplayDelay={500}
               autoplayInterval={3000}
               onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }

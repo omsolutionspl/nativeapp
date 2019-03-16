@@ -12,9 +12,9 @@ import { Icon, LinearGradient, Linking } from 'expo';
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 import { View } from '@shoutem/ui/components/View'
 import { Text, Heading, Subtitle, Title, Caption } from '@shoutem/ui/components/Text'
+import { Overlay } from '@shoutem/ui/components/Overlay'
 import { Tile } from '@shoutem/ui/components/Tile'
 import { Row } from '@shoutem/ui/components/Row'
-import { Overlay } from '@shoutem/ui/components/Overlay'
 import { Divider } from '@shoutem/ui/components/Divider'
 import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { Image } from '@shoutem/ui/components/Image'
@@ -90,19 +90,23 @@ class OpportunityBlock extends Component {
 
     const { navigation, style, item, item: { type, description } } = this.props
 
-    let mode = this.getMode();
+    let mode  = this.getMode();
+
     let __now = moment();
     let deadline;
+
     if (item.deadline) {
       deadline = moment(item.deadline);
     }
 
-    console.log('render OppBlock @ ', mode, item.id); // TODO: Slow on modal
+    // console.log('render OppBlock @ ', mode, item.id); // TODO: Slow on modal
 
-    if (mode === 'row' || mode === 'tile')
+    if (mode === 'row' || mode === 'tile' || mode === 'card')
       return <GridRow
+          imageAsBackground={mode === 'card'}
           onPress={this.props.handleClickBlock.bind(this)}
           type={ITEM_ROW}
+          styleName={`${mode}`}
           item={{
             brand: item.type,
             title: item.category.name,
@@ -265,7 +269,9 @@ class OpportunityBlock extends Component {
                 source={{ uri: item.images[0].url }}
             />
 
-            {renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.8})}
+            {/* renderImageOverlay({ from: Colors.gradientFrom, to: Colors.gradientTo, opacity: 0.8}) */}
+
+            <Overlay styleName="fill-parent image-overlay" />
 
             <LinearGradient
                 start={{ x: 0, y: 1 }}
@@ -285,6 +291,7 @@ class OpportunityBlock extends Component {
               </QuickInfo>
 
             </LinearGradient>
+
 
           </Animated.View>
 

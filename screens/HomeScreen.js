@@ -3,12 +3,14 @@ import {Button, ScrollView, Image, Easing, View, Text, StyleSheet, Platform } fr
 import { Constants, Permissions, Notifications, Icon } from 'expo';
 
 import FeaturedContent from '../containers/FeaturedContent'
+import FeaturedOpportunities from '../containers/FeaturedOpportunities'
 import ButtonsGroup  from '../components/ButtonsGroup'
 import OpportunitiesScreen from "./OpportunitiesScreen";
 
 import { connectStyle } from '@shoutem/theme';
 import CompaniesScreen from "./CompaniesScreen";
 import EventsScreen from "../containers/Events";
+
 
 class HomeScreen extends React.Component {
   render() {
@@ -18,7 +20,7 @@ class HomeScreen extends React.Component {
     return (
         <ScrollView>
 
-          <FeaturedContent name={'featured'} title={"FEATURED CONTENT"} />
+          <FeaturedContent name={'featured'} title={"FEATURED"} />
 
           <ButtonsGroup title={"DISCOVER"} styleName={"stacked"} buttons={[
             {
@@ -46,20 +48,17 @@ class HomeScreen extends React.Component {
             }
           ]} />
 
-          <FeaturedContent
+          <FeaturedOpportunities
               name={'opportunities'}
-              layout={'stack'}
-              layoutCardOffset={`18`}
-              title={"OPPORTUNITIES"}
-              renderType={'opportunity'}
+              title={"YOUR OPPORTUNITIES"}
               navigation={this.props.navigation}
           />
 
           <FeaturedContent
               name={'companies'}
-              layout={'stack'}
+              layout={'tinder'}
               layoutCardOffset={`18`}
-              title={"COMPANIES"}
+              title={"RELEVANT COMPANIESS"}
           />
 
         </ScrollView>

@@ -1,3 +1,12 @@
+/**
+ *
+ * https://docs.reactnativestarter.com/internalization
+ *
+ * https://github.com/react-native-community/react-native-localize
+ * https://github.com/fnando/i18n-js
+ *
+ */
+
 import * as RNLocalize from 'react-native-localize';
 import i18n from 'i18n-js';
 

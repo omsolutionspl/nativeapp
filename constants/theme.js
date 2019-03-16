@@ -91,8 +91,7 @@ export default () => {
         'shoutem.ui.View': {
           'shoutem.ui.View': {
             'shoutem.ui.Heading': {
-              fontSize: 16,
-
+              fontSize: 15,
               color: Colors.headingTextColor,
               fontFamily: Fonts.primarySemiBold
             }
@@ -151,6 +150,14 @@ export default () => {
     'mbm.grid.GridRow': {
       'shoutem.ui.View': {
         'shoutem.ui.Row': {
+
+          '.card': {
+            backgroundColor: Colors.almostWhite,
+            borderWidth:1,
+            borderColor: Colors.tabNavigationBorder,
+            borderRadius:5,
+          },
+
           'shoutem.ui.View': {
 
             'shoutem.ui.View.details': {

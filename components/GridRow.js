@@ -2,13 +2,14 @@ import React from 'react';
 import { Platform } from 'react-native';
 import {
   TouchableOpacity,
-  ImageBackground,
   Dimensions,
 } from 'react-native';
 import { Colors, Fonts, Layout } from '../constants';
 
 import {connectStyle} from "@shoutem/theme/index";
 
+import { Overlay } from '@shoutem/ui/components/Overlay'
+import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { View } from '@shoutem/ui/components/View'
 import { Row } from '@shoutem/ui/components/Row'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
@@ -18,8 +19,9 @@ import Badge from '../components/Badge'
 import { Icon } from '@shoutem/ui/components/Icon'
 
 
-export const IMAGE_ROW = 'image_row';
-export const ITEM_ROW = 'item_row';
+export const IMAGE_ROW  = 'image_row';
+export const ITEM_ROW   = 'item_row';
+export const ITEM_CARD  = 'item_card';
 
 class GridRow extends React.Component {
 
@@ -66,10 +68,14 @@ class GridRow extends React.Component {
     );
   }
 
-
-
   render() {
-    const { style, styleName, item } = this.props
+
+    const {
+      style,
+      styleName,
+      item,
+      imageAsBackground
+    } = this.props
 
     if (this.getType() === ITEM_ROW && item.badge === 'NEW') {
       style.badge.backgroundColor = Colors.green
@@ -102,17 +108,30 @@ class GridRow extends React.Component {
           activeOpacity={1}
           onPress={this.onPress}
       >
-        <Row>
-          {item.image ?
+
+
+        <Row styleName={styleName}>
+
+          {/*imageAsBackground && <Overlay styleName="fill-parent image-overlay" /> */}
+
+          {! imageAsBackground && item.image ?
           <Image
               styleName="small rounded-corners top"
-              source={{ uri: item.image }} />
+              source={{ uri: item.image }}
+          />
           : null}
+
+          {imageAsBackground && <View style={ style.backgroundImage}>
+            <Image
+                styleName="small rounded-corners top"
+                source={{ uri: item.image }}
+            />
+          </View>}
 
           <View styleName={"vertical"}>
 
             <Caption>{item.brand}</Caption>
-            <Title>{item.title}</Title>
+            <Title numberOfLines={2}>{item.title}</Title>
             <Subtitle numberOfLines={1}>{item.subtitle}</Subtitle>
 
             <View styleName={"details horizontal space-between v-start"}>
@@ -222,6 +241,21 @@ const styles = { //
     bottom: 0,
     backgroundColor: Colors.yellow,
     opacity: 0.2,
+  },
+  backgroundImage: {
+    flex:1,
+    position: 'absolute',
+    top: 20,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    alignSelf:'flex-end',
+    left: 0,
+    right:20,
+    width: null,
+
+    // shadowColor: '#000',
+    // shadowOpacity: 0.2,
+    // shadowOffset: { height: 1 },
   },
 };
 

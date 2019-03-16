@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import { LinearGradient, Icon } from 'expo';
 
 import {
   TouchableOpacity,
-  View,
-  Text,
   ActivityIndicator,
+  View,
+  Text
 } from 'react-native';
 
 import { Colors, Fonts } from '../constants';
+
+// import { View } from '@shoutem/ui/components/View'
+// import { Text } from '@shoutem/ui/components/Text'
+
 import {connectStyle} from "@shoutem/theme/index";
 
 const borderRadius = 40;
@@ -22,7 +26,9 @@ class Button extends Component {
   }
 
   getIcon() {
+
     const { icon } = this.props;
+
     if (icon) {
       return <Icon.Ionicons
           // size={button.size || 30}
@@ -41,7 +47,7 @@ class Button extends Component {
 
     let content;
 
-    if (props.bordered) {
+    if (props.bordered) { //  Bordered style block
 
       const borderedStyle = [
         styles.button,
@@ -101,7 +107,7 @@ class Button extends Component {
           </View>
       );
     }
-    else
+    else    // Default sstyle block
     {
       const isPrimary = props.primary || (!props.primary && !props.secondary);
 
@@ -118,6 +124,10 @@ class Button extends Component {
         gradientArray = [props.bgColor, props.bgColor];
       }
 
+      if (props.clear) {
+        gradientArray = ['transparent', 'transparent'];
+      }
+
       content = (
           <LinearGradient
             start={[0.5, 1]}
@@ -128,10 +138,11 @@ class Button extends Component {
               props.small && styles.buttonSmall,
               styles.primaryButton,
               props.rounded && { borderRadius },
-              props.action && styles.action,
+              props.action && styles.action
             ]}>
 
-            { icon && ( <View> {icon} </View>)}
+            { icon && ( <Text> {icon} </Text> )}
+
             { props.loading && (<ActivityIndicator color="white" />)}
             { !props.loading && props.caption && (
               <Text
@@ -143,6 +154,7 @@ class Button extends Component {
                 props.textColor && {
                   color: props.textColor,
                 },
+                props.clear && styles.buttonClear,
               ]}>{caption}</Text>
             )}
 
@@ -217,6 +229,9 @@ const styles = {
   },
   captionWithIcon: {
     marginLeft: 12,
+  },
+  buttonClear: {
+    color: Colors.darkBlue
   },
   primaryCaption: {
     color: 'white',

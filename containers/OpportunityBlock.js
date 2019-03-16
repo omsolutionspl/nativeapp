@@ -21,6 +21,7 @@ export default connect(
       let _mode = ownProps.navigation.state.params.mode || ownProps.mode; // TODO: fix
 
       console.log('x', _mode);
+
       return {
         item: _item,
         type: _mode,

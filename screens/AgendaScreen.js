@@ -13,9 +13,6 @@ import { Colors, Fonts } from '../constants';
 import { connectStyle } from '@shoutem/theme';
 
 class AgendaScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   rowHasChanged(r1, r2) {
     return r1.name !== r2.name;
@@ -58,10 +55,16 @@ class AgendaScreen extends React.Component {
   }
 
   render() {
+
+    const {
+      items,
+      loadItems
+    } = this.props;
+
     return (
         <Agenda
-            items={this.props.items}
-            loadItemsForMonth={this.props.loadItems}
+            items={items}
+            loadItemsForMonth={loadItems}
             renderItem={this.renderItem}
             renderEmptyDate={this.renderEmptyDate}
             rowHasChanged={this.rowHasChanged}
