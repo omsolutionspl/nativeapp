@@ -10,7 +10,13 @@ const LOAD   = 'MBM/Opportunities/LOAD';
 const CREATE = 'MBM/Opportunities/CREATE';
 const SET_DETAILED = 'MBM/Opportunities/SET_DETAILED';
 const SHOW = 'MBM/Opportunities/SHOW';
+
+const SAVE_FILTER = 'MBM/Opportunities/SAVE_FILTER';
 const CHANGE_FILTER = 'MBM/Opportunities/CHANGE_FILTER';
+
+const SEARCH_FOR = 'MBM/Opportunities/SEARCH_FOR';
+const SEARCH_SUCCESS = 'MBM/Opportunities/SEARCH_SUCCESS';
+
 const TOGGLE_FILTERS = 'MBM/Opportunities/TOGGLE_FILTERS';
 const CHANGE_TAB = 'MBM/Opportunities/CHANGE_TAB';
 
@@ -954,8 +960,9 @@ const initState = {
   opps: OPPORTUNITIES,
   filters: {
     tab: FILTER_OPPORTUNITIES,
-    search: '',
-    modalOpen: false
+    searchText: '',
+    modalOpen: false,
+    loading: false
   },
   selectedId: null,
   detailed: [],
@@ -974,6 +981,24 @@ export default function reducer(state = initState, action = {}) {
     case TOGGLE_FILTERS:
       return update(state, {
         filters: { modalOpen: { $set: ! state.filters.modalOpen } }
+      });
+      break;
+
+    case SEARCH_FOR:
+      return update(state, {
+        filters: {
+          loading: { $set: true },
+          searchText: { $set: action.searchText },
+          query: { $set: action.query },
+        }
+      });
+      break;
+
+    case SEARCH_SUCCESS:
+      return update(state, {
+        filters: {
+          loading: { $set: false }
+        }
       });
       break;
 
@@ -1015,6 +1040,38 @@ export function seeDetails(opp, forceModal) {
     // }
   };
 }
+
+
+export function saveFilter(query) {
+  return (dispatch, getState) => {
+
+    dispatch({
+      type: SAVE_FILTER,
+      query
+    });
+  }
+}
+
+
+export function search(searchText, query) {
+  return (dispatch, getState) => {
+
+    // dispatch(seeDetails());
+    dispatch({
+      type: SEARCH_FOR,
+      searchText,
+      query
+    });
+
+
+    setTimeout(function() {
+      dispatch({
+        type: SEARCH_SUCCESS
+      });
+    }, 3000);
+  }
+}
+
 
 export function changeTab(tab) {
   return (dispatch, getState) => {

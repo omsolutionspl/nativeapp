@@ -89,11 +89,13 @@ export default () => {
     'mbm.dashboard.FeaturedContent': {
       'shoutem.ui.View': {
         'shoutem.ui.View': {
-          'shoutem.ui.Heading': {
-            fontSize: 15,
-            padding: 10,
-            color: Colors.headingTextColor,
-            fontFamily: "FontAwesome"
+          'shoutem.ui.View': {
+            'shoutem.ui.Heading': {
+              fontSize: 16,
+
+              color: Colors.headingTextColor,
+              fontFamily: Fonts.primarySemiBold
+            }
           }
         }
       }

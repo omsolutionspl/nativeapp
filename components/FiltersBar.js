@@ -91,7 +91,8 @@ class FilterBar extends React.Component {
           {
             toValue: 100,              // Animate to opacity: 1 (opaque)
             duration: 500,            // Make it take a while
-          }
+            useNativeDriver: true,
+          },
       ).start();                        // Starts the animation
     }
 
@@ -124,8 +125,8 @@ class FilterBar extends React.Component {
           borderTopRightRadius: 5,
 
         }}
-        // useNativeDriver={true}
-        animationIn={'fadeIn'}
+        useNativeDriver={true} //
+        animationIn={'fadeIn'} // slideInUp
         animationOut={'fadeOut'}
         //  deviceHeight={120}
         // deviceHeight={Layout.window.height - 100}
@@ -249,12 +250,26 @@ class FilterBar extends React.Component {
       </Modal>
   }
 
+  _handleSearch(val) {
+
+    const {
+      searchText,
+      setSearchText,
+      search
+    } = this.props;
+
+    setSearchText(val) // local state
+
+
+    search(searchText, {}); // dispatch redux
+  }
+
   _renderNavigationBar() {
 
     const {
       navigation,
       searchText,
-      setSearchText
+      isLoading
     } = this.props;
 
     return <NavigationBar
@@ -283,8 +298,8 @@ class FilterBar extends React.Component {
             leftIconContainerStyle={{ backgroundColor: Colors.topNavSearchBackgroundColor }}
             rightIconContainerStyle={{ backgroundColor: Colors.topNavSearchBackgroundColor }}
             placeholder="What are you looking for?"
-            onChangeText={(val) => setSearchText(val)}
-            showLoading={false}
+            onChangeText={(val) => this._handleSearch(val)}
+            showLoading={isLoading}
             value={searchText}
         />}
 

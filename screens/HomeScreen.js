@@ -18,7 +18,7 @@ class HomeScreen extends React.Component {
     return (
         <ScrollView>
 
-          <FeaturedContent title={"FEATURED CONTENT"} />
+          <FeaturedContent name={'featured'} title={"FEATURED CONTENT"} />
 
           <ButtonsGroup title={"DISCOVER"} styleName={"stacked"} buttons={[
             {
@@ -45,6 +45,22 @@ class HomeScreen extends React.Component {
               }
             }
           ]} />
+
+          <FeaturedContent
+              name={'opportunities'}
+              layout={'stack'}
+              layoutCardOffset={`18`}
+              title={"OPPORTUNITIES"}
+              renderType={'opportunity'}
+              navigation={this.props.navigation}
+          />
+
+          <FeaturedContent
+              name={'companies'}
+              layout={'stack'}
+              layoutCardOffset={`18`}
+              title={"COMPANIES"}
+          />
 
         </ScrollView>
     );

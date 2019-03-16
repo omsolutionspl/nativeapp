@@ -4,7 +4,7 @@ import { Image, View, StyleSheet, Text, Platform } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
-import AgendaScreen from '../screens/AgendaScreen';
+import AgendaScreen from '../containers/Agenda';
 import ChatScreen from '../containers/Chat';
 import QRScreen from '../screens/QRScreen';
 import HomeExample from '../components/HomeExample';

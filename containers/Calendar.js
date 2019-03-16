@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { loadItems, getItems } from '../reducers/Features/Agenda';
 
-import AgendaScreen from '../screens/AgendaScreen';
+import CalendarScreen from '../screens/AgendaScreen';
 
 export default compose(
     connect(
@@ -15,4 +15,4 @@ export default compose(
           loadItems: items => dispatch(loadItems(items)),
         }),
     ),
-)(AgendaScreen);
+)(CalendarScreen);
