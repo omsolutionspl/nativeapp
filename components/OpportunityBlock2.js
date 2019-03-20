@@ -91,7 +91,7 @@ class OpportunityBlock extends Component {
     const { navigation, style, item, item: { type, description } } = this.props
 
     let mode  = this.getMode();
-
+    let imageAsBackground = mode === 'card'
     let __now = moment();
     let deadline;
 
@@ -99,31 +99,52 @@ class OpportunityBlock extends Component {
       deadline = moment(item.deadline);
     }
 
+    // TODO: Map data for different view
+    let _item = {
+      brand: item.type,
+      title: item.category.name,
+      subtitle: item.description['dot_procurement_category'] || null,
+      detailInfo: item.description['estimated_value'] || null,
+      badge: Math.floor(Math.random() * 10) % 2 ? {
+        label: 'Short deadline',
+        type: "danger"
+      } : {
+        label: 'Fully applicable',
+        type: "success"
+      },
+      image: item.images[0].url,
+      deadline: deadline,
+    };
+
     // console.log('render OppBlock @ ', mode, item.id); // TODO: Slow on modal
 
+    if (mode === 'card')
+    {
+      if (item.company.agency) {
+        // _item['brand'] = item.company.agency;
+      }
+    }
+
     if (mode === 'row' || mode === 'tile' || mode === 'card')
-      return <GridRow
-          imageAsBackground={mode === 'card'}
-          onPress={this.props.handleClickBlock.bind(this)}
-          type={ITEM_ROW}
-          styleName={`${mode}`}
-          item={{
-            brand: item.type,
-            title: item.category.name,
-            subtitle: item.description['dot_procurement_category'] || null,
-            detailInfo: item.description['estimated_value'] || null,
-            badge: Math.floor(Math.random() * 10) % 2 ? {
-              label: 'Short deadline',
-              type: "danger"
-            } : {
-              label: 'Fully applicable',
-              type: "success"
-            },
-            image: item.images[0].url,
-            deadline: deadline,
-          }
-          }
-      />
+      return <View>
+          <GridRow
+            imageAsBackground
+            // overlay={{ from: Colors.primaryLight, to: Colors.darkBlue, opacity: 1}}
+            onPress={this.props.handleClickBlock.bind(this)}
+            type={mode}
+            styleName={`${mode}`}
+            item={_item}
+        />
+
+
+
+        <Button
+
+            default
+            label
+
+        />
+      </View>
 
     // Because of content inset the scroll value will be negative on iOS so bring
     // it back to 0.

@@ -58,6 +58,7 @@ class FeaturedContent extends Component {
     const {
       name,
       featured,
+      onMore,
       showPagination,
       title,
       layout,
@@ -76,15 +77,17 @@ class FeaturedContent extends Component {
             <View styleName={"horizontal"}>
               <Heading>{title}</Heading>
             </View>
-            <View styleName={"horizontal h-end"}>
-              <Button
-                  clear
-                  small
-                  loading={false}
-                  caption={"Discover More"}
-                  onPress={() => alert('pressed')}
-              />
-            </View>
+            {onMore &&
+              <View styleName={"horizontal h-end"}>
+                <Button
+                    clear
+                    small
+                    loading={false}
+                    caption={"Discover More"}
+                    onPress={onMore}
+                />
+              </View>
+            }
           </View>
           <Carousel
               ref={c => this._slider1Ref = c}

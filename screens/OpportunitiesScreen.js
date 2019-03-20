@@ -40,7 +40,7 @@ class OpportunitiesScreen extends Component {
     return <OpportunityBlock
         item={opp}
         index={index}
-        mode={mode}
+        mode={'row'}
         listingReg={this.flatList} // for scroll maintain after collapsable
         navigation={this.props.navigation}
     />
@@ -71,6 +71,7 @@ class OpportunitiesScreen extends Component {
 
       ]} />
       */}
+
     </View>
   }
 

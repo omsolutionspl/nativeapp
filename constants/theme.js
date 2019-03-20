@@ -152,8 +152,15 @@ export default () => {
         'shoutem.ui.Row': {
 
           '.card': {
+
+            'shoutem.ui.View': {
+              'shoutem.ui.Title': {
+                  paddingRight:64
+              },
+            },
+
             backgroundColor: Colors.almostWhite,
-            borderWidth:1,
+            borderWidth:0, // 1,
             borderColor: Colors.tabNavigationBorder,
             borderRadius:5,
           },

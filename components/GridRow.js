@@ -8,6 +8,7 @@ import { Colors, Fonts, Layout } from '../constants';
 
 import {connectStyle} from "@shoutem/theme/index";
 
+import { renderImageOverlay } from '../components/utils/gradients'
 import { Overlay } from '@shoutem/ui/components/Overlay'
 import { ImageBackground } from '@shoutem/ui/components/ImageBackground'
 import { View } from '@shoutem/ui/components/View'
@@ -19,9 +20,9 @@ import Badge from '../components/Badge'
 import { Icon } from '@shoutem/ui/components/Icon'
 
 
-export const IMAGE_ROW  = 'image_row';
-export const ITEM_ROW   = 'item_row';
-export const ITEM_CARD  = 'item_card';
+export const IMAGE_ROW  = 'image';
+export const ITEM_ROW   = 'row';
+export const ITEM_CARD  = 'card';
 
 class GridRow extends React.Component {
 
@@ -74,7 +75,8 @@ class GridRow extends React.Component {
       style,
       styleName,
       item,
-      imageAsBackground
+      imageAsBackground,
+      overlay
     } = this.props
 
     if (this.getType() === ITEM_ROW && item.badge === 'NEW') {
@@ -102,17 +104,16 @@ class GridRow extends React.Component {
         </TouchableOpacity>
       : null}
 
-      {this.getType() === ITEM_ROW ?
+      {this.getType() === ITEM_ROW || this.getType() === ITEM_CARD ?
       <TouchableOpacity
           key={item.id}
           activeOpacity={1}
           onPress={this.onPress}
       >
 
+        {imageAsBackground && overlay && renderImageOverlay(overlay)}
 
         <Row styleName={styleName}>
-
-          {/*imageAsBackground && <Overlay styleName="fill-parent image-overlay" /> */}
 
           {! imageAsBackground && item.image ?
           <Image

@@ -20,7 +20,11 @@ class HomeScreen extends React.Component {
     return (
         <ScrollView>
 
-          <FeaturedContent name={'featured'} title={"FEATURED"} />
+          <FeaturedContent
+              styleName={'medium'}
+              name={'featured'}
+              title={"FEATURED"}
+          />
 
           <ButtonsGroup title={"DISCOVER"} styleName={"stacked"} buttons={[
             {
@@ -52,6 +56,9 @@ class HomeScreen extends React.Component {
               name={'opportunities'}
               title={"YOUR OPPORTUNITIES"}
               navigation={this.props.navigation}
+              onMore={() => navigate('OpportunitiesScreen', {
+
+              })}
           />
 
           <FeaturedContent
