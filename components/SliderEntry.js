@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import { ParallaxImage } from 'react-native-snap-carousel';
 
-import styles from '../constants/styles/SliderEntry';
+import baseStyles from '../constants/styles/SliderEntry';
+import {connectStyle} from "@shoutem/theme";
 
-export default class SliderEntry extends Component {
+import { Fonts } from '../constants'
+
+class SliderEntry extends Component {
 
   get image ()
   {
@@ -28,11 +36,15 @@ export default class SliderEntry extends Component {
   }
 
   render () {
-    const { data: { title, subtitle }, even } = this.props;
+    const { style, data: { title, subtitle, description, website }, even, extended } = this.props;
 
     const uppercaseTitle = title ? (
         <Text
-            style={[styles.title, even ? styles.titleEven : {}]}
+            style={[
+              styles.title,
+              even ? styles.titleEven : {},
+              extended && style.biggerTitle
+            ]}
             numberOfLines={2}
         >
           { title.toUpperCase() }
@@ -46,18 +58,63 @@ export default class SliderEntry extends Component {
             onPress={() => { alert(`You've clicked '${title}'`); }}
         >
           <View style={styles.shadow} />
-          <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
+          <View style={[
+              styles.imageContainer,
+              even ? styles.imageContainerEven : {},
+              ]}>
             { this.image }
             <View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]} />
           </View>
-          <View style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
+          <View style={[
+              styles.textContainer,
+              even ? styles.textContainerEven : {},
+            ]}>
             {uppercaseTitle}
 
-            <Text style={[styles.subtitle, even ? styles.subtitleEven : {}]} numberOfLines={2}>
+            <Text style={[
+                styles.subtitle,
+                even ? styles.subtitleEven : {},
+                extended && style.biggerSubtitle
+            ]} numberOfLines={2}>
               {subtitle}
             </Text>
           </View>
+
+          {description ?
+          <View style={[
+            styles.textContainer,
+            even ? styles.textContainerEven : {},
+          ]}>
+            <Text numberOfLines={2}>{description}</Text>
+
+            <Text style={[
+              styles.website,
+            ]} numberOfLines={1}>
+              {website}
+            </Text>
+          </View>
+          : null}
+
         </TouchableOpacity>
     );
   }
 }
+
+
+const styles = {
+  ...baseStyles,
+  biggerTitle: {
+    fontSize:20,
+    fontFamily: Fonts.defaultText
+  },
+  biggerSubtitle: {
+    fontSize:16
+  },
+  website: {
+    fontSize:11
+  }
+};
+
+
+// connect the component to the theme
+export default connectStyle('mbm.grid.SliderEntry', styles)(SliderEntry);

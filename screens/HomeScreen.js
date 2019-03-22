@@ -4,6 +4,7 @@ import { Constants, Permissions, Notifications, Icon } from 'expo';
 
 import FeaturedContent from '../containers/FeaturedContent'
 import FeaturedOpportunities from '../containers/FeaturedOpportunities'
+import FeaturedCompanies from '../containers/FeaturedCompanies'
 import ButtonsGroup  from '../components/ButtonsGroup'
 import OpportunitiesScreen from "./OpportunitiesScreen";
 
@@ -61,11 +62,13 @@ class HomeScreen extends React.Component {
               })}
           />
 
-          <FeaturedContent
+          <FeaturedCompanies
               name={'companies'}
-              layout={'tinder'}
-              layoutCardOffset={`18`}
-              title={"RELEVANT COMPANIESS"}
+              title={"RELEVANT COMPANIES"}
+              navigation={this.props.navigation}
+              onMore={() => navigate('CompaniesScreen', {
+
+              })}
           />
 
         </ScrollView>

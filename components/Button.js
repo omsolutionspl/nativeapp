@@ -27,15 +27,29 @@ class Button extends Component {
 
   getIcon() {
 
-    const { icon } = this.props;
+    const {
+      icon,
+      style,
+      textColor
+    } = this.props;
 
-    if (icon) {
+    if(typeof(icon) === 'function')
+      return icon();
+
+    if (icon)
+    {
       return <Icon.Ionicons
-          // size={button.size || 30}
+          size={18}
           name={icon}
-          // style={style.icon}
+          style={[
+              style.icon,
+              textColor && {
+                color: textColor,
+              },
+          ]}
       />
     }
+
     return null;
   }
 
@@ -136,6 +150,7 @@ class Button extends Component {
             style={[
               styles.button,
               props.small && styles.buttonSmall,
+              (props.small && ! props.caption) && styles.iconOnly,
               styles.primaryButton,
               props.rounded && { borderRadius },
               props.action && styles.action
@@ -151,10 +166,10 @@ class Button extends Component {
                 props.small && styles.captionSmall,
                 icon && styles.captionWithIcon,
                 styles.primaryCaption,
+                props.clear && styles.buttonClear,
                 props.textColor && {
                   color: props.textColor,
                 },
-                props.clear && styles.buttonClear,
               ]}>{caption}</Text>
             )}
 
@@ -195,8 +210,12 @@ const styles = {
     justifyContent: 'center',
     paddingHorizontal: 30,
   },
+  iconOnly: {
+    paddingHorizontal: 2,
+  },
   buttonSmall: {
-    paddingHorizontal: 20,
+    paddingLeft: 10,
+    paddingRight:12,
   },
   border: {
     borderWidth: 1,
@@ -217,6 +236,7 @@ const styles = {
   icon: {
     maxHeight: HEIGHT - 20,
     maxWidth: HEIGHT - 20,
+    color:'white',
   },
   caption: {
     letterSpacing: 1,
@@ -228,7 +248,7 @@ const styles = {
     fontWeight: '500',
   },
   captionWithIcon: {
-    marginLeft: 12,
+    marginLeft: 4,
   },
   buttonClear: {
     color: Colors.darkBlue

@@ -7,6 +7,7 @@ import {
 import { Colors, Fonts, Layout } from '../constants';
 
 import {connectStyle} from "@shoutem/theme/index";
+import { map } from 'lodash';
 
 import { renderImageOverlay } from '../components/utils/gradients'
 import { Overlay } from '@shoutem/ui/components/Overlay'
@@ -76,6 +77,7 @@ class GridRow extends React.Component {
       styleName,
       item,
       imageAsBackground,
+      buttons,
       overlay
     } = this.props
 
@@ -148,6 +150,10 @@ class GridRow extends React.Component {
                 <Text styleName="multiline">{item.detailRow}</Text>
               </View>
 
+            </View>
+
+            <View styleName={"buttons horizontal v-start"}>
+              {map(buttons, button => button)}
             </View>
 
           </View>

@@ -144,6 +144,9 @@ export default () => {
     'mbm.Authentication': {
       // Code here
     },
+    'mbm.grid.SliderEntry': {
+
+    },
     'mbm.grid.Listing': {
 
     },

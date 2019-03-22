@@ -18,7 +18,7 @@ export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const entryBorderRadius = 8;
 
-export default StyleSheet.create({
+export default {
   slideInnerContainer: {
     width: itemWidth,
     height: slideHeight,
@@ -33,7 +33,7 @@ export default StyleSheet.create({
     bottom: 18,
     shadowColor: colors.black,
     shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 10 },
+    shadowOffset: {width: 0, height: 10},
     shadowRadius: 10,
     borderRadius: entryBorderRadius
   },
@@ -96,4 +96,4 @@ export default StyleSheet.create({
   subtitleEven: {
     color: 'rgba(255, 255, 255, 0.7)'
   }
-});
+}

@@ -35,7 +35,7 @@ import GridRow, { ITEM_ROW, IMAGE_ROW } from '../components/GridRow'
 import { renderImageOverlay } from '../components/utils/gradients'
 import ProfileHeader  from '../components/ProfileHeader'
 import QuickInfo  from '../components/QuickInfo'
-import { Badge, ButtonsGroup, AttributeRow, GoBackBtn, Button, Anchor } from '../components/'
+import {Badge, ButtonsGroup, AttributeRow, GoBackBtn, Button, Anchor, Button as RNButton} from '../components/'
 
 const HEADER_MAX_HEIGHT = Platform.OS === 'ios' ? (Layout.isIphoneX ? 300 : 280) : 280; //
 const HEADER_MIN_HEIGHT = (Platform.OS === 'ios' && Layout.isIphoneX) ? 250 : 220; // Layout.NAVIGATION_HEADER_HEIGHT; // Platform.OS === 'ios' ? 60 : 73;
@@ -134,16 +134,39 @@ class OpportunityBlock extends Component {
             type={mode}
             styleName={`${mode}`}
             item={_item}
+            buttons={mode !== 'card' ? [] : [
+              <Button
+
+                  key={'bt1'}
+                  primary
+                  small
+                  rounded
+                  style={{marginRight: 2}}
+                  clear
+                  textColor={Colors.black}
+                  // bgColor={Colors.success}
+                 // caption={"Favorite"}
+                  onPress={() => alert('Favorited!')}
+                  icon={'md-star-outline'}
+
+              />,
+              <Button
+
+                  key={'bt2'}
+                  primary
+                  small
+                  rounded
+                  style={{marginRight: 2}}
+                  caption={"Arrange meeting!"}
+                  textColor={Colors.white}
+                  bgColor={Colors.success}
+                  onPress={() => alert('Request has been sent.')}
+                  icon={'md-calendar'}
+
+              />
+            ]}
         />
 
-
-
-        <Button
-
-            default
-            label
-
-        />
       </View>
 
     // Because of content inset the scroll value will be negative on iOS so bring
@@ -192,7 +215,7 @@ class OpportunityBlock extends Component {
     // Small logo animations
     const logoOpacity = this.state.scrollY.interpolate({
       inputRange: [0, 0, HEADER_SCROLL_DISTANCE],
-      outputRange: [0.1, 0.1, 1],
+      outputRange: [1, 1, 1],
       extrapolate: 'clamp',
     });
 
@@ -320,7 +343,7 @@ class OpportunityBlock extends Component {
               style={[
                 style.logoContainer,
                 {
-                  opacity: logoOpacity, // __opacity
+                  opacity: 1, // logoOpacity, // __opacity
                   transform: [
                     { translateX: logoTranslateX },
                     // { translateY: imageTranslateY }

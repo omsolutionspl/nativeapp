@@ -21,6 +21,7 @@ export default {
   blue: '#5A81F7',
   bluish: '#f8f8f1',
   green: '#3cd39f',
+  success:'#1FA57F',
   darkGreen: '#003B36',
   veryDarkGreen: '#012622',
   yellow: '#ffc247',
