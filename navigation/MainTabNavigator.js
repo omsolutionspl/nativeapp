@@ -213,10 +213,10 @@ export default createBottomTabNavigator({
       };
     }
   },
-  Components: {
-    screen: ModalExample, // HomeExample,
-    params: { label: "Examples"}
-  }
+  // Components: {
+  //   screen: ModalExample, // HomeExample,
+  //   params: { label: "Examples"}
+  // }
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

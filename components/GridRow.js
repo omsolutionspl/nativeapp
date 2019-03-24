@@ -115,7 +115,7 @@ class GridRow extends React.Component {
 
         {imageAsBackground && overlay && renderImageOverlay(overlay)}
 
-        <Row styleName={styleName}>
+        <Row styleName={styleName + (item.image ? ' hasImage' : '')}>
 
           {! imageAsBackground && item.image ?
           <Image
@@ -131,7 +131,7 @@ class GridRow extends React.Component {
             />
           </View>}
 
-          <View styleName={"vertical"}>
+          <View styleName={`vertical`}>
 
             <Caption>{item.brand}</Caption>
             <Title numberOfLines={2}>{item.title}</Title>

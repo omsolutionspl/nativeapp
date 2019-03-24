@@ -1,79 +1,144 @@
 import React from 'react';
-import {Button, ScrollView, Image, Easing, View, Text, StyleSheet, Platform } from 'react-native';
+import {
+	Button, ScrollView,
+	Image, Easing, View, Text,
+	Platform,
+	Animated
+} from 'react-native';
 import { Constants, Permissions, Notifications, Icon } from 'expo';
 
-import FeaturedContent from '../containers/FeaturedContent'
-import FeaturedOpportunities from '../containers/FeaturedOpportunities'
-import FeaturedCompanies from '../containers/FeaturedCompanies'
-import ButtonsGroup  from '../components/ButtonsGroup'
-import OpportunitiesScreen from "./OpportunitiesScreen";
+import FeaturedContent from '../containers/FeaturedContent';
+import FeaturedOpportunities from '../containers/FeaturedOpportunities';
+import FeaturedCompanies from '../containers/FeaturedCompanies';
+import ButtonsGroup  from '../components/ButtonsGroup';
+import OpportunitiesScreen from './OpportunitiesScreen';
 
 import { connectStyle } from '@shoutem/theme';
-import CompaniesScreen from "./CompaniesScreen";
-import EventsScreen from "../containers/Events";
+import CompaniesScreen from './CompaniesScreen';
+import EventsScreen from '../containers/Events';
+import {Layout} from "../constants";
 
+const HEADER_MAX_HEIGHT = Platform.OS === 'ios' ? (Layout.isIphoneX ? 300 : 280) : 280; //
+const HEADER_MIN_HEIGHT = (Platform.OS === 'ios' && Layout.isIphoneX) ? 270 : 250; // Layout.NAVIGATION_HEADER_HEIGHT; // Platform.OS === 'ios' ? 60 : 73;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 class HomeScreen extends React.Component {
-  render() {
 
-    const {navigate} = this.props.navigation;
+  constructor(props) {
+    super(props);
 
-    return (
-        <ScrollView>
-
-          <FeaturedContent
-              styleName={'medium'}
-              name={'featured'}
-              title={"FEATURED"}
-          />
-
-          <ButtonsGroup title={"DISCOVER"} styleName={"stacked"} buttons={[
-            {
-              label: "Opportunities",
-              icon:  "md-analytics", //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
-              onPress: () => navigate('OpportunitiesScreen', {
-
-              })
-            },
-            {
-              label: "Companies",
-              icon: "md-people",
-              onPress: () => navigate('CompaniesScreen', {
-
-              })
-            },
-            {
-              label: "Events",
-              icon: "md-globe",
-              onPress: () => {
-                navigate('EventsScreen', {
-                  // url: 'https://mbmapp.com/',
-                });
-              }
-            }
-          ]} />
-
-          <FeaturedOpportunities
-              name={'opportunities'}
-              title={"YOUR OPPORTUNITIES"}
-              navigation={this.props.navigation}
-              onMore={() => navigate('OpportunitiesScreen', {
-
-              })}
-          />
-
-          <FeaturedCompanies
-              name={'companies'}
-              title={"RELEVANT COMPANIES"}
-              navigation={this.props.navigation}
-              onMore={() => navigate('CompaniesScreen', {
-
-              })}
-          />
-
-        </ScrollView>
-    );
+    this.state = {
+      scrollY: new Animated.Value(
+          // iOS has negative initial scroll value because content inset...
+          Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
+      )
+    };
   }
+
+	render() {
+
+		const {navigate} = this.props.navigation;
+
+    // Because of content inset the scroll value will be negative on iOS so bring
+    // it back to 0.
+    const scrollY = Animated.add(
+        this.state.scrollY,
+        Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+    );
+
+		return (
+				<View>
+
+				<Animated.ScrollView
+
+						style={{marginBottom:16}}
+						stickyHeaderIndices={[1]}
+            scrollEventThrottle={20}
+
+						onScroll={Animated.event(
+								[{
+									nativeEvent: {
+										contentOffset: { y: this.state.scrollY }
+									}
+								}],
+								{ useNativeDriver: true },
+						)}
+						contentInset={{
+							/**
+							 * A value that scroll view can be pulled down instead of sticking top,
+							 * so it can be pulled down through all expanded header
+							 */
+						 // top: HEADER_MAX_HEIGHT,
+						}}
+						contentOffset={{
+
+							/**
+							 * Pull the content to be visible under the header
+							 */
+						 // y: -HEADER_MAX_HEIGHT,
+						}}
+				>
+
+        <FeaturedContent
+            styleName={'medium'}
+            name={'featured'}
+            title={'FEATURED'}
+        />
+
+
+				<ButtonsGroup
+						title={'DISCOVER'}
+						styleName={'stacked darkBlue'}
+						animatedScrollValue={scrollY}
+						buttons={[
+							{
+								label: 'Opportunities',
+								icon:  'md-analytics', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+								onPress: () => navigate('OpportunitiesScreen', {
+
+								})
+							},
+							{
+								label: 'Companies',
+								icon: 'md-people',
+								onPress: () => navigate('CompaniesScreen', {
+
+								})
+							},
+							{
+								label: 'Events',
+								icon: 'md-globe',
+								onPress: () => {
+									navigate('EventsScreen', {
+										// url: 'https://mbmapp.com/',
+									});
+								}
+							}
+						]}
+				/>
+
+				<FeaturedOpportunities
+					name={'opportunities'}
+					title={'YOUR OPPORTUNITIES'}
+					navigation={this.props.navigation}
+					onMore={() => navigate('OpportunitiesScreen', {
+
+					})}
+				/>
+
+				<FeaturedCompanies
+					name={'companies'}
+					title={'RELEVANT COMPANIES'}
+					navigation={this.props.navigation}
+					onMore={() => navigate('CompaniesScreen', {
+
+					})}
+				/>
+
+			</Animated.ScrollView>
+        </View>
+		);
+	}
 }
 
 const styles = {

@@ -9,7 +9,7 @@ export default connect(
     (state, ownProps) => {
       return {
         featured: getOpportunities(state),
-        layout: 'tinder',
+        layout: 'stack', // 'tinder'
         autoplay: false,
         layoutCardOffset: 18,
         renderAs: 'company',

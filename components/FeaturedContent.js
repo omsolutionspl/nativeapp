@@ -14,7 +14,8 @@ import { Button } from './index'
 import { connectStyle } from '@shoutem/theme';
 
 import SliderEntry from '../components/SliderEntry';
-import OpportunityBlock from '../containers/OpportunityBlock'
+import OpportunityBlock from '../containers/OpportunityBlock' // TODO: make it Pure
+import CompanyBlock from '../components/CompanyBlock'
 import Badge from "./Badge";
 
 class FeaturedContent extends Component {
@@ -27,11 +28,11 @@ class FeaturedContent extends Component {
 
       case 'company':
 
-        return <SliderEntry
-            extended
-            data={{
+        return <CompanyBlock
 
-              title: 'Amazystems',
+            item={{
+
+              name: 'Amazystems',
               subtitle: '238210 - Electrical Contractors and Other Wiring Installation Contractors',
               badge: () => <Badge>Supplier</Badge>,
               illustration: require('../assets/images/app/content/dap-bg.png'),
@@ -39,9 +40,11 @@ class FeaturedContent extends Component {
               description: 'Have you ever wanted to target your feature set? Instantly? We realize that if you maximize strategically then you may also facilitate vertically. Quick: do you have a revolutionary strategy for deali'
 
             }}
-            // even={(index + 1) % 2 === 0}
+
+            styleName={"card"}
             parallax={true}
             parallaxProps={parallaxProps}
+
         />
 
         break;

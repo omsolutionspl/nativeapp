@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import {Platform, ScrollView, StatusBar, SafeAreaView, StyleSheet} from 'react-native';
+import {Animated, Platform, ScrollView } from 'react-native';
 // import { Constants } from 'expo';
 // import { map } from 'lodash';
+
+
 import { Icon } from 'expo';
 import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
@@ -19,7 +21,16 @@ class ButtonsGroup extends Component {
   // stacked
   renderButton(button)
   {
-    const { style, bottom } = this.props
+    const { style, bottom, animatedScrollValue } = this.props
+
+    console.log(animatedScrollValue);
+
+    const headerIconSize = animatedScrollValue.interpolate({
+      inputRange: [0, 200],
+      outputRange: [0.1, 1],
+      extrapolate: 'clamp',
+    });
+
 
     if (bottom === true)
     {
@@ -40,11 +51,13 @@ class ButtonsGroup extends Component {
         styleName={`full-width ${this.getStyleName()} ${button.active ? 'active' : ''}`}>
 
         {button.icon ?
-          <Icon.Ionicons
-              size={button.size || 30}
-              name={button.icon}
-              style={style.icon}
-          />
+          <Animated.View style={{ transform: [{scale: headerIconSize}] }}>
+            <Icon.Ionicons
+                size={button.size || 30}
+                name={button.icon}
+                style={style.icon}
+            />
+          </Animated.View>
         : null}
 
         <Text style={{fontFamily: "FontAwesome"}}>{button.label}</Text>
@@ -57,10 +70,34 @@ class ButtonsGroup extends Component {
 
   render() {
 
-    const { buttons, title } = this.props
+    const { buttons, title, animatedScrollValue } = this.props
+
+    const featuredTranslateY = animatedScrollValue.interpolate({
+      inputRange: [0, 123],
+      outputRange: [0, -123],
+      extrapolate: 'clamp',
+    });
+
+    const headerSize = animatedScrollValue.interpolate({
+      inputRange: [0, 123],
+      outputRange: [1, 0.5],
+      extrapolate: 'clamp',
+    });
+
 
     return (
 
+        <Animated.View
+            style={[
+              {
+                transform: [
+                  // { scale: 0.7 }
+                  // { translateX: -250 },
+                  // { translateY: titleTranslateY },
+                ]
+              },
+            ]}
+        >
         <View styleName={this.getStyleName()}>
 
           {title?
@@ -74,6 +111,7 @@ class ButtonsGroup extends Component {
           </View>
 
         </View>
+        </Animated.View>
     );
   }
 }

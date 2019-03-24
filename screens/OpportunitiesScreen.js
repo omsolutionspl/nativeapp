@@ -89,6 +89,7 @@ class OpportunitiesScreen extends Component {
           <View style={{ flex:1 }}>
             <FlatList
                 ref={(list) => this.flatList = list}
+                style={{ paddingHorizontal: 6 }}
                 autoHideHeader={true}
                 initialNumToRender={3}
                 maxToRenderPerBatch={3}
