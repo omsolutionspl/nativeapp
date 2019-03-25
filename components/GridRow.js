@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import {
   TouchableOpacity,
@@ -19,6 +20,7 @@ import { Image } from '@shoutem/ui/components/Image'
 import { Divider } from '@shoutem/ui/components/Divider'
 import Badge from '../components/Badge'
 import { Icon } from '@shoutem/ui/components/Icon'
+import ButtonsGroup  from '../components/ButtonsGroup';
 
 
 export const IMAGE_ROW  = 'image';
@@ -26,6 +28,12 @@ export const ITEM_ROW   = 'row';
 export const ITEM_CARD  = 'card';
 
 class GridRow extends React.Component {
+
+  static propTypes = {
+    // buttons: PropTypes.shape({
+    //
+    // }),
+  };
 
   constructor(props) {
     super(props)
@@ -78,14 +86,15 @@ class GridRow extends React.Component {
       item,
       imageAsBackground,
       buttons,
-      overlay
+      overlay,
+      navigation: { navigate }
     } = this.props
 
     if (this.getType() === ITEM_ROW && item.badge === 'NEW') {
       style.badge.backgroundColor = Colors.green
     }
     
-    console.log(style)
+    // console.log(style)
 
     return <View styleName={styleName}>
 
@@ -117,7 +126,7 @@ class GridRow extends React.Component {
 
         {imageAsBackground && overlay && renderImageOverlay(overlay)}
 
-        <Row styleName={styleName + (item.image ? ' hasImage' : '')}>
+        <Row styleName={styleName + (item.image ? ' hasImage' : '') + (buttons.length ? ' hasButtons' : '') }>
 
           {! imageAsBackground && item.image ?
           <Image
@@ -154,13 +163,22 @@ class GridRow extends React.Component {
 
             </View>
 
-            <View styleName={"buttons horizontal v-start"}>
+            {/*
+            <View styleName="horizontal space-between">
               {map(buttons, button => button)}
             </View>
+            */}
 
           </View>
           <Icon styleName="disclosure" name="right-arrow" />
         </Row>
+
+        {buttons.length ?
+        <ButtonsGroup
+            smaller
+            styleName={'darkBlue bottomRounded'}
+            buttons={buttons}
+        /> : null}
 
         <Divider styleName={"line"} style={{color:"#e3e3e3", backgroundColor: "#e3e3e3"}}/>
 

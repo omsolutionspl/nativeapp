@@ -65,7 +65,7 @@ export default () => {
           },
 
           icon: {
-            fontSize: 30,
+            fontSize: 50,
             color: Colors.white,
           },
         }
@@ -118,6 +118,15 @@ export default () => {
 
         },
 
+				'.bottomRounded': {
+          'shoutem.ui.View': {
+						borderBottomLeftRadius: 5,
+						borderBottomRightRadius: 5,
+          },
+
+
+				},
+
 				'.tabs': {
 					'shoutem.ui.View': {
 						'shoutem.ui.Button': {
@@ -160,9 +169,18 @@ export default () => {
 
 			},
 
+			label: {
+				fontFamily: Fonts.primaryLight
+			},
       icon: {
-        fontSize: 30,
+        fontSize: 28,
         color: Colors.white,
+      },
+
+      iconSmall: {
+        fontSize: 20,
+        color: Colors.white,
+				marginRight:4
       }
 
 		},
@@ -195,6 +213,11 @@ export default () => {
             borderWidth:0, // 1,
             borderColor: Colors.almostWhite,
 						borderRadius:5,
+					},
+
+					'.hasButtons': {
+							borderBottomLeftRadius:0,
+							borderBottomRightRadius:0,
 					},
 
 					'.hasImage': {

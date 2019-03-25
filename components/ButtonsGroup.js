@@ -31,7 +31,7 @@ class ButtonsGroup extends Component {
   // stacked
   renderButton(button)
   {
-    const { style, bottom, animatedScrollValue } = this.props
+    const { style, bottom, animatedScrollValue, smaller } = this.props
 
     // console.log(animatedScrollValue);
 
@@ -93,9 +93,12 @@ class ButtonsGroup extends Component {
             ]
           }}>
             <Icon.Ionicons
-                size={button.size || 30}
+                // size={button.size || 30}
                 name={button.icon}
-                style={[style.icon]}
+                style={[
+                    style.icon,
+                    smaller && style.iconSmall
+                ]}
             />
           </Animated.View>
         : null}
@@ -107,7 +110,7 @@ class ButtonsGroup extends Component {
             {translateX: labelTranslateX}
           ]
         }}>
-          <Text style={{fontFamily: "FontAwesome"}}>{button.label}</Text>
+          <Text style={style.label}>{button.label}</Text>
         </Animated.View>
     </Button>
   }

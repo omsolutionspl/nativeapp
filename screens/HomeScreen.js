@@ -134,6 +134,17 @@ class HomeScreen extends React.Component {
 					})}
 				/>
 
+				<FeaturedCompanies
+						name={'events'}
+						title={'EVENTS'}
+						navigation={this.props.navigation}
+						onMore={() => {
+							navigate('EventsScreen', {
+
+              })
+            }}
+				/>
+
 			</Animated.ScrollView>
 		);
 	}

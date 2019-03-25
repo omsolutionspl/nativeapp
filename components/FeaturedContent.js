@@ -30,17 +30,7 @@ class FeaturedContent extends Component {
 
         return <CompanyBlock
 
-            item={{
-
-              name: 'Amazystems',
-              subtitle: '238210 - Electrical Contractors and Other Wiring Installation Contractors',
-              badge: () => <Badge>Supplier</Badge>,
-              illustration: require('../assets/images/app/content/dap-bg.png'),
-              website: 'https://mbmapp.com',
-              description: 'Have you ever wanted to target your feature set? Instantly? We realize that if you maximize strategically then you may also facilitate vertically. Quick: do you have a revolutionary strategy for deali'
-
-            }}
-
+            item={item}
             styleName={"card"}
             parallax={true}
             parallaxProps={parallaxProps}

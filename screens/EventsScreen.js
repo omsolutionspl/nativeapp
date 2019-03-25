@@ -40,6 +40,7 @@ class EventsScreen extends Component {
     return <GridRow
         item={event}
         onPress={() =>  this.props.onSelect(event)}
+        navigation={this.props.navigation}
       />
   }
 

@@ -131,39 +131,32 @@ class OpportunityBlock extends Component {
             imageAsBackground
             // overlay={{ from: Colors.primaryLight, to: Colors.darkBlue, opacity: 1}}
             onPress={this.props.handleClickBlock.bind(this)}
+            navigation={this.props.navigation}
             type={mode}
             styleName={`${mode}`}
             item={_item}
             buttons={mode !== 'card' ? [] : [
-              <Button
+              {
+                label: 'Favorite',
+                icon:  'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+                onPress: () => alert("Favorited")
+              },
+              {
+                label: 'Send a message',
+                icon: 'md-people',
+                onPress: () => navigation.navigate('CompaniesScreen', {
 
-                  key={'bt1'}
-                  primary
-                  small
-                  rounded
-                  style={{marginRight: 2}}
-                  clear
-                  textColor={Colors.black}
-                  // bgColor={Colors.success}
-                 // caption={"Favorite"}
-                  onPress={() => alert('Favorited!')}
-                  icon={'md-star-outline'}
-
-              />,
-              <Button
-
-                  key={'bt2'}
-                  primary
-                  small
-                  rounded
-                  style={{marginRight: 2}}
-                  caption={"Arrange meeting!"}
-                  textColor={Colors.white}
-                  bgColor={Colors.success}
-                  onPress={() => alert('Request has been sent.')}
-                  icon={'md-calendar'}
-
-              />
+                })
+              },
+              {
+                label: 'Schedule a meeting',
+                icon: 'md-globe',
+                onPress: () => {
+                  navigation.navigate('EventsScreen', {
+                    // url: 'https://mbmapp.com/',
+                  });
+                }
+              }
             ]}
         />
 
@@ -371,10 +364,10 @@ class OpportunityBlock extends Component {
               <View style={style.centerComponent}><Text></Text></View>
               <View style={style.rightComponent}>
                 <Icon.Ionicons
-                    name={Platform.OS === 'ios' ? 'ios-heart-empty': 'md-heart-empty'}
+                    name={Platform.OS === 'ios' ? 'ios-star-outline': 'md-star-outline'}
                     size={28}
                     style={{ marginRight: 16, color: 'white' }}
-                    onPress={() => (navigation.navigate('EventsScreen'))}
+                    onPress={() => alert("Favorited")}
                     color={Colors.defaultText}
                 />
               </View>
