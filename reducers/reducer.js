@@ -15,6 +15,7 @@ import opportunities from './Features/Opportunities'
 import events from './Features/Events'
 import chat from './Features/Chat'
 import agenda from './Features/Agenda'
+import companies from './Features/Companies'
 
 export default combineReducers({
 
@@ -22,7 +23,8 @@ export default combineReducers({
   opportunities,
   events,
   chat,
-  agenda
+  agenda,
+  companies
 
   /*
   grid: GridReducer,

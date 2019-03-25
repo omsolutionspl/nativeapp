@@ -65,7 +65,6 @@ class CompanyBlock extends PureComponent {
         <ImageBackground
             // styleName="medium"
             source={illustration}
-
             style={{flex:1, height:100, width: '100%'}}
         >
 

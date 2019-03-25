@@ -12,7 +12,7 @@ import DrawerContent from '../screens/DrawerContent';
 import SystemWebScreen from '../screens/SystemWebScreen'
 import DetailScreen from '../screens/DetailScreen';
 import OpportunityDetailScreen from '../screens/OpportunityDetailScreen';
-import CompaniesScreen from '../screens/CompaniesScreen';
+import CompaniesScreen from '../containers/Companies';
 import DetailModal from '../screens/DetailModal';
 import ProfileScreen from '../containers/Profile';
 

@@ -84,6 +84,8 @@ class GridRow extends React.Component {
     if (this.getType() === ITEM_ROW && item.badge === 'NEW') {
       style.badge.backgroundColor = Colors.green
     }
+    
+    console.log(style)
 
     return <View styleName={styleName}>
 
@@ -134,7 +136,7 @@ class GridRow extends React.Component {
           <View styleName={`vertical`}>
 
             <Caption>{item.brand}</Caption>
-            <Title numberOfLines={2}>{item.title}</Title>
+            <Title style={style.title} numberOfLines={2}>{item.title}</Title>
             <Subtitle numberOfLines={1}>{item.subtitle}</Subtitle>
 
             <View styleName={"details horizontal space-between v-start"}>

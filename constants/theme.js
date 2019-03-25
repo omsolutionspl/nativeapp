@@ -225,8 +225,8 @@ export default () => {
 						},
 
 						'shoutem.ui.Title': {
-							fontFamily: Fonts.primaryBold,
-							fontSize: 16,
+              fontFamily: Fonts.primaryBold,
+							fontSize: 17,
 							padding:0,
 							margin:0,
 							color: Colors.defaultText

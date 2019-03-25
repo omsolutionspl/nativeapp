@@ -1,8 +1,9 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
+
 import {Animated, Platform, ScrollView } from 'react-native';
 // import { Constants } from 'expo';
 // import { map } from 'lodash';
-
 
 import { Icon } from 'expo';
 import { View } from '@shoutem/ui/components/View'
@@ -18,18 +19,51 @@ import { connectStyle } from '@shoutem/theme';
 
 class ButtonsGroup extends Component {
 
+  static propTypes = {
+    buttons: PropTypes.array.isRequired,
+    // asdasd: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    // asdasd: {},
+  };
+
   // stacked
   renderButton(button)
   {
     const { style, bottom, animatedScrollValue } = this.props
 
-    console.log(animatedScrollValue);
+    // console.log(animatedScrollValue);
 
-    const headerIconSize = animatedScrollValue.interpolate({
-      inputRange: [0, 200],
-      outputRange: [0.1, 1],
+    const headerIconSize = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 150, 300],
+      outputRange: [1, 1, 0.7],
       extrapolate: 'clamp',
-    });
+    }) : 1;
+
+    const iconTranslateX = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 150, 300],
+      outputRange: [1, -10, -50],
+      extrapolate: 'clamp',
+    }) : 0;
+
+    const iconTranslateY = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 150, 300],
+      outputRange: [1, 10, 32],
+      extrapolate: 'clamp',
+    }) : 0;
+
+    const labelTranslateY = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 150, 300],
+      outputRange: [1, -10, -32],
+      extrapolate: 'clamp',
+    }) : 0;
+
+    const labelTranslateX = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 300],
+      outputRange: [0, 20],
+      extrapolate: 'clamp',
+    }) : 0;
 
 
     if (bottom === true)
@@ -51,16 +85,30 @@ class ButtonsGroup extends Component {
         styleName={`full-width ${this.getStyleName()} ${button.active ? 'active' : ''}`}>
 
         {button.icon ?
-          <Animated.View style={{ transform: [{scale: headerIconSize}] }}>
+          <Animated.View style={{
+            transform: [
+              {scale: headerIconSize},
+              // {translateY: iconTranslateY},
+              {translateX: iconTranslateX}
+            ]
+          }}>
             <Icon.Ionicons
                 size={button.size || 30}
                 name={button.icon}
-                style={style.icon}
+                style={[style.icon]}
             />
           </Animated.View>
         : null}
 
-        <Text style={{fontFamily: "FontAwesome"}}>{button.label}</Text>
+        <Animated.View style={{
+          transform: [
+            // {scale: headerIconSize},
+            {translateY: labelTranslateY},
+            {translateX: labelTranslateX}
+          ]
+        }}>
+          <Text style={{fontFamily: "FontAwesome"}}>{button.label}</Text>
+        </Animated.View>
     </Button>
   }
 
@@ -72,32 +120,23 @@ class ButtonsGroup extends Component {
 
     const { buttons, title, animatedScrollValue } = this.props
 
-    const featuredTranslateY = animatedScrollValue.interpolate({
+    /*
+    const featuredTranslateY = animatedScrollValue ? animatedScrollValue.interpolate({
       inputRange: [0, 123],
       outputRange: [0, -123],
       extrapolate: 'clamp',
-    });
+    }) : 1;
+    */
 
-    const headerSize = animatedScrollValue.interpolate({
-      inputRange: [0, 123],
-      outputRange: [1, 0.5],
+    const buttonsSize = animatedScrollValue ? animatedScrollValue.interpolate({
+      inputRange: [0, 300],
+      outputRange: [1, 0.8],
       extrapolate: 'clamp',
-    });
-
+    }) : 1;
 
     return (
 
-        <Animated.View
-            style={[
-              {
-                transform: [
-                  // { scale: 0.7 }
-                  // { translateX: -250 },
-                  // { translateY: titleTranslateY },
-                ]
-              },
-            ]}
-        >
+
         <View styleName={this.getStyleName()}>
 
           {title?
@@ -106,12 +145,24 @@ class ButtonsGroup extends Component {
           </View>
           :null}
 
-          <View styleName={`horizontal h-center`}>
-            {buttons.map(button => this.renderButton(button))}
-          </View>
+          <Animated.View
+              style={[
+                {
+
+                  transform: [
+                    { scale: buttonsSize }
+                    // { translateX: -250 },
+                    // { translateY: titleTranslateY },
+                  ]
+                },
+              ]}
+          >
+            <View styleName={`horizontal h-center`}>
+              {buttons.map(button => this.renderButton(button))}
+            </View>
+          </Animated.View>
 
         </View>
-        </Animated.View>
     );
   }
 }

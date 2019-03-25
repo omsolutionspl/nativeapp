@@ -30,7 +30,7 @@ class HomeScreen extends React.Component {
     this.state = {
       scrollY: new Animated.Value(
           // iOS has negative initial scroll value because content inset...
-          Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
+          0 // Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
       )
     };
   }
@@ -43,11 +43,10 @@ class HomeScreen extends React.Component {
     // it back to 0.
     const scrollY = Animated.add(
         this.state.scrollY,
-        Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
+        0 //Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,
     );
 
 		return (
-				<View>
 
 				<Animated.ScrollView
 
@@ -89,7 +88,7 @@ class HomeScreen extends React.Component {
 				<ButtonsGroup
 						title={'DISCOVER'}
 						styleName={'stacked darkBlue'}
-						animatedScrollValue={scrollY}
+						// animatedScrollValue={scrollY} // TODO: Enable animation
 						buttons={[
 							{
 								label: 'Opportunities',
@@ -136,7 +135,6 @@ class HomeScreen extends React.Component {
 				/>
 
 			</Animated.ScrollView>
-        </View>
 		);
 	}
 }

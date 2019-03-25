@@ -2,18 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose, lifecycle, withState } from 'recompose';
 
-import { getRenderMode, getOpportunities, seeDetails } from '../reducers/Features/Opportunities';
+import { getCompanies } from '../reducers/Features/Companies';
 import { map } from 'lodash'
 
 import CompaniesScreen from '../screens/CompaniesScreen'
-
 
 export default connect(
     (state, ownProps) => {
 
       return {
-        companies: ["a", "b"],
-        intentions: getOpportunities(state), // Apply filtered
+        companies: getCompanies(state),
+        // intentions: [{id:1}, {id:2}], // Apply filtered
         // showPagination: false,
       }
     },
