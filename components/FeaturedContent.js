@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Platform, ScrollView, SafeAreaView} from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { Notifications } from 'expo';
 
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 
@@ -31,6 +32,8 @@ class FeaturedContent extends Component {
       return <EmptyStackPlaceholder data={item} />
     }
 
+
+
     switch(renderAs) {
 
       case 'company':
@@ -44,8 +47,27 @@ class FeaturedContent extends Component {
             buttons={[
               {
                 label: 'Favorite',
-                icon:  'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
-                onPress: () => alert("Favorited")
+                icon: 'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+                onPress: () => {
+                  const localNotification = {
+                    title: 'Example Title!',
+                    body: 'This is the body text of the local notification',
+                    android: {
+                      sound: true,
+                    },
+                    ios: {
+                      sound: true,
+                    },
+                  };
+                  let sendAfterFiveSeconds = Date.now();
+                  sendAfterFiveSeconds += 5000;
+
+                  const schedulingOptions = {time: sendAfterFiveSeconds};
+                  Notifications.scheduleLocalNotificationAsync(
+                      localNotification,
+                      schedulingOptions
+                  );
+                },
               },
               {
                 label: 'Schedule a meeting',

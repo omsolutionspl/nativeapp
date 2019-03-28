@@ -1,12 +1,14 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Alert } from 'react-native';
 import { Provider, connect } from 'react-redux';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { AppLoading, Asset, Font, Icon, Constants, Notifications, Permissions } from 'expo';
 import { StyleProvider } from '@shoutem/theme';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './reducers/store';
 import theme from './constants/theme'
+
+import NavigationService from './navigation/NavigationService';
 
 /*
 if (process.env.NODE_ENV !== 'production') {
@@ -15,10 +17,124 @@ if (process.env.NODE_ENV !== 'production') {
 }
 */
 
+/**
+ * TODO: Check
+ * https://github.com/zo0r/react-native-push-notification
+ *
+ * No foreground push notification in Expo for now
+ * https://stackoverflow.com/questions/48437781/ios-expo-push-notifications-when-app-is-in-foreground
+ *
+ * @returns {Promise<*>}
+ */
+async function getNotificationPerms() {
+
+  const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  // Get the token that uniquely identifies this device
+  let token = await Notifications.getExpoPushTokenAsync();
+
+  console.log('ExpoPush Token', token);
+
+  return token;
+
+  // POST the token to your backend server from where you can retrieve it to send push notifications.
+  /*
+  return fetch(PUSH_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: {
+        value: token,
+      },
+      user: {
+        username: 'Brent',
+      },
+    }),
+  });
+  */
+
+}
+
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+
+  listenForNotifications = () => {
+    Notifications.addListener(notification => {
+      if (notification.origin === 'received') {
+        console.log('listenForNotifications', notification);
+
+        // TODO: Toast
+        // Alert.alert(notification.title, notification.body);
+      }
+
+      if (notification.origin === 'selected')
+      {
+        NavigationService.navigate(
+            notification.data.navigateTo,
+            notification.data.navigateParams
+        );
+      }
+    });
+  };
+
+  componentWillMount() {
+    getNotificationPerms();
+    this.listener = this.listenForNotifications();
+  }
+
+  componentWillUnmount() {
+    this.listener && this.listener.remove();
+  }
+
+  componentDidMount() {
+    setTimeout(function() {
+      const localNotification = {
+        title: 'You have new Opportunity!',
+        body: 'Click here to review.',
+        data: {
+            navigateTo: "OpportunitiesScreen",
+            navigateParams: {
+
+            }
+        },
+        android: {
+          sound: true,
+        },
+        ios: {
+          sound: true,
+        },
+      };
+      let sendAfterFiveSeconds = Date.now();
+      sendAfterFiveSeconds += 5000;
+
+      const schedulingOptions = {time: sendAfterFiveSeconds};
+      Notifications.presentLocalNotificationAsync(localNotification)
+    }, 5000);
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -35,7 +151,11 @@ export default class App extends React.Component {
             <View style={styles.container}>
               {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
               <StyleProvider style={theme()}>
-                <AppNavigator />
+                <AppNavigator
+                    ref={navigatorRef => {
+                      NavigationService.setTopLevelNavigator(navigatorRef);
+                    }}
+                />
               </StyleProvider>
             </View>
           </Provider>

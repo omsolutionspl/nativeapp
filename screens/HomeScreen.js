@@ -49,6 +49,7 @@ class HomeScreen extends React.Component {
 
 		return (
 
+				// TODO: Fix becausse This Animated.ScrollView does not work on android.
 				<Animated.ScrollView
 
 						// style={{marginBottom:16}}
