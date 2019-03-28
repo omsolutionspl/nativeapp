@@ -8,6 +8,13 @@ import AppNavigator from './navigation/AppNavigator';
 import store from './reducers/store';
 import theme from './constants/theme'
 
+/*
+if (process.env.NODE_ENV !== 'production') {
+  const {whyDidYouUpdate} = require('rn-why-did-you-update')
+  whyDidYouUpdate(React)
+}
+*/
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -43,6 +50,7 @@ export default class App extends React.Component {
         require('./assets/images/robot-prod.png'),
         require('./assets/images/app/mbm-logo-350.png'),
         require('./assets/images/app/content/dap-bg.png'),
+        require('./assets/images/app/login-bg-small-refine.jpg'),
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar

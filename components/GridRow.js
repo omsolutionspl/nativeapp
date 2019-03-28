@@ -135,7 +135,7 @@ class GridRow extends React.Component {
           />
           : null}
 
-          {imageAsBackground && <View style={ style.backgroundImage}>
+          {imageAsBackground && <View style={ style.backgroundImage }>
             <Image
                 styleName="small rounded-corners top"
                 source={{ uri: item.image }}

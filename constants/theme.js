@@ -122,6 +122,7 @@ export default () => {
           'shoutem.ui.View': {
 						borderBottomLeftRadius: 5,
 						borderBottomRightRadius: 5,
+						// backgroundColor:'blue'
           },
 
 
@@ -180,7 +181,8 @@ export default () => {
       iconSmall: {
         fontSize: 20,
         color: Colors.white,
-				marginRight:4
+				marginRight:5,
+				marginTop:2
       }
 
 		},
@@ -433,40 +435,42 @@ export default () => {
 		},
 
 		'mbm.common.CompanyBlock': {
+      'shoutem.ui.View': {
+        'shoutem.ui.Tile': {
 
-      'shoutem.ui.Tile': {
+          '.card': {
 
-        '.card': {
+            'shoutem.ui.View': {
+              'shoutem.ui.Title': {
+                color: Colors.defaultText
+                //paddingRight:64
+              },
+            },
+
+            shadowColor: Colors.primary,
+            shadowOpacity: 0.1,
+            shadowOffset: {width: 1, height: 1},
+
+            backgroundColor: Colors.almostWhite,
+            borderWidth: 0, // 1,
+            borderColor: Colors.almostWhite,
+            borderRadius: 5,
+          },
 
           'shoutem.ui.View': {
             'shoutem.ui.Title': {
-              //paddingRight:64
+              fontFamily: Fonts.primarySemiBold,
+              padding: 0
             },
+            'shoutem.ui.Text': {
+              fontFamily: Fonts.primaryLight,
+              color: Colors.defaultText,
+              padding: 0
+            }
           },
-
-          shadowColor: Colors.primary,
-          shadowOpacity: 0.1,
-          shadowOffset: { width: 1, height: 1 },
-
-          backgroundColor: Colors.almostWhite,
-          borderWidth:0, // 1,
-          borderColor: Colors.almostWhite,
-          borderRadius:5,
-        },
-
-        'shoutem.ui.View': {
-          'shoutem.ui.Title': {
-          	fontFamily: Fonts.primarySemiBold,
-            padding:0
-          },
-          'shoutem.ui.Text': {
-            fontFamily: Fonts.primaryLight,
-						color: Colors.defaultText,
-            padding:0
-          }
-        },
-				borderRadius:5,
-      	// borderWidth:1
+          borderRadius: 5,
+          // borderWidth:1
+        }
       }
 		},
 

@@ -14,7 +14,7 @@ import { View } from '@shoutem/ui/components/View'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
 
 import ButtonsGroup from '../components/ButtonsGroup'
-import OpportunityBlock from '../containers/OpportunityBlock'
+import EventBlock from '../components/EventBlock'
 import { SearchBar } from 'react-native-elements';
 import { FILTER_OPPORTUNITIES, FILTER_FORECASTS, FILTER_MATCHES } from '../reducers/Features/Opportunities';
 import { connectStyle } from '@shoutem/theme';
@@ -37,7 +37,7 @@ class EventsScreen extends Component {
   }
 
   renderRow(event, index) {
-    return <GridRow
+    return <EventBlock
         item={event}
         onPress={() =>  this.props.onSelect(event)}
         navigation={this.props.navigation}

@@ -29,7 +29,7 @@ import { renderImageOverlay } from '../components/utils/gradients'
 import { Badge, ButtonsGroup, AttributeRow, GoBackBtn, Button, Anchor } from '../components/'
 
 
-class CompanyBlock extends PureComponent {
+class EventBlock extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -60,37 +60,21 @@ class CompanyBlock extends PureComponent {
 
     const { style, styleName, navigation, item, item: { name, type, description, illustration }, buttons } = this.props
 
-      return <View>
-        <Tile styleName={styleName}>
+    return <View>
 
-          <ImageBackground
-              // styleName="medium"
-              source={illustration}
-              style={{flex:1, height:120, width: '100%'}}
-          >
+      <GridRow
+          item={item}
+          onPress={() =>  alert('x')}
+          navigation={navigation}
+      />
 
-          </ImageBackground>
-          <Divider styleName={"line"} style={{color:"#e3e3e3", backgroundColor: "#e3e3e3"}}/>
-
-          <View styleName="content">
-            <Title numberOfLines={2}>{name}</Title>
-            <Text numberOfLines={2}>{description}</Text>
-            <View styleName="horizontal space-between">
-              <Caption>1 hour ago</Caption>
-              <Caption>15:34</Caption>
-            </View>
-          </View>
-
-        </Tile>
-
-        {buttons.length ?
-        <ButtonsGroup
-            smaller
-            styleName={'darkBlue bottomRounded'}
-            buttons={buttons}
-        /> : null}
-
-      </View>
+      {/*buttons.length ?
+      <ButtonsGroup
+          smaller
+          styleName={'darkBlue bottomRounded'}
+          buttons={buttons}
+      /> : null*/}
+    </View>
   }
 }
 
@@ -101,4 +85,4 @@ const styles = {
 };
 
 // connect the component to the theme
-export default connectStyle('mbm.common.CompanyBlock', styles)(CompanyBlock);
+export default connectStyle('mbm.common.EventBlock', styles)(EventBlock);

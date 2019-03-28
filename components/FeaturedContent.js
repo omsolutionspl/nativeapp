@@ -16,6 +16,8 @@ import { connectStyle } from '@shoutem/theme';
 import SliderEntry from '../components/SliderEntry';
 import OpportunityBlock from '../containers/OpportunityBlock' // TODO: make it Pure
 import CompanyBlock from '../components/CompanyBlock'
+import EventBlock from '../components/EventBlock'
+import EmptyStackPlaceholder from '../components/EmptyStackPlaceholder'
 import Badge from "./Badge";
 
 class FeaturedContent extends Component {
@@ -23,6 +25,11 @@ class FeaturedContent extends Component {
   _renderItem ({item, index}, parallaxProps) {
 
     const { renderAs } = this.props
+
+    if (item.placeholder)
+    {
+      return <EmptyStackPlaceholder data={item} />
+    }
 
     switch(renderAs) {
 
@@ -34,9 +41,38 @@ class FeaturedContent extends Component {
             styleName={"card"}
             parallax={true}
             parallaxProps={parallaxProps}
+            buttons={[
+              {
+                label: 'Favorite',
+                icon:  'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+                onPress: () => alert("Favorited")
+              },
+              {
+                label: 'Schedule a meeting',
+                icon: 'md-globe',
+                onPress: () => {
+                  navigation.navigate('EventsScreen', {
+                    // url: 'https://mbmapp.com/',
+                  });
+                }
+              }
+            ]}
 
         />
 
+        break;
+
+      case 'event':
+        return (
+            <EventBlock
+                item={item}
+                index={index}
+                mode={'card'}
+
+                // listingReg={this.flatList} // for scroll maintain after collapsable
+                navigation={this.props.navigation}
+            />
+        );
         break;
 
       case 'opportunities':
@@ -82,7 +118,7 @@ class FeaturedContent extends Component {
     // console.log('autopla', autoplay)
 
     return (
-        <View styleName={styleName}>
+        <View styleName={styleName} style={{paddingBottom:10}}>
           <View styleName={"horizontal space-between"} style={{ padding: 8}}>
             <View styleName={"horizontal"}>
               <Heading>{title}</Heading>

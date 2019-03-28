@@ -10,6 +10,7 @@ import { Constants, Permissions, Notifications, Icon } from 'expo';
 import FeaturedContent from '../containers/FeaturedContent';
 import FeaturedOpportunities from '../containers/FeaturedOpportunities';
 import FeaturedCompanies from '../containers/FeaturedCompanies';
+import FeaturedEvents from '../containers/FeaturedEvents';
 import ButtonsGroup  from '../components/ButtonsGroup';
 import OpportunitiesScreen from './OpportunitiesScreen';
 
@@ -50,7 +51,7 @@ class HomeScreen extends React.Component {
 
 				<Animated.ScrollView
 
-						style={{marginBottom:16}}
+						// style={{marginBottom:16}}
 						stickyHeaderIndices={[1]}
             scrollEventThrottle={20}
 
@@ -134,15 +135,15 @@ class HomeScreen extends React.Component {
 					})}
 				/>
 
-				<FeaturedCompanies
-						name={'events'}
-						title={'EVENTS'}
-						navigation={this.props.navigation}
-						onMore={() => {
-							navigate('EventsScreen', {
+				<FeaturedEvents
+					name={'events'}
+					title={'EVENTS'}
+					navigation={this.props.navigation}
+					onMore={() => {
+						navigate('EventsScreen', {
 
-              })
-            }}
+						})
+					}}
 				/>
 
 			</Animated.ScrollView>

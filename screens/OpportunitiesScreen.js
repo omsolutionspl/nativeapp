@@ -8,7 +8,8 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { Icon, LinearGradient } from 'expo';
+
+import { filter } from 'lodash';
 import { Colors, Fonts, Layout } from '../constants';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Title, Subtitle, Caption } from '@shoutem/ui/components/Text'
@@ -75,9 +76,14 @@ class OpportunitiesScreen extends Component {
     </View>
   }
 
+  get intentions () {
+    const { intentions } = this.props
+    return filter(intentions, _int => ! _int.placeholder);
+  }
+
   render() {
 
-    const { style, navigate, intentions } = this.props
+    const { style, navigate } = this.props
 
     console.log('render OpportunityScreen');
 
@@ -94,7 +100,7 @@ class OpportunitiesScreen extends Component {
                 initialNumToRender={3}
                 maxToRenderPerBatch={3}
                 keyExtractor={item => item.id}
-                data={intentions}
+                data={this.intentions}
                 renderItem={({ item, index }) => this._renderRow(item, index)}
             />
           </View>

@@ -80,9 +80,10 @@ class ButtonsGroup extends Component {
     }
 
     return <Button
+
         onPress={button.onPress}
         key={`btn_${button.label}`}
-        styleName={`full-width ${this.getStyleName()} ${button.active ? 'active' : ''}`}>
+        styleName={`${this.getStyleName()} ${button.active ? 'active' : ''}`}>
 
         {button.icon ?
           <Animated.View style={{

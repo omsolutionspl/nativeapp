@@ -136,21 +136,21 @@ class OpportunityBlock extends Component {
             styleName={`${mode}`}
             item={_item}
             buttons={mode !== 'card' ? [] : [
+              // {
+              //   label: 'Favorite',
+              //   icon:  'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
+              //   onPress: () => alert("Favorited")
+              // },
               {
-                label: 'Favorite',
-                icon:  'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
-                onPress: () => alert("Favorited")
-              },
-              {
-                label: 'Send a message',
-                icon: 'md-people',
-                onPress: () => navigation.navigate('CompaniesScreen', {
+                label: 'Let\'s Connect',
+                icon: 'md-chatboxes',
+                onPress: () => navigation.navigate('Chats', {
 
                 })
               },
               {
                 label: 'Schedule a meeting',
-                icon: 'md-globe',
+                icon: 'md-calendar',
                 onPress: () => {
                   navigation.navigate('EventsScreen', {
                     // url: 'https://mbmapp.com/',

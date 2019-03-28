@@ -2,6 +2,7 @@
 export Badge from './Badge';
 export Button from './Button';
 export AttributeRow from './AttributeRow';
+export EmptyStackPlaceholder from './EmptyStackPlaceholder';
 export GridRow from './GridRow';
 export ButtonsGroup from './ButtonsGroup';
 export GoBackBtn from './Helpers/GoBackBtn';
