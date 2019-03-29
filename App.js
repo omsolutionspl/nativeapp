@@ -9,6 +9,7 @@ import store from './reducers/store';
 import theme from './constants/theme'
 
 import NavigationService from './navigation/NavigationService';
+import Toast from './components/Helpers/Extensions/Toast';
 
 /*
 if (process.env.NODE_ENV !== 'production') {
@@ -89,6 +90,26 @@ export default class App extends React.Component {
 
         // TODO: Toast
         // Alert.alert(notification.title, notification.body);
+
+        let toast = Toast.show(notification.data, {
+          duration: Toast.durations.LONG,
+          shadow: false,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+          onShow: () => {
+            // calls on toast\`s appear animation start
+          },
+          onShown: () => {
+            // calls on toast\`s appear animation end.
+          },
+          onHide: () => {
+            // calls on toast\`s hide animation start.
+          },
+          onHidden: () => {
+            // calls on toast\`s hide animation end..
+          }
+        });
       }
 
       if (notification.origin === 'selected')
@@ -111,11 +132,15 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+
     setTimeout(function() {
       const localNotification = {
         title: 'You have new Opportunity!',
         body: 'Click here to review.',
         data: {
+            title: 'You have new Opportunity!',
+            body: 'Click here to review.',
+            icon: "md-analytics",
             navigateTo: "OpportunitiesScreen",
             navigateParams: {
 
@@ -134,6 +159,7 @@ export default class App extends React.Component {
       const schedulingOptions = {time: sendAfterFiveSeconds};
       Notifications.presentLocalNotificationAsync(localNotification)
     }, 5000);
+
   }
 
   render() {

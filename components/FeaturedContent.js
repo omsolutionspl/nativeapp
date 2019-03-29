@@ -50,23 +50,18 @@ class FeaturedContent extends Component {
                 icon: 'md-star-outline', //(Platform.OS === 'ios ? "ios-md-scan" : "md-scan"),
                 onPress: () => {
                   const localNotification = {
-                    title: 'Example Title!',
-                    body: 'This is the body text of the local notification',
-                    android: {
-                      sound: true,
-                    },
-                    ios: {
-                      sound: true,
+                    title: 'You got a new message!',
+                    body: 'Click here to see',
+                    data: {
+                      title: 'You got a new message!',
+                      icon: "md-chatboxes",
+                      navigateTo: "Chats",
+                      navigateParams: {
+
+                      }
                     },
                   };
-                  let sendAfterFiveSeconds = Date.now();
-                  sendAfterFiveSeconds += 5000;
-
-                  const schedulingOptions = {time: sendAfterFiveSeconds};
-                  Notifications.scheduleLocalNotificationAsync(
-                      localNotification,
-                      schedulingOptions
-                  );
+                  Notifications.presentLocalNotificationAsync(localNotification)
                 },
               },
               {
