@@ -14,6 +14,11 @@ export default {
     server: {
       host: '127.0.0.1',
       port: '3422'
+    },
+
+    // OpenTok config
+    opentok: {
+
     }
   },
   production: {
@@ -29,6 +34,11 @@ export default {
     server: {
       host:   '127.0.0.1',
       port:   '3421'
+    },
+
+    // OpenTok config
+    opentok: {
+
     }
   }
 };
