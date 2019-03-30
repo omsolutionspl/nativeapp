@@ -598,21 +598,26 @@ export default () => {
 
     'mbm.toast.StyledToast': {
 			'shoutem.ui.Row': {
+        'shoutem.ui.View': {
+          'shoutem.ui.View': {
+            'shoutem.ui.Heading': {
+              color: Colors.black,
+              fontFamily: Fonts.primaryBold,
+              fontSize: 18,
+            },
+          },
+          'shoutem.ui.Text': {
+            color: Colors.black,
+            fontFamily: Fonts.primaryLight,
+            fontSize: 15,
+          }
+        },
+
         backgroundColor: Colors.secondaryGradientStart,
 				paddingHorizontal: 20,
 				paddingVertical: 20
 			},
-			'shoutem.ui.Heading': {
-				color: Colors.black,
-				fontFamily: Fonts.primaryBold,
-				fontSize: 16,
-			},
-			'shoutem.ui.Text': {
-				marginTop:4,
-				color: Colors.black,
-				fontFamily: Fonts.primaryLight,
-				fontSize: 13,
-			}
+
     },
 
 		'mbm.common.NavigationBar': {

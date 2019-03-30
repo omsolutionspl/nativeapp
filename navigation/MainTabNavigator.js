@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AgendaScreen from '../containers/Agenda';
 import ChatScreen from '../containers/Chat';
 import QRScreen from '../screens/QRScreen';
+import VideoCall from '../screens/VideoCall';
 import HomeExample from '../components/HomeExample';
 import ModalExample from '../components/__examples__/ModalExample';
 
@@ -213,10 +214,10 @@ export default createBottomTabNavigator({
       };
     }
   },
-  // Components: {
-  //   screen: ModalExample, // HomeExample,
-  //   params: { label: "Examples"}
-  // }
+  Components: {
+    screen: VideoCall, // ModalExample, // HomeExample,
+    params: { label: "Examples"}
+  }
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

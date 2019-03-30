@@ -36,8 +36,19 @@ class Container extends React.Component {
   exit = () => {
     clearTimeout(this._exit);
     this.view.slideOutDown(800).then(
-        endState => console.log(endState.finished ? 'exiting finished' : 'exiting cancelled')
+        endState => {
+          console.log(endState.finished ? 'exiting finished' : 'exiting cancelled')
+          // this.props.onPress()
+        }
     );
+  }
+
+  onPress = () => {
+
+    const { onPress, hideOnPress } = this.props
+
+    // onPress();
+    hideOnPress && this.exit();
   }
 
   componentDidMount() {
@@ -51,9 +62,9 @@ class Container extends React.Component {
 
   render() {
 
-    const { styleName, style, onEnter, onExit } = this.props;
+    const { styleName, style } = this.props;
 
-    return  <TouchableWithoutFeedback onPress={() => {this.exit()}}>
+    return  <TouchableWithoutFeedback onPress={this.onPress}>
         <Animatable.View
             ref={this.handleViewRef}
             styleName={styleName}

@@ -11,6 +11,9 @@ import theme from './constants/theme'
 import NavigationService from './navigation/NavigationService';
 import Toast from './components/Helpers/Extensions/Toast';
 
+var env = process.env.NODE_ENV || 'development';
+var config = require('./Config')[env];
+
 /*
 if (process.env.NODE_ENV !== 'production') {
   const {whyDidYouUpdate} = require('rn-why-did-you-update')
@@ -86,10 +89,8 @@ export default class App extends React.Component {
   listenForNotifications = () => {
     Notifications.addListener(notification => {
       if (notification.origin === 'received') {
-        console.log('listenForNotifications', notification);
 
-        // TODO: Toast
-        // Alert.alert(notification.title, notification.body);
+        console.log('listenForNotifications', notification);
 
         let toast = Toast.show(notification.data, {
           duration: Toast.durations.LONG,
@@ -97,6 +98,15 @@ export default class App extends React.Component {
           animation: true,
           hideOnPress: true,
           delay: 0,
+          onPress: () => {
+
+            if (notification.data.navigateTo) {
+              NavigationService.navigate(
+                  notification.data.navigateTo,
+                  notification.data.navigateParams || {}
+              );
+            }
+          },
           onShow: () => {
             // calls on toast\`s appear animation start
           },
@@ -114,10 +124,12 @@ export default class App extends React.Component {
 
       if (notification.origin === 'selected')
       {
-        NavigationService.navigate(
-            notification.data.navigateTo,
-            notification.data.navigateParams
-        );
+        if (notification.data.navigateTo) {
+          NavigationService.navigate(
+              notification.data.navigateTo,
+              notification.data.navigateParams || {}
+          );
+        }
       }
     });
   };

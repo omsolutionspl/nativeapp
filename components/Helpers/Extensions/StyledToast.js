@@ -21,12 +21,12 @@ export default connectStyle('mbm.toast.StyledToast', styles)(
           <Row>
             {icon &&
               <Icon.Ionicons
-                  size={20}
+                  size={22}
                   name={icon}
                   style={[
                     style.icon,
                     {
-                      top:3,
+                      top:4,
                       justifyContent: 'flex-start',
                       alignSelf: 'flex-start'
                     },

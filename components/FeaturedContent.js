@@ -54,6 +54,7 @@ class FeaturedContent extends Component {
                     body: 'Click here to see',
                     data: {
                       title: 'You got a new message!',
+                      body: 'Click here to see',
                       icon: "md-chatboxes",
                       navigateTo: "Chats",
                       navigateParams: {
