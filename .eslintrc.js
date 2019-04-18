@@ -12,9 +12,11 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
+      "react-hooks/rules-of-hooks": "error",
         "indent": [
             "error",
             "tab"
@@ -30,6 +32,6 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
     }
 };

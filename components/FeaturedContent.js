@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Platform, ScrollView, SafeAreaView} from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Notifications } from 'expo';
@@ -31,8 +31,6 @@ class FeaturedContent extends Component {
     {
       return <EmptyStackPlaceholder data={item} />
     }
-
-
 
     switch(renderAs) {
 
@@ -69,7 +67,7 @@ class FeaturedContent extends Component {
                 label: 'Schedule a meeting',
                 icon: 'md-globe',
                 onPress: () => {
-                  navigation.navigate('EventsScreen', {
+                  this.props.navigation.navigate('EventsScreen', {
                     // url: 'https://mbmapp.com/',
                   });
                 }
@@ -134,6 +132,9 @@ class FeaturedContent extends Component {
     let data = featured
     
     // console.log('autopla', autoplay)
+
+    // Declare a new state variable, which we'll call "count"
+    const [count, setCount] = useState(0);
 
     return (
         <View styleName={styleName} style={{paddingBottom:10}}>

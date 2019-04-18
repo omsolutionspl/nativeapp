@@ -11,6 +11,7 @@ export default connect(
         featured: getEvents(state),
         layout: 'stack', // 'tinder'
         autoplay: false,
+        loop:false,
         layoutCardOffset: 18,
         renderAs: 'event',
         showPagination: false
