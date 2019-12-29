@@ -5,7 +5,8 @@ import {
 	Platform,
 	Animated
 } from 'react-native';
-import { Constants, Permissions, Notifications, Icon } from 'expo';
+import { Constants, Notifications } from 'expo';
+import { Permissions } from 'expo-permissions';
 
 import FeaturedContent from '../containers/FeaturedContent';
 import FeaturedOpportunities from '../containers/FeaturedOpportunities';

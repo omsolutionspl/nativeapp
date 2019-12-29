@@ -5,7 +5,7 @@ import {Animated, Platform, ScrollView } from 'react-native';
 // import { Constants } from 'expo';
 // import { map } from 'lodash';
 
-import { Icon } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import { View } from '@shoutem/ui/components/View'
 import { Button } from '@shoutem/ui/components/Button'
 import { Text, Heading } from '@shoutem/ui/components/Text'
@@ -93,7 +93,7 @@ class ButtonsGroup extends Component {
               {translateX: iconTranslateX}
             ]
           }}>
-            <Icon.Ionicons
+            <Ionicons
                 // size={button.size || 30}
                 name={button.icon}
                 style={[

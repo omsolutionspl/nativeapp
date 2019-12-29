@@ -1,6 +1,7 @@
 import React, {Component, PureComponent} from "react";
 import moment from 'moment';
-import { Icon, LinearGradient, Linking } from 'expo';
+import { Ionicons, Linking } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView, Easing, Platform } from 'react-native';
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 import { View } from '@shoutem/ui/components/View'
@@ -122,7 +123,7 @@ class OpportunityBlock extends PureComponent {
 
       <NavigationBar
           styleName="fade"
-          leftComponent={<Icon.Ionicons
+          leftComponent={<Ionicons
               name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
               size={26}
               style={{ marginLeft: 16, marginTop: 2 }}
@@ -130,7 +131,7 @@ class OpportunityBlock extends PureComponent {
               color={Colors.defaultText}
           />}
           centerComponent={<Title>OpportunityTTXXXX lsdas askdsakd sad k s</Title>}
-          rightComponent={<Icon.Ionicons
+          rightComponent={<Ionicons
               name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
               size={28}
               style={{ marginRight: 16, marginTop: 2 }}

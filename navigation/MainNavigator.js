@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator }
 import { Colors, Fonts } from '../constants';
 
 import { ROOT_NAV_NAME } from '../constants/Navigation'
-import { Icon } from 'expo';
+import { Ionicons } from 'expo';
 
 import DrawerContent from '../screens/DrawerContent';
 
@@ -101,7 +101,7 @@ const MainAppNavigator = createStackNavigator({
     screen: OpportunityBlock,
     navigationOptions: {
       title: "OPPORTUNITY DETAILS",
-      headerRight: <Icon.Ionicons
+      headerRight: <Ionicons
           name={'md-heart'}
           size={28}
           style={{ marginRight: 16, marginTop: 2 }}

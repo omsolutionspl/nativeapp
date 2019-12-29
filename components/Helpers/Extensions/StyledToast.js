@@ -1,7 +1,6 @@
 import React  from 'react';
 
-import { Icon } from 'expo';
-
+import { Ionicons } from '@expo/vector-icons';
 import { Text, Title, Caption, Subtitle, Heading } from '@shoutem/ui/components/Text'
 import { View } from '@shoutem/ui/components/View'
 import { Row } from '@shoutem/ui/components/Row'
@@ -20,7 +19,7 @@ export default connectStyle('mbm.toast.StyledToast', styles)(
       return (
           <Row>
             {icon &&
-              <Icon.Ionicons
+              <Ionicons
                   size={22}
                   name={icon}
                   style={[

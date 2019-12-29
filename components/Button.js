@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { LinearGradient, Icon } from 'expo';
-
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import {
   TouchableOpacity,
   ActivityIndicator,
@@ -38,7 +38,7 @@ class Button extends Component {
 
     if (icon)
     {
-      return <Icon.Ionicons
+      return <Ionicons
           size={18}
           name={icon}
           style={[

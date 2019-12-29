@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Modal, Button, Image, View, Text, TouchableNativeFeedback, Platform} from 'react-native';
-import { Icon } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
 import { ROOT_NAV_NAME } from '../constants/Navigation'
@@ -19,14 +19,14 @@ class LogoTitle extends React.Component {
 export const MainStackHeaderNavigationConfig = ({ navigation }) => {
   return {
     headerTitle: navigation.state.routeName === ROOT_NAV_NAME ? <LogoTitle /> : null,
-    headerLeft: <Icon.Ionicons
+    headerLeft: <Ionicons
         name={navigation.state.routeName === ROOT_NAV_NAME ? 'md-menu' : 'md-arrow-back'}
         size={26}
         style={{ marginLeft: 16, marginTop: 2 }}
         onPress={() => (navigation.state.routeName === ROOT_NAV_NAME ? navigation.toggleDrawer() : navigation.goBack())}
         color={Colors.defaultText}
     />,
-    headerRight: <Icon.Ionicons
+    headerRight: <Ionicons
         name={Platform.OS === 'ios' ? 'ios-contact': 'md-contact'}
         size={28}
         style={{ marginRight: 16, marginTop: 2 }}

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Alert } from 'react-native';
 import { Provider, connect } from 'react-redux';
-import { AppLoading, Asset, Font, Icon, Constants, Notifications, Permissions } from 'expo';
+import { AppLoading, Asset, Ionicons, Constants, Notifications } from 'expo';
+import { Permissions } from 'expo-permissions';
 import { StyleProvider } from '@shoutem/theme';
+import * as Font from 'expo-font';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './reducers/store';
@@ -202,17 +204,24 @@ export default class App extends React.Component {
   }
 
   _loadResourcesAsync = async () => {
+
+    // const images = [require('./assets/snack-icon.png')];
+    //
+    // const cacheImages = images.map(image => {
+    //   return Asset.fromModule(image).downloadAsync();
+    // });
+
     return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
-        require('./assets/images/app/mbm-logo-350.png'),
-        require('./assets/images/app/content/dap-bg.png'),
-        require('./assets/images/app/login-bg-small-refine.jpg'),
-      ]),
+      // Asset.loadAsync([
+      //   require('./assets/images/robot-dev.png'),
+      //   require('./assets/images/robot-prod.png'),
+      //   require('./assets/images/app/mbm-logo-350.png'),
+      //   require('./assets/images/app/content/dap-bg.png'),
+      //   require('./assets/images/app/login-bg-small-refine.jpg'),
+      // ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
+        //...Ionicons.font,
 
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
@@ -232,8 +241,9 @@ export default class App extends React.Component {
         'Lato-Regular': require('./assets/fonts/Lato-Regular.ttf'),
         'Lato-Semibold': require('./assets/fonts/Lato-Semibold.ttf'),
         'Lato-Thin': require('./assets/fonts/Lato-Thin.ttf'),
-      }),
+      })
     ]);
+
   };
 
   _handleLoadingError = error => {

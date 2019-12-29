@@ -7,7 +7,9 @@ import {
 import {connectStyle} from "@shoutem/theme/index";
 
 import moment from 'moment';
-import { Icon, LinearGradient, Linking } from 'expo';
+
+import { Ionicons } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { TouchableOpacity} from '@shoutem/ui/components/TouchableOpacity'
 import { View } from '@shoutem/ui/components/View'
@@ -353,7 +355,7 @@ class OpportunityBlock extends Component {
           <View styleName={"horizontal"} style={style.navigation}>
             <View style={style.componentsContainer}>
               <View style={style.leftComponent}>
-                <Icon.Ionicons
+                <Ionicons
                     name={'md-arrow-back'}
                     size={26}
                     style={{ marginLeft: 16, color: 'white' }}
@@ -363,7 +365,7 @@ class OpportunityBlock extends Component {
               </View>
               <View style={style.centerComponent}><Text></Text></View>
               <View style={style.rightComponent}>
-                <Icon.Ionicons
+                <Ionicons
                     name={Platform.OS === 'ios' ? 'ios-star-outline': 'md-star-outline'}
                     size={28}
                     style={{ marginRight: 16, color: 'white' }}

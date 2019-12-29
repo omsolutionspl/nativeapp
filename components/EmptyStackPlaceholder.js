@@ -11,12 +11,16 @@ import { Layout } from '../constants'
 import Button from '../components/Button'
 
 class EmptyStackPlaceholder extends React.Component {
+
+
   render() {
     const { style, styleName, data: { header, buttons } } = this.props
 
+    {/* TODO Fix layout */}
+
     return <ImageBackground
           styleName="large-banner"
-          style={{width: Layout.width - 10 }}
+          style={{width: /*Layout.width - 10*/ 200 }}
           source={require('../assets/images/app/login-bg-small-refine.jpg')}
           onPress={() => alert('12')}
       >

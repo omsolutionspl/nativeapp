@@ -1,5 +1,5 @@
 import { Dimensions, Platform } from 'react-native';
-import { Constants } from 'expo';
+import Constants from 'expo';
 
 const width = Dimensions.get('window').width;
 const height = Platform.OS === "ios"
@@ -32,7 +32,7 @@ const IPHONE_X_NOTCH_PADDING = 30;
 const IPHONE_X_HOME_INDICATOR_PADDING = 34;
 const IPHONE_X_LONG_SIDE = 812;
 const NAVIGATION_HEADER_HEIGHT = isIphoneX() ? 104 : (Platform.OS === 'ios' ? 80 : 84); // 64;
-const STATUS_BAR_HEIGHT = Constants.statusBarHeight;
+const STATUS_BAR_HEIGHT = 15; // Constants.statusBarHeight;
 
 export default {
   window: {

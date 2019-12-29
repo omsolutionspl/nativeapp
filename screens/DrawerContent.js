@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, ScrollView, View, StyleSheet, Image, Button } from 'react-native';
-import { Constants, Permissions, Notifications } from 'expo';
+import { Constants, Notifications } from 'expo';
 import { DrawerItems, SafeAreaView } from 'react-navigation';
 
 export default class DrawerContent extends React.Component {

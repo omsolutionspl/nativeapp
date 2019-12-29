@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View } from '@shoutem/ui/components/View'
-import { Icon } from 'expo'
+import { Ionicons } from '@expo/vector-icons'
 import { Text, Subtitle, Heading, Caption } from '@shoutem/ui/components/Text'
 import {connectStyle} from "@shoutem/theme/index";
 import { Anchor } from './index'
@@ -20,7 +20,7 @@ class ContactBlock extends React.Component {
       :null}
 
       <View styleName="horizontal h-start">
-        <Icon.Ionicons
+        <Ionicons
             size={17}
             name={"md-mail"}
             style={style.icon}
@@ -31,7 +31,7 @@ class ContactBlock extends React.Component {
       </View>
 
       <View styleName="horizontal h-start">
-        <Icon.Ionicons
+        <Ionicons
             size={17}
             name={"md-call"}
             style={style.icon}

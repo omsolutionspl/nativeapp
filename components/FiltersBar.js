@@ -13,7 +13,7 @@ import {
 import Modal from "react-native-modal";
 
 import { map } from 'lodash';
-import { Icon } from 'expo';
+import { Ionicons } from 'expo';
 import { View } from '@shoutem/ui/components/View'
 import { Text, Caption, Subtitle } from '@shoutem/ui/components/Text'
 import {connectStyle} from "@shoutem/theme/index";
@@ -41,12 +41,12 @@ const FilterValueRow = ({ style, header, values, onPress }) => {
               </View>
             }
             checked={!__value.checked}
-            checkedIcon={<Icon.Ionicons
+            checkedIcon={<Ionicons
                 size={24}
                 name={Platform.OS === 'ios' ? "ios-checkbox":"md-star-outline"}
                 style={{paddingRight:10}}
             />}
-            uncheckedIcon={<Icon.Ionicons
+            uncheckedIcon={<Ionicons
                 size={24}
                 name={'md-square-outline'}
                 style={{paddingRight:10}}
@@ -275,7 +275,7 @@ class FilterBar extends React.Component {
     return <NavigationBar
         styleName={"filters"}
 
-        leftComponent={<Icon.Ionicons
+        leftComponent={<Ionicons
             name={'md-arrow-back'}
             size={26}
             style={{ marginLeft: 16, marginTop: 2 }}
@@ -335,7 +335,7 @@ class FilterBar extends React.Component {
           </View>
           <View style={style.icons} styleName={'horizontal h-end'}>
             <TouchableOpacity onPress={onFavoriteFilter}>
-              <Icon.Ionicons
+              <Ionicons
                   size={24}
                   name={"md-star-outline"}
                   style={[style.icon]}
@@ -345,7 +345,7 @@ class FilterBar extends React.Component {
             <TouchableOpacity onPress={() => {
               toggleSearchModal()
             }}>
-              <Icon.Ionicons
+              <Ionicons
                   size={24}
                   name={"md-options"}
                   style={[style.icon]}

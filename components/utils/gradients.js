@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const DEFAULT_OPACITY = 0.6;
 
